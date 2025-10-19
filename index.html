@@ -752,7 +752,25 @@ body.loaded #intro-logo {
   pointer-events: none;
 }
 </style></head>
-<body><div id="intro-logo"><img alt="logo intro" src="images/ロゴアイコン画像800.gif"/></div>
+<body>
+
+  <!-- 🔒 パスワード保護スクリプト -->
+  <script>
+    const correctPassword = "mypass123"; // 好きなパスワードに変更
+    const entered = sessionStorage.getItem("auth-ok");
+
+    if (!entered) {
+      const input = prompt("このサイトはパスワードで保護されています。パスワードを入力してください：");
+      if (input !== correctPassword) {
+        alert("パスワードが違います。");
+        window.location.href = "https://www.google.com"; // 間違えたら別ページへ
+      } else {
+        sessionStorage.setItem("auth-ok", "true");
+      }
+    }
+  </script>
+
+<div id="intro-logo"><img alt="logo intro" src="images/ロゴアイコン画像800.gif"/></div>
 <header>
 <div class="wrap head">
 <a aria-label="home" class="brand" href="#top">
