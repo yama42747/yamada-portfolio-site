@@ -751,10 +751,111 @@ body.loaded #intro-logo {
   opacity: 0;
   pointer-events: none;
 }
+</style><style>
+/* ===== Workセクション 画像枠線フィット ===== */
+.work-thumb {
+  overflow: hidden;
+  border-radius: 10px;
+  border: 2px solid #222;
+}
+.work-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+</style><style>
+/* ===== Workセクション グリッド整列修正 ===== */
+#work .work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  justify-items: center;
+  align-items: stretch;
+}
+#work .work-thumb {
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 2px solid #222;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+#work .work-thumb:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+#work .work-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  display: block;
+}
+</style><style>
+/* ===== Workセクション レイアウト崩れ修正 ===== */
+#work .work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  justify-content: center;
+  align-items: stretch;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+#work .work-thumb {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 2px solid #222;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+#work .work-thumb:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+#work .work-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+</style><style>
+/* ===== Workセクション グリッドレイアウト再構築 ===== */
+#workGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  justify-content: center;
+  align-items: stretch;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+#workGrid .work-thumb {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 2px solid #222;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+#workGrid .work-thumb:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+#workGrid .work-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 </style></head>
 <body>
 
-  <!-- 🔒 パスワード保護スクリプト -->
+    <!-- 🔒 パスワード保護スクリプト -->
   <script>
     const correctPassword = "mypass123"; // 好きなパスワードに変更
     const entered = sessionStorage.getItem("auth-ok");
@@ -770,7 +871,7 @@ body.loaded #intro-logo {
     }
   </script>
 
-<div id="intro-logo"><img alt="logo intro" src="images/ロゴアイコン画像800.gif"/></div>
+<div id="intro-logo"><img alt="logo intro" src="images/ロゴアイコン画像.gif"/></div>
 <header>
 <div class="wrap head">
 <a aria-label="home" class="brand" href="#top">
@@ -821,7 +922,7 @@ body.loaded #intro-logo {
 <div class="skill-list">
 <div>
 <h3>できること</h3>
-<p>動画制作／SNS投稿／商品撮影・レタッチ／イラストレーション／キャラクターデザイン／パッケージデザイン／バナーデザイン／広告運用（Google・Meta・TikTok）／支援ツール KARTE など</p>
+<p>動画制作／SNS投稿／商品撮影・レタッチ／イラストレーション／キャラクターデザイン／パッケージデザイン／バナーデザイン／広告運用（Google・Meta・TikTok）／KARTE など</p>
 </div>
 <div>
 <h3>使用してるソフト・ツール</h3>
@@ -831,9 +932,8 @@ body.loaded #intro-logo {
 </section>
 <section id="work">
 <div class="sec-title"><span class="bar"></span><h2 class="latin">Work</h2></div>
-<div class="work-grid"><div class="work-grid" data-count="6" data-total="30" id="workGrid"></div></div>
-<div class="viewall latin"><a href="works/index.html">View all »»</a></div>
-</section>
+<div class="viewall latin"></div>
+<div class="work-grid" id="workGrid"></div><div style="text-align:center; margin-top:30px; font-weight:600;"></div><div style="text-align:center; margin-top:30px; font-weight:600;"><a href="works/index.html">View all »»</a></div></section>
 <section id="contact">
 <div class="contact-panel">
 <div class="sec-title"><span class="bar" style="background:#83ddbf"></span><h2 class="latin">Contact</h2></div>
@@ -865,44 +965,6 @@ body.loaded #intro-logo {
     toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   </script>
 <script>
-    // Populate Work preview with fixed 1,2,3 + 3 random from 4..30, and randomize order of all 6
-    (function() {
-      const grid = document.getElementById('workGrid');
-      if (!grid) return;
-      const total = parseInt(grid.getAttribute('data-total') || '30', 10);
-      const count = parseInt(grid.getAttribute('data-count') || '6', 10);
-      const fixed = [1,2,3].filter(n => n >= 1 && n <= total);
-      const remain = Math.max(0, count - fixed.length);
-
-      // Pool from 4..total (exclude fixed)
-      const pool = [];
-      for (let n = 4; n <= total; n++) pool.push(n);
-      for (let i = pool.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [pool[i], pool[j]] = [pool[j], pool[i]];
-      }
-      const randoms = pool.slice(0, remain);
-      const picks = fixed.concat(randoms);
-
-      // Shuffle final order so fixed items' positions are random
-      for (let i = picks.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [picks[i], picks[j]] = [picks[j], picks[i]];
-      }
-
-      const pad2 = n => String(n).padStart(2, '0');
-      const frag = document.createDocumentFragment();
-      picks.forEach(n => {
-        const a = document.createElement('a');
-        a.className = 'work-thumb';
-        a.href = `works/detail-${pad2(n)}.html`;
-        a.textContent = `作品 ${n}`;
-        frag.appendChild(a);
-      });
-      grid.appendChild(frag);
-    })();
-  </script>
-<script>
 window.addEventListener('load', () => {
   const hasVisited = sessionStorage.getItem('visited');
   const intro = document.getElementById('intro-logo');
@@ -917,5 +979,60 @@ window.addEventListener('load', () => {
     if (intro) intro.remove();
   }
 });
+</script><script>
+/* ===== Workセクション：0X/ X ＋ .png/.jpg の順で自動探索 ===== */
+(() => {
+  const pad2 = n => String(n).padStart(2, '0');
+  const picks = [1, 2, 3, 4, 5, 6];
+  const grid  = document.querySelector('#work .work-grid');
+  if (!grid) return;
+
+  const makePaths = n => {
+    const p = pad2(n), s = String(n);
+    return [
+      `images/${p}.png`, `images/${p}.jpg`,
+      `images/${s}.png`, `images/${s}.jpg`,
+    ];
+  };
+
+  const useFirstAvailable = (img, paths) => {
+    let i = 0;
+    const tryNext = () => {
+      if (i >= paths.length) {
+        img.src =
+          "data:image/svg+xml;utf8," +
+          encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><rect width='8' height='8' fill='#f7f7f7'/></svg>`);
+        return;
+      }
+      const src = paths[i++];
+      const probe = new Image();
+      probe.onload = () => (img.src = src);
+      probe.onerror = tryNext;
+      probe.src = src;
+    };
+    tryNext();
+  };
+
+  const frag = document.createDocumentFragment();
+  picks.forEach(n => {
+    const a = document.createElement('a');
+    a.className = 'work-thumb';
+    a.href = `works/detail-${String(n).padStart(2, '0')}.html`;
+
+    const img = document.createElement('img');
+    img.alt = `作品 ${n}`;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.style.cssText = "width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;";
+
+    useFirstAvailable(img, makePaths(n));
+
+    a.appendChild(img);
+    frag.appendChild(a);
+  });
+
+  grid.innerHTML = '';
+  grid.appendChild(frag);
+})();
 </script></body>
 </html>
