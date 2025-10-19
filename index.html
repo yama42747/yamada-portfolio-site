@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Designer ヤマダチナツ | Portfolio</title>
+<link href="css/style.css" rel="stylesheet"/>
+<style>
+/* ===== 波線（ヘッダー直下） ===== */
+.wave-divider {
+  display:block;
+  height:12px;
+  margin:4px 0 14px;
+  background-repeat:repeat-x;
+  background-size:24px 8px;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 8' preserveAspectRatio='none'><path d='M0 4 Q6 0 12 4 T24 4' fill='none' stroke='%2349c9a9' stroke-width='1.6' stroke-linecap='round'/></svg>");
+}
+@media (max-width:520px){
+  .wave-divider {
+    height:10px;
+    margin:2px 0 12px;
+    background-size:22px 8px;
+  }
+}
+</style><style>
+/* ===== Contactブロック背景色 ===== */
+#contact .contact-panel {
+  background-color: #83ddbf !important;
+}
+</style><style>
+/* ===== PC版での改行禁止設定 ===== */
+@media screen and (min-width: 768px) {
+  .no-wrap-pc {
+    white-space: nowrap;
+  }
+}
+</style><style>
+/* ===== Profile セクション カード ===== */
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+  border: 2px solid #1e1e1e;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.profile-text {
+  flex: 1;
+}
+.profile-text .role {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 4px;
+}
+.profile-text .name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #333;
+}
+.profile-text .desc {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #333;
+}
+@media (max-width: 768px) {
+  .profile-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .profile-img {
+    width: 100px;
+    height: 100px;
+  }
+}
+</style><style>
+/* ===== Profile セクション文字間隔微調整 ===== */
+.profile-text .role {
+  margin-bottom: 2px !important;
+}
+.profile-text .name {
+  margin-top: 0 !important;
+}
+</style><style>
+/* ===== Profile セクション画像サイズ調整 ===== */
+.profile-card {
+  gap: 28px !important;
+}
+.profile-img {
+  width: 150px !important;
+  height: 150px !important;
+}
+@media (max-width: 768px) {
+  .profile-img {
+    width: 100px !important;
+    height: 100px !important;
+  }
+}
+</style><style>
+/* ===== Profile セクション最終調整 ===== */
+.profile-card {
+  border-width: 1px !important;      /* Workセクションと統一 */
+  padding: 24px 40px !important;     /* 左右余白を広く */
+  gap: 18px !important;              /* 画像と文章の距離を詰める */
+}
+.profile-img {
+  width: 150px !important;
+  height: 150px !important;
+}
+@media (max-width: 768px) {
+  .profile-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px !important;
+    gap: 12px !important;
+  }
+  .profile-img {
+    width: 100px !important;
+    height: 100px !important;
+  }
+}
+</style><style>
+/* ===== Profile セクション仕上げ調整 ===== */
+.profile-card {
+  border: 1.6px solid #111 !important;   /* Workセクションと見た目統一 */
+  padding: 24px 40px !important;         /* 横余白を維持 */
+  gap: 16px !important;                  /* 画像と文章の間を微調整 */
+  box-shadow: 0 1.5px 4px rgba(0,0,0,0.06);
+}
+.profile-img {
+  width: 150px !important;
+  height: 150px !important;
+}
+.profile-text .desc {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  max-width: 95%;
+  line-height: 1.8;
+}
+@media (max-width: 768px) {
+  .profile-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px !important;
+    gap: 12px !important;
+  }
+  .profile-img {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  .profile-text .desc {
+    max-width: 100%;
+  }
+}
+</style><style>
+/* ===== Profile セクション最終仕上げ ===== */
+.profile-card {
+  border: 3px solid #111 !important;   /* Workセクションの見た目に寄せる */
+  padding: 24px 40px !important;       /* 横余白を維持 */
+  gap: 16px !important;                /* 画像と文章の間を微調整 */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+.profile-img {
+  width: 150px !important;
+  height: 150px !important;
+}
+.profile-text .desc {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  line-height: 1.9;
+}
+@media (max-width: 768px) {
+  .profile-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px !important;
+    gap: 14px !important;
+  }
+  .profile-img {
+    width: 130px !important;  /* スマホ時に大きめに */
+    height: 130px !important;
+  }
+}
+</style><style>
+/* ===== Profile セクション レイアウト最適化 ===== */
+.profile-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;           /* 中央寄せ */
+  gap: 20px;                         /* 適度な距離 */
+  padding: 24px 48px !important;     /* 横余白を少し増やす */
+  border: 3px solid #111 !important; /* Workセクション寄りの太さ */
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  margin: 0 auto;
+  max-width: 900px;
+}
+.profile-img {
+  width: 180px !important;
+  height: 180px !important;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.profile-text {
+  flex: 1;
+  max-width: 560px;
+}
+.profile-text .desc {
+  font-size: 0.95rem;
+  line-height: 1.9;
+  color: #333;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+@media (max-width: 768px) {
+  .profile-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 28px 24px !important;
+    gap: 16px !important;
+  }
+  .profile-img {
+    width: 150px !important;
+    height: 150px !important;
+  }
+  .profile-text {
+    max-width: 100%;
+  }
+  .profile-text .desc {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    padding: 0 4px;
+    word-break: normal;
+  }
+}
+</style><style>
+/* ===== Profile セクション 横幅修正（PC版のみ） ===== */
+@media screen and (min-width: 769px) {
+  .profile-card {
+    max-width: 100% !important;     /* 他セクションと同幅に */
+    width: 100%;
+    padding: 24px 32px !important;  /* 横余白をやや控えめに */
+    margin: 0 auto;
+    justify-content: center;
+  }
+}
+</style><style>
+/* ===== Profile セクション PC版バランス調整 ===== */
+@media screen and (min-width: 769px) {
+  .profile-card {
+    display: flex;
+    align-items: center;           /* 垂直方向中央揃え */
+    justify-content: flex-start;   /* 横は左から自然に */
+    gap: 32px;                     /* 適度な距離に再調整 */
+    padding: 20px 48px !important; /* 上下余白をやや詰める */
+    height: auto;
+    margin: 0 auto;
+  }
+  .profile-img {
+    width: 180px !important;
+    height: 180px !important;
+    margin: auto 0;                /* 垂直方向中央寄せ */
+  }
+  .profile-text {
+    flex: 1;
+    margin: auto 0;                /* 中央揃えの安定化 */
+  }
+}
+</style><style>
+/* ===== Profile セクション PC版バランス最適化 ===== */
+@media screen and (min-width: 769px) {
+  .profile-card {
+    display: flex;
+    align-items: center;           /* 垂直方向中央揃え */
+    justify-content: center;       /* コンテンツを中央寄せに */
+    gap: 40px;                     /* 適度な距離感に調整 */
+    padding: 24px 60px !important; /* 横余白をやや広く */
+    border: 3px solid #111 !important;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1100px;             /* 全体バランスを整える */
+  }
+  .profile-img {
+    width: 180px !important;
+    height: 180px !important;
+    flex-shrink: 0;
+    margin: 0;
+    object-fit: cover;
+  }
+  .profile-text {
+    flex: 1;
+    max-width: none !important;    /* テキスト制限を解除 */
+    width: 100%;
+  }
+  .profile-text .desc {
+    font-size: 0.96rem;
+    line-height: 1.9;
+    color: #333;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+}
+</style><style>
+/* ===== スマホ版 Profile アイコン拡大 ===== */
+@media (max-width: 768px) {
+  .profile-img {
+    width: 170px !important;
+    height: 170px !important;
+  }
+}
+
+/* ===== PC版 Work セクション 3列レイアウト ===== */
+@media screen and (min-width: 769px) {
+  .work-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important; /* 3列固定 */
+    gap: 24px !important;
+    justify-items: center;
+    align-items: center;
+  }
+  .work-thumb {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+</style><style>
+/* ===== PC版 Work セクション：3列・各ブロックをセクション幅いっぱい＆正方形に ===== */
+@media screen and (min-width: 769px) {
+  #work .work-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 24px !important;
+    justify-items: stretch !important;  /* 各セルいっぱいに広げる */
+    align-items: stretch !important;
+  }
+  #work .work-thumb {
+    width: 100% !important;
+    aspect-ratio: 1 / 1;               /* 正方形を維持 */
+    display: block;
+  }
+}
+</style><style>
+/* ===== PC版 Work セクション：横幅を他セクションと統一＆正方形維持 ===== */
+@media screen and (min-width: 769px) {
+  #work .work-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 32px !important;
+    justify-content: center;
+    align-items: stretch;
+    max-width: 100% !important;   /* wrap幅に揃える */
+    width: 100%;
+    margin: 0 auto;
+  }
+  #work .work-thumb {
+    width: 100% !important;
+    aspect-ratio: 1 / 1;          /* 正方形維持 */
+    border-radius: 12px;
+  }
+}
+</style><style>
+/* ===== PC版 Work：3列・正方形・セクション幅いっぱい・中央寄せ ===== */
+@media screen and (min-width: 769px) {
+  /* 外側の空の .work-grid はレイアウトに影響しないよう無効化 */
+  #work > .work-grid {
+    display: contents !important;
+  }
+  /* 実体のグリッド(#workGrid)をセクション幅いっぱいに */
+  #work #workGrid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 32px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto;
+    justify-items: stretch;
+    align-items: stretch;
+  }
+  #work #workGrid .work-thumb {
+    width: 100% !important;
+    aspect-ratio: 1 / 1;
+    display: block;
+  }
+}
+</style><style>
+/* ===== ヘッダー（スマホ）の横スクロール対応・崩れ防止 ===== */
+@media (max-width: 640px) {
+  header .wrap.head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  header a.brand{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto;            /* ロゴは縮まず固定 */
+  }
+  header a.brand img{
+    width: 42px;
+    height: 42px;
+  }
+  header nav{
+    flex: 1 1 auto;
+    overflow-x: auto;          /* 横スクロールで全項目表示 */
+    -webkit-overflow-scrolling: touch;
+  }
+  header nav ul{
+    display: inline-flex;
+    gap: 16px;
+    white-space: nowrap;       /* 折り返さず横に並べる */
+    padding: 6px 0;
+    margin: 0;
+  }
+  header nav ul.latin{
+    font-size: 0.95rem;        /* わずかに縮小して収まりを良くする */
+  }
+  header nav::-webkit-scrollbar{
+    display: none;             /* iOS/Androidでスクロールバー非表示 */
+  }
+}
+</style><style>
+/* ===== ヘッダー（スマホ）：ロゴ比率維持＋左余白追加 ===== */
+@media (max-width: 640px) {
+  header .wrap.head{
+    padding-left: 12px;           /* 左に少し余白を追加 */
+  }
+  header a.brand img{
+    width: 42px;                  /* アイコン幅 */
+    height: auto;                 /* 比率維持（縦は自動） */
+  }
+}
+</style><style>
+/* ===== ファーストビュー ランダム表示 動画埋め込み ===== */
+.focus-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.focus-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.focus-card .label {
+  display: none;
+}
+</style><style>
+/* ===== ファーストビュー ランダム表示：動画（imagesフォルダ） ===== */
+.focus-card{position:relative;overflow:hidden;border-radius:12px;}
+.focus-card video{width:100%;height:100%;object-fit:cover;display:block;}
+</style><style>
+/* ===== ファーストビュー 動画全体表示＋背景色設定 ===== */
+.focus-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: #83ddbf !important;  /* 枠内の背景色を指定 */
+}
+.focus-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important;        /* 見切れず全体表示 */
+  display: block;
+  background-color: #83ddbf;             /* 背景と統一 */
+}
+</style><style>
+/* ===== ファーストビュー 動画：見切れ防止 + 背景色 #83ddbf ===== */
+.hero .focus-card{
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: #83ddbf !important;
+  aspect-ratio: 16 / 9;              /* 枠比率を固定してトリミング回避 */
+}
+.hero .focus-card video{
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important;     /* 全体表示（見切れ防止） */
+  background-color: #83ddbf;          /* 余白色を揃える */
+  display: block;
+}
+</style><style>
+/* ===== ファーストビュー動画サイズ修正（PC・スマホ対応） ===== */
+
+/* PC版：他セクションと同幅・中央揃え */
+@media screen and (min-width: 769px) {
+  .hero .focus-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: #83ddbf !important;
+    width: 100%;
+    max-width: 1100px;         /* 他セクションと同じ横幅 */
+    margin: 0 auto;
+  }
+  .hero .focus-card video {
+    width: 100%;
+    height: auto;
+    object-fit: contain !important;
+    display: block;
+    background-color: #83ddbf;
+  }
+}
+
+/* スマホ版：枠幅に合わせて縮小・見切れ防止 */
+@media screen and (max-width: 768px) {
+  .hero .focus-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: #83ddbf !important;
+    width: 100%;
+  }
+  .hero .focus-card video {
+    width: 100%;
+    height: auto;
+    object-fit: contain !important;
+    display: block;
+    background-color: #83ddbf;
+  }
+}
+</style><style>
+/* ===== ファーストビュー動画 最終調整（PC/スマホ共通） ===== */
+
+/* PC版：他セクションと同幅で動画全体表示 */
+@media screen and (min-width: 769px) {
+  .hero .focus-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: #83ddbf !important;
+    width: 100%;
+    max-width: 1100px;        /* 他セクションと同じ横幅 */
+    margin: 0 auto;
+    aspect-ratio: 16 / 9;     /* 比率固定 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero .focus-card video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain !important;   /* 全体を表示（見切れ防止） */
+    background-color: #83ddbf;        /* 背景統一 */
+    display: block;
+  }
+}
+
+/* スマホ版：幅100%・比率維持・全体表示 */
+@media screen and (max-width: 768px) {
+  .hero .focus-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: #83ddbf !important;
+    width: 100%;
+    aspect-ratio: 16 / 9;             /* 比率を固定 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero .focus-card video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain !important;   /* 見切れ防止 */
+    background-color: #83ddbf;
+    display: block;
+  }
+}
+</style><style>
+/* ===== ファーストビュー動画：比率維持・全画面表示調整 ===== */
+
+/* PC版：比率維持で全体表示（背景が見えないように） */
+@media screen and (min-width: 769px) {
+  .hero .focus-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: #83ddbf !important;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hero .focus-card video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important;     /* 比率維持＋全画面表示 */
+    display: block;
+    background-color: #83ddbf;
+  }
+}
+
+/* スマホ版：画面幅に合わせて比率を維持して全体表示 */
+@media screen and (max-width: 768px) {
+  .hero .focus-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: #83ddbf !important;
+    width: 100vw;
+    height: 56.25vw;                  /* 16:9 比率を維持 */
+    margin: 0 auto;
+  }
+  .hero .focus-card video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important;     /* 比率維持＋見切れ防止 */
+    background-color: #83ddbf;
+  }
+}
+</style><style>
+/* ===== ファーストビュー動画：PC版 比率維持・全画面表示修正版 ===== */
+
+/* 🖥 PC版 */
+@media screen and (min-width: 769px) {
+  .hero .focus-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: #83ddbf !important;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    aspect-ratio: 16 / 9;
+  }
+  .hero .focus-card video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover !important;     /* 比率維持＋背景非表示 */
+    background-color: #83ddbf;
+  }
+}
+
+/* 📱 スマホ版（現状維持） */
+@media screen and (max-width: 768px) {
+  .hero .focus-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: #83ddbf !important;
+    width: 100vw;
+    height: 56.25vw;
+    margin: 0 auto;
+  }
+  .hero .focus-card video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important;
+    background-color: #83ddbf;
+  }
+}
+</style><style>
+/* ===== ファーストビュー動画：PC版 比率維持・全画面フィット最終版 ===== */
+
+/* 🖥 PC版 */
+@media screen and (min-width: 769px) {
+  .hero .focus-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: #83ddbf !important;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    height: auto;                /* 高さを動画の比率に任せる */
+  }
+  .hero .focus-card video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover !important;   /* 比率維持＋背景を隠す */
+    background-color: #83ddbf;
+  }
+}
+
+/* 📱 スマホ版（現状維持） */
+@media screen and (max-width: 768px) {
+  .hero .focus-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: #83ddbf !important;
+    width: 100vw;
+    height: 56.25vw;
+    margin: 0 auto;
+  }
+  .hero .focus-card video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important;
+    background-color: #83ddbf;
+  }
+}
+</style><style>
+/* ===== ロゴイントロアニメーション（完全中央・10秒） ===== */
+#intro-logo {
+  position: fixed;
+  inset: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 2s ease 8s; /* 8秒後にフェードアウト開始 */
+}
+@keyframes logoPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+#intro-logo img {
+  width: 180px;
+  height: auto;
+  animation: logoPulse 2.2s ease-in-out infinite;
+}
+body.loaded #intro-logo {
+  opacity: 0;
+  pointer-events: none;
+}
+</style></head>
+<body><div id="intro-logo"><img alt="logo intro" src="images/ロゴアイコン画像800.gif"/></div>
+<header>
+<div class="wrap head">
+<a aria-label="home" class="brand" href="#top">
+<img alt="ロゴアイコン" src="images/ロゴアイコン画像.gif"/>
+<div class="title latin"><span class="small">Designer ヤマダチナツ</span>Portfolio</div>
+</a>
+<nav aria-label="primary">
+<ul class="latin">
+<li><a href="#profile">Profile</a></li>
+<li><a href="#skills">Skill</a></li>
+<li><a href="#work">Work</a></li>
+<li><a href="#contact">Contact</a></li>
+<li>
+<a aria-label="Instagram" href="https://www.instagram.com/YAMADEZA" target="_blank">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<rect height="20" rx="5" ry="5" width="20" x="2" y="2"></rect>
+<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+<line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+</svg>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</header><div aria-hidden="true" class="wave-divider"></div>
+<main class="wrap" id="top">
+<section class="hero">
+<p class="catch">伝えるすべてに、“楽しさ”と“心地よさ”を 💪🔥</p>
+<div class="focus-card"><video autoplay="True" loop="True" muted="True" playsinline="True"><source src="images/コンポ%201.mp4" type="video/mp4"/><source src="images/コンポ 1.mp4" type="video/mp4"/><source src="images/コンポ%201.mp4" type="video/mp4"/><source src="images/コンポ 1.mp4" type="video/mp4"/><source src="images/コンポ1.mp4" type="video/mp4"/></video><div class="label" style="display:none;display:none">ランダム表示</div></div>
+<p class="lead no-wrap-pc">デザインは誰かに笑顔を届ける小さなきっかけだと考えています。携わるデザインで、誰かの心を少しでも明るくできたら嬉しいです。</p>
+</section>
+<section class="profile" id="profile">
+<div class="sec-title"><span class="bar"></span><h2 class="latin">Profile</h2></div>
+<div class="profile-card">
+<img alt="プロフィール写真" class="profile-img" src="images/プロフィールアイコン用.gif"/>
+<div class="profile-text">
+<p class="role">Designer</p>
+<h3 class="name">Yamada chinatsu</h3>
+<p class="desc">美大卒業後、ECサイトの運営に5年間携わり、デザインからマーケティングまで幅広く経験してきました。
+          広告運用で培った分析力を活かし、「見られる × 売れるデザイン」を意識した提案が得意です。
+          日々の課題に対して「もっと良くできる方法はないか」と考え、楽しみながら形にしています。
+          デザインを通して、モノやサービスの価値を丁寧に伝えることを大切にしています。</p>
+</div>
+</div>
+</section>
+<section class="skills" id="skills">
+<div class="sec-title"><span class="bar"></span><h2 class="latin">Skill</h2></div>
+<div class="skill-list">
+<div>
+<h3>できること</h3>
+<p>動画制作／SNS投稿／商品撮影・レタッチ／イラストレーション／キャラクターデザイン／パッケージデザイン／バナーデザイン／広告運用（Google・Meta・TikTok）／支援ツール KARTE など</p>
+</div>
+<div>
+<h3>使用してるソフト・ツール</h3>
+<p>Adobe Photoshop／Illustrator／After Effects／Premiere Pro、Figma、CapCut ほか</p>
+</div>
+</div>
+</section>
+<section id="work">
+<div class="sec-title"><span class="bar"></span><h2 class="latin">Work</h2></div>
+<div class="work-grid"><div class="work-grid" data-count="6" data-total="30" id="workGrid"></div></div>
+<div class="viewall latin"><a href="works/index.html">View all »»</a></div>
+</section>
+<section id="contact">
+<div class="contact-panel">
+<div class="sec-title"><span class="bar" style="background:#83ddbf"></span><h2 class="latin">Contact</h2></div>
+<p>ご覧いただきありがとうございます。ご不明な点がありましたら、下記メールアドレスからお気軽にお問い合わせください。</p>
+<p class="mail">mail : <a href="mailto:yama42747@gmail.com">yama42747@gmail.com</a></p>
+</div>
+</section>
+</main>
+<!-- Back to top button -->
+<button aria-label="ページ上部へ" class="to-top" id="toTop">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<script>
+    // Smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href').slice(1);
+        const el = id ? document.getElementById(id) : null;
+        if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); }
+      });
+    });
+    // Back to top visibility
+    const toTop = document.getElementById('toTop');
+    const toggleTop = () => { toTop.hidden = window.scrollY <= 360; };
+    window.addEventListener('scroll', toggleTop, { passive: true });
+    toggleTop();
+    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  </script>
+<script>
+    // Populate Work preview with fixed 1,2,3 + 3 random from 4..30, and randomize order of all 6
+    (function() {
+      const grid = document.getElementById('workGrid');
+      if (!grid) return;
+      const total = parseInt(grid.getAttribute('data-total') || '30', 10);
+      const count = parseInt(grid.getAttribute('data-count') || '6', 10);
+      const fixed = [1,2,3].filter(n => n >= 1 && n <= total);
+      const remain = Math.max(0, count - fixed.length);
+
+      // Pool from 4..total (exclude fixed)
+      const pool = [];
+      for (let n = 4; n <= total; n++) pool.push(n);
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      const randoms = pool.slice(0, remain);
+      const picks = fixed.concat(randoms);
+
+      // Shuffle final order so fixed items' positions are random
+      for (let i = picks.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [picks[i], picks[j]] = [picks[j], picks[i]];
+      }
+
+      const pad2 = n => String(n).padStart(2, '0');
+      const frag = document.createDocumentFragment();
+      picks.forEach(n => {
+        const a = document.createElement('a');
+        a.className = 'work-thumb';
+        a.href = `works/detail-${pad2(n)}.html`;
+        a.textContent = `作品 ${n}`;
+        frag.appendChild(a);
+      });
+      grid.appendChild(frag);
+    })();
+  </script>
+<script>
+window.addEventListener('load', () => {
+  const hasVisited = sessionStorage.getItem('visited');
+  const intro = document.getElementById('intro-logo');
+  // 初回アクセス時のみ再生
+  if (!hasVisited) {
+    sessionStorage.setItem('visited', 'true');
+    document.body.classList.add('loaded');
+    setTimeout(() => {
+      if (intro) intro.remove();
+    }, 10000); // 10秒間表示
+  } else {
+    if (intro) intro.remove();
+  }
+});
+</script></body>
+</html>
