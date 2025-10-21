@@ -23,6 +23,26 @@
     background-size:22px 8px;
   }
 }
+
+
+/* === Mobile-only fix: hero video exact fit + title single-line === */
+@media (max-width: 768px){
+  .hero .focus-card{
+    height:auto !important;
+    aspect-ratio:16 / 9;
+    padding:0 !important;
+    overflow:hidden;
+  }
+  .hero .focus-card video{
+    width:100% !important;
+    height:100% !important;
+    object-fit:contain !important;
+    background-color:#83ddbf;
+  }
+  .hero-title{
+    white-space:nowrap !important;
+  }
+}
 </style><style>
 /* ===== Contactブロック背景色 ===== */
 #contact .contact-panel {
