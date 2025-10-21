@@ -1,7 +1,7 @@
-export const onRequest = async ({ request, env }) => {
+export const onRequest = async ({ request }) => {
   const auth = request.headers.get("Authorization");
-  const username = env.CF_PAGES_USERNAME;
-  const password = env.CF_PAGES_PASSWORD;
+  const username = "guest";
+  const password = "mypass123";
   const realm = "Protected";
 
   if (auth && auth.startsWith("Basic ")) {
