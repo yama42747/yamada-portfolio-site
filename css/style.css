@@ -168,3 +168,12 @@ section { padding: 28px 0; }
 @media (min-width: 1200px){
   :root{ --card-min: 220px; --card-ideal: 20vw; --card-max: 360px; }
 }
+
+@media screen and (max-width: 768px) {
+  .hero .catch {
+    white-space: nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.95em !important;
+  }
+}
