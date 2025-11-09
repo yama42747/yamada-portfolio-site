@@ -1,5 +1,5 @@
 export async function onRequest(context) {
-  const password = "pass123"; // ← 好きなパスワードに変更！
+  const password = "pass423"; // ← 好きなパスワードに変更！
   const auth = context.request.headers.get("Authorization");
 
   // すでに認証済みならOK
