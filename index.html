@@ -1,1099 +1,735 @@
 <!DOCTYPE html>
-
 <html lang="ja">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Designer ヤマダチナツ | Portfolio</title>
-<link href="css/style.css" rel="stylesheet"/>
-<style>
-/* ===== 波線（ヘッダー直下） ===== */
-.wave-divider {
-  display:block;
-  height:12px;
-  margin:4px 0 14px;
-  background-repeat:repeat-x;
-  background-size:24px 8px;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 8' preserveAspectRatio='none'><path d='M0 4 Q6 0 12 4 T24 4' fill='none' stroke='%2349c9a9' stroke-width='1.6' stroke-linecap='round'/></svg>");
-}
-@media (max-width:520px){
-  .wave-divider {
-    height:10px;
-    margin:2px 0 12px;
-    background-size:22px 8px;
-  }
-}
-
-
-/* === Mobile-only fix: hero video exact fit + title single-line === */
-@media (max-width: 768px){
-  .hero .focus-card{
-    height:auto !important;
-    aspect-ratio:16 / 9;
-    padding:0 !important;
-    overflow:hidden;
-  }
-  .hero .focus-card video{
-    width:100% !important;
-    height:100% !important;
-    object-fit:contain !important;
-    background-color:#83ddbf;
-  }
-  .hero-title{
-    white-space:nowrap !important;
-  }
-}
-</style><style>
-/* ===== Contactブロック背景色 ===== */
-#contact .contact-panel {
-  background-color: #83ddbf !important;
-}
-</style><style>
-/* ===== PC版での改行禁止設定 ===== */
-@media screen and (min-width: 768px) {
-  .no-wrap-pc {
-    white-space: nowrap;
-  }
-}
-</style><style>
-/* ===== Profile セクション カード ===== */
-.profile-card {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  padding: 24px;
-  border: 2px solid #1e1e1e;
-  border-radius: 16px;
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
-.profile-img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-.profile-text {
-  flex: 1;
-}
-.profile-text .role {
-  font-size: 0.9rem;
-  color: #555;
-  margin-bottom: 4px;
-}
-.profile-text .name {
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: #333;
-}
-.profile-text .desc {
-  font-size: 0.95rem;
-  line-height: 1.8;
-  color: #333;
-}
-@media (max-width: 768px) {
-  .profile-card {
-    flex-direction: column;
-    text-align: center;
-  }
-  .profile-img {
-    width: 100px;
-    height: 100px;
-  }
-}
-</style><style>
-/* ===== Profile セクション文字間隔微調整 ===== */
-.profile-text .role {
-  margin-bottom: 2px !important;
-}
-.profile-text .name {
-  margin-top: 0 !important;
-}
-</style><style>
-/* ===== Profile セクション画像サイズ調整 ===== */
-.profile-card {
-  gap: 28px !important;
-}
-.profile-img {
-  width: 150px !important;
-  height: 150px !important;
-}
-@media (max-width: 768px) {
-  .profile-img {
-    width: 100px !important;
-    height: 100px !important;
-  }
-}
-</style><style>
-/* ===== Profile セクション最終調整 ===== */
-.profile-card {
-  border-width: 1px !important;      /* Workセクションと統一 */
-  padding: 24px 40px !important;     /* 左右余白を広く */
-  gap: 18px !important;              /* 画像と文章の距離を詰める */
-}
-.profile-img {
-  width: 150px !important;
-  height: 150px !important;
-}
-@media (max-width: 768px) {
-  .profile-card {
-    flex-direction: column;
-    text-align: center;
-    padding: 20px !important;
-    gap: 12px !important;
-  }
-  .profile-img {
-    width: 100px !important;
-    height: 100px !important;
-  }
-}
-</style><style>
-/* ===== Profile セクション仕上げ調整 ===== */
-.profile-card {
-  border: 1.6px solid #111 !important;   /* Workセクションと見た目統一 */
-  padding: 24px 40px !important;         /* 横余白を維持 */
-  gap: 16px !important;                  /* 画像と文章の間を微調整 */
-  box-shadow: 0 1.5px 4px rgba(0,0,0,0.06);
-}
-.profile-img {
-  width: 150px !important;
-  height: 150px !important;
-}
-.profile-text .desc {
-  word-break: keep-all;
-  overflow-wrap: break-word;
-  max-width: 95%;
-  line-height: 1.8;
-}
-@media (max-width: 768px) {
-  .profile-card {
-    flex-direction: column;
-    text-align: center;
-    padding: 20px !important;
-    gap: 12px !important;
-  }
-  .profile-img {
-    width: 100px !important;
-    height: 100px !important;
-  }
-  .profile-text .desc {
-    max-width: 100%;
-  }
-}
-</style><style>
-/* ===== Profile セクション最終仕上げ ===== */
-.profile-card {
-  border: 3px solid #111 !important;   /* Workセクションの見た目に寄せる */
-  padding: 24px 40px !important;       /* 横余白を維持 */
-  gap: 16px !important;                /* 画像と文章の間を微調整 */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-.profile-img {
-  width: 150px !important;
-  height: 150px !important;
-}
-.profile-text .desc {
-  word-break: keep-all;
-  overflow-wrap: break-word;
-  line-height: 1.9;
-}
-@media (max-width: 768px) {
-  .profile-card {
-    flex-direction: column;
-    text-align: center;
-    padding: 24px !important;
-    gap: 14px !important;
-  }
-  .profile-img {
-    width: 130px !important;  /* スマホ時に大きめに */
-    height: 130px !important;
-  }
-}
-</style><style>
-/* ===== Profile セクション レイアウト最適化 ===== */
-.profile-card {
-  display: flex;
-  align-items: center;
-  justify-content: center;           /* 中央寄せ */
-  gap: 20px;                         /* 適度な距離 */
-  padding: 24px 48px !important;     /* 横余白を少し増やす */
-  border: 3px solid #111 !important; /* Workセクション寄りの太さ */
-  border-radius: 16px;
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  margin: 0 auto;
-  max-width: 900px;
-}
-.profile-img {
-  width: 180px !important;
-  height: 180px !important;
-  border-radius: 50%;
-  object-fit: cover;
-}
-.profile-text {
-  flex: 1;
-  max-width: 560px;
-}
-.profile-text .desc {
-  font-size: 0.95rem;
-  line-height: 1.9;
-  color: #333;
-  word-break: keep-all;
-  overflow-wrap: break-word;
-  max-width: 100%;
-}
-@media (max-width: 768px) {
-  .profile-card {
-    flex-direction: column;
-    text-align: center;
-    padding: 28px 24px !important;
-    gap: 16px !important;
-  }
-  .profile-img {
-    width: 150px !important;
-    height: 150px !important;
-  }
-  .profile-text {
-    max-width: 100%;
-  }
-  .profile-text .desc {
-    font-size: 0.95rem;
-    line-height: 1.9;
-    padding: 0 4px;
-    word-break: normal;
-  }
-}
-</style><style>
-/* ===== Profile セクション 横幅修正（PC版のみ） ===== */
-@media screen and (min-width: 769px) {
-  .profile-card {
-    max-width: 100% !important;     /* 他セクションと同幅に */
-    width: 100%;
-    padding: 24px 32px !important;  /* 横余白をやや控えめに */
-    margin: 0 auto;
-    justify-content: center;
-  }
-}
-</style><style>
-/* ===== Profile セクション PC版バランス調整 ===== */
-@media screen and (min-width: 769px) {
-  .profile-card {
-    display: flex;
-    align-items: center;           /* 垂直方向中央揃え */
-    justify-content: flex-start;   /* 横は左から自然に */
-    gap: 32px;                     /* 適度な距離に再調整 */
-    padding: 20px 48px !important; /* 上下余白をやや詰める */
-    height: auto;
-    margin: 0 auto;
-  }
-  .profile-img {
-    width: 180px !important;
-    height: 180px !important;
-    margin: auto 0;                /* 垂直方向中央寄せ */
-  }
-  .profile-text {
-    flex: 1;
-    margin: auto 0;                /* 中央揃えの安定化 */
-  }
-}
-</style><style>
-/* ===== Profile セクション PC版バランス最適化 ===== */
-@media screen and (min-width: 769px) {
-  .profile-card {
-    display: flex;
-    align-items: center;           /* 垂直方向中央揃え */
-    justify-content: center;       /* コンテンツを中央寄せに */
-    gap: 40px;                     /* 適度な距離感に調整 */
-    padding: 24px 60px !important; /* 横余白をやや広く */
-    border: 3px solid #111 !important;
-    border-radius: 16px;
-    background: #fff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    margin: 0 auto;
-    width: 100%;
-    max-width: 1100px;             /* 全体バランスを整える */
-  }
-  .profile-img {
-    width: 180px !important;
-    height: 180px !important;
-    flex-shrink: 0;
-    margin: 0;
-    object-fit: cover;
-  }
-  .profile-text {
-    flex: 1;
-    max-width: none !important;    /* テキスト制限を解除 */
-    width: 100%;
-  }
-  .profile-text .desc {
-    font-size: 0.96rem;
-    line-height: 1.9;
-    color: #333;
-    word-break: keep-all;
-    overflow-wrap: break-word;
-  }
-}
-</style><style>
-/* ===== スマホ版 Profile アイコン拡大 ===== */
-@media (max-width: 768px) {
-  .profile-img {
-    width: 170px !important;
-    height: 170px !important;
-  }
-}
-
-/* ===== PC版 Work セクション 3列レイアウト ===== */
-@media screen and (min-width: 769px) {
-  .work-grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important; /* 3列固定 */
-    gap: 24px !important;
-    justify-items: center;
-    align-items: center;
-  }
-  .work-thumb {
-    width: 100%;
-    max-width: 300px;
-  }
-}
-</style><style>
-/* ===== PC版 Work セクション：3列・各ブロックをセクション幅いっぱい＆正方形に ===== */
-@media screen and (min-width: 769px) {
-  #work .work-grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 24px !important;
-    justify-items: stretch !important;  /* 各セルいっぱいに広げる */
-    align-items: stretch !important;
-  }
-  #work .work-thumb {
-    width: 100% !important;
-    aspect-ratio: 1 / 1;               /* 正方形を維持 */
-    display: block;
-  }
-}
-</style><style>
-/* ===== PC版 Work セクション：横幅を他セクションと統一＆正方形維持 ===== */
-@media screen and (min-width: 769px) {
-  #work .work-grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 32px !important;
-    justify-content: center;
-    align-items: stretch;
-    max-width: 100% !important;   /* wrap幅に揃える */
-    width: 100%;
-    margin: 0 auto;
-  }
-  #work .work-thumb {
-    width: 100% !important;
-    aspect-ratio: 1 / 1;          /* 正方形維持 */
-    border-radius: 12px;
-  }
-}
-</style><style>
-/* ===== PC版 Work：3列・正方形・セクション幅いっぱい・中央寄せ ===== */
-@media screen and (min-width: 769px) {
-  /* 外側の空の .work-grid はレイアウトに影響しないよう無効化 */
-  #work > .work-grid {
-    display: contents !important;
-  }
-  /* 実体のグリッド(#workGrid)をセクション幅いっぱいに */
-  #work #workGrid {
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 32px !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 auto;
-    justify-items: stretch;
-    align-items: stretch;
-  }
-  #work #workGrid .work-thumb {
-    width: 100% !important;
-    aspect-ratio: 1 / 1;
-    display: block;
-  }
-}
-</style><style>
-/* ===== ヘッダー（スマホ）の横スクロール対応・崩れ防止 ===== */
-@media (max-width: 640px) {
-  header .wrap.head{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-  }
-  header a.brand{
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    flex: 0 0 auto;            /* ロゴは縮まず固定 */
-  }
-  header a.brand img{
-    width: 42px;
-    height: 42px;
-  }
-  header nav{
-    flex: 1 1 auto;
-    overflow-x: auto;          /* 横スクロールで全項目表示 */
-    -webkit-overflow-scrolling: touch;
-  }
-  header nav ul{
-    display: inline-flex;
-    gap: 16px;
-    white-space: nowrap;       /* 折り返さず横に並べる */
-    padding: 6px 0;
-    margin: 0;
-  }
-  header nav ul.latin{
-    font-size: 0.95rem;        /* わずかに縮小して収まりを良くする */
-  }
-  header nav::-webkit-scrollbar{
-    display: none;             /* iOS/Androidでスクロールバー非表示 */
-  }
-}
-</style><style>
-/* ===== ヘッダー（スマホ）：ロゴ比率維持＋左余白追加 ===== */
-@media (max-width: 640px) {
-  header .wrap.head{
-    padding-left: 12px;           /* 左に少し余白を追加 */
-  }
-  header a.brand img{
-    width: 42px;                  /* アイコン幅 */
-    height: auto;                 /* 比率維持（縦は自動） */
-  }
-}
-</style><style>
-/* ===== ファーストビュー ランダム表示 動画埋め込み ===== */
-.focus-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
-}
-.focus-card video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.focus-card .label {
-  display: none;
-}
-</style><style>
-/* ===== ファーストビュー ランダム表示：動画（imagesフォルダ） ===== */
-.focus-card{position:relative;overflow:hidden;border-radius:12px;}
-.focus-card video{width:100%;height:100%;object-fit:cover;display:block;}
-</style><style>
-/* ===== ファーストビュー 動画全体表示＋背景色設定 ===== */
-.focus-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
-  background-color: #83ddbf !important;  /* 枠内の背景色を指定 */
-}
-.focus-card video {
-  width: 100%;
-  height: 100%;
-  object-fit: contain !important;        /* 見切れず全体表示 */
-  display: block;
-  background-color: #83ddbf;             /* 背景と統一 */
-}
-</style><style>
-/* ===== ファーストビュー 動画：見切れ防止 + 背景色 #83ddbf ===== */
-.hero .focus-card{
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
-  background-color: #83ddbf !important;
-  aspect-ratio: 16 / 9;              /* 枠比率を固定してトリミング回避 */
-}
-.hero .focus-card video{
-  width: 100%;
-  height: 100%;
-  object-fit: contain !important;     /* 全体表示（見切れ防止） */
-  background-color: #83ddbf;          /* 余白色を揃える */
-  display: block;
-}
-</style><style>
-/* ===== ファーストビュー動画サイズ修正（PC・スマホ対応） ===== */
-
-/* PC版：他セクションと同幅・中央揃え */
-@media screen and (min-width: 769px) {
-  .hero .focus-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    background-color: #83ddbf !important;
-    width: 100%;
-    max-width: 1100px;         /* 他セクションと同じ横幅 */
-    margin: 0 auto;
-  }
-  .hero .focus-card video {
-    width: 100%;
-    height: auto;
-    object-fit: contain !important;
-    display: block;
-    background-color: #83ddbf;
-  }
-}
-
-/* スマホ版：枠幅に合わせて縮小・見切れ防止 */
-@media screen and (max-width: 768px) {
-  .hero .focus-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    background-color: #83ddbf !important;
-    width: 100%;
-  }
-  .hero .focus-card video {
-    width: 100%;
-    height: auto;
-    object-fit: contain !important;
-    display: block;
-    background-color: #83ddbf;
-  }
-}
-</style><style>
-/* ===== ファーストビュー動画 最終調整（PC/スマホ共通） ===== */
-
-/* PC版：他セクションと同幅で動画全体表示 */
-@media screen and (min-width: 769px) {
-  .hero .focus-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    background-color: #83ddbf !important;
-    width: 100%;
-    max-width: 1100px;        /* 他セクションと同じ横幅 */
-    margin: 0 auto;
-    aspect-ratio: 16 / 9;     /* 比率固定 */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .hero .focus-card video {
-    width: 100%;
-    height: 100%;
-    object-fit: contain !important;   /* 全体を表示（見切れ防止） */
-    background-color: #83ddbf;        /* 背景統一 */
-    display: block;
-  }
-}
-
-/* スマホ版：幅100%・比率維持・全体表示 */
-@media screen and (max-width: 768px) {
-  .hero .focus-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    background-color: #83ddbf !important;
-    width: 100%;
-    aspect-ratio: 16 / 9;             /* 比率を固定 */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .hero .focus-card video {
-    width: 100%;
-    height: 100%;
-    object-fit: contain !important;   /* 見切れ防止 */
-    background-color: #83ddbf;
-    display: block;
-  }
-}
-</style><style>
-/* ===== ファーストビュー動画：比率維持・全画面表示調整 ===== */
-
-/* PC版：比率維持で全体表示（背景が見えないように） */
-@media screen and (min-width: 769px) {
-  .hero .focus-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    background-color: #83ddbf !important;
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  .hero .focus-card video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover !important;     /* 比率維持＋全画面表示 */
-    display: block;
-    background-color: #83ddbf;
-  }
-}
-
-/* スマホ版：画面幅に合わせて比率を維持して全体表示 */
-@media screen and (max-width: 768px) {
-  .hero .focus-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    background-color: #83ddbf !important;
-    width: 100vw;
-    height: 56.25vw;                  /* 16:9 比率を維持 */
-    margin: 0 auto;
-  }
-  .hero .focus-card video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover !important;     /* 比率維持＋見切れ防止 */
-    background-color: #83ddbf;
-  }
-}
-</style><style>
-/* ===== ファーストビュー動画：PC版 比率維持・全画面表示修正版 ===== */
-
-/* 🖥 PC版 */
-@media screen and (min-width: 769px) {
-  .hero .focus-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    background-color: #83ddbf !important;
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    aspect-ratio: 16 / 9;
-  }
-  .hero .focus-card video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    transform: translate(-50%, -50%);
-    object-fit: cover !important;     /* 比率維持＋背景非表示 */
-    background-color: #83ddbf;
-  }
-}
-
-/* 📱 スマホ版（現状維持） */
-@media screen and (max-width: 768px) {
-  .hero .focus-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    background-color: #83ddbf !important;
-    width: 100vw;
-    height: 56.25vw;
-    margin: 0 auto;
-  }
-  .hero .focus-card video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover !important;
-    background-color: #83ddbf;
-  }
-}
-</style><style>
-/* ===== ファーストビュー動画：PC版 比率維持・全画面フィット最終版 ===== */
-
-/* 🖥 PC版 */
-@media screen and (min-width: 769px) {
-  .hero .focus-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    background-color: #83ddbf !important;
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    height: auto;                /* 高さを動画の比率に任せる */
-  }
-  .hero .focus-card video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    transform: translate(-50%, -50%);
-    object-fit: cover !important;   /* 比率維持＋背景を隠す */
-    background-color: #83ddbf;
-  }
-}
-
-/* 📱 スマホ版（現状維持） */
-@media screen and (max-width: 768px) {
-  .hero .focus-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    background-color: #83ddbf !important;
-    width: 100vw;
-    height: 56.25vw;
-    margin: 0 auto;
-  }
-  .hero .focus-card video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover !important;
-    background-color: #83ddbf;
-  }
-}
-</style><style>
-/* ===== ロゴイントロアニメーション（完全中央・10秒） ===== */
-#intro-logo {
-  position: fixed;
-  inset: 0;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #fff;
-  z-index: 9999;
-  opacity: 1;
-  transition: opacity 2s ease 8s; /* 8秒後にフェードアウト開始 */
-}
-@keyframes logoPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
-}
-#intro-logo img {
-  width: 180px;
-  height: auto;
-  animation: logoPulse 2.2s ease-in-out infinite;
-}
-body.loaded #intro-logo {
-  opacity: 0;
-  pointer-events: none;
-}
-</style><style>
-/* ===== Workセクション 画像枠線フィット ===== */
-.work-thumb {
-  overflow: hidden;
-  border-radius: 10px;
-  border: 2px solid #222;
-}
-.work-thumb img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: inherit;
-}
-</style><style>
-/* ===== Workセクション グリッド整列修正 ===== */
-#work .work-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-  justify-items: center;
-  align-items: stretch;
-}
-#work .work-thumb {
-  width: 100%;
-  max-width: 360px;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  border-radius: 10px;
-  border: 2px solid #222;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-#work .work-thumb:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-#work .work-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 0;
-  display: block;
-}
-</style><style>
-/* ===== Workセクション レイアウト崩れ修正 ===== */
-#work .work-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 32px;
-  justify-content: center;
-  align-items: stretch;
-  max-width: 1100px;
-  margin: 0 auto;
-  width: 100%;
-}
-#work .work-thumb {
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  border-radius: 10px;
-  border: 2px solid #222;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-#work .work-thumb:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-#work .work-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-</style><style>
-/* ===== Workセクション グリッドレイアウト再構築 ===== */
-#workGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 32px;
-  justify-content: center;
-  align-items: stretch;
-  max-width: 1100px;
-  margin: 0 auto;
-  width: 100%;
-}
-#workGrid .work-thumb {
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-  border-radius: 10px;
-  border: 2px solid #222;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-#workGrid .work-thumb:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-#workGrid .work-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-</style><style>
-/* 📱 スマホ版（見切れ防止） */
-@media screen and (max-width: 768px) {
-  .hero .focus-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    background-color: #83ddbf !important;
-    width: 100%;
-    max-width: 100vw;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }
-  .hero .focus-card video {
-    width: 100%;
-    height: auto;
-    object-fit: contain !important;
-    display: block;
-    background-color: #83ddbf;
-  }
-  .hero .catch {
-    display: inline-block;
-    text-align: center;
-    word-break: keep-all;
-    overflow-wrap: normal;
-    white-space: normal;
-  }
-  .hero .catch span.emoji {
-    white-space: nowrap; /* ✅ 絵文字だけ改行しない */
-  }
-}
-</style><style>
-/* ===== ロゴイントロアニメーション（4秒版） ===== */
-#intro-logo {
-  position: fixed;
-  inset: 0;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #fff;
-  z-index: 9999;
-  opacity: 1;
-  transition: opacity 1.2s ease 3.8s; /* ✅ 3.8秒後にフェードアウト開始 */
-}
-@keyframes logoPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
-}
-#intro-logo img {
-  width: 180px;
-  height: auto;
-  animation: logoPulse 2.2s ease-in-out infinite;
-}
-body.loaded #intro-logo {
-  opacity: 0;
-  pointer-events: none;
-}
-</style></head>
-<body>
-<!-- 🔒 パスワード保護スクリプト -->
-<div id="intro-logo"><img alt="logo intro" src="images/logo_intro.gif"/></div>
-<header>
-<div class="wrap head">
-<a aria-label="home" class="brand" href="#top">
-<img alt="ロゴアイコン" src="images/logo.gif"/>
-<div class="title latin"><span class="small">Designer ヤマダチナツ</span>Portfolio</div>
-</a>
-<nav aria-label="primary">
-<ul class="latin">
-<li><a href="#profile">Profile</a></li>
-<li><a href="#skills">Skill</a></li>
-<li><a href="#work">Work</a></li>
-<li><a href="#contact">Contact</a></li>
-<li>
-<a aria-label="Instagram" href="https://www.instagram.com/YAMADEZA" target="_blank">
-<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<rect height="20" rx="5" ry="5" width="20" x="2" y="2"></rect>
-<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-<line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-</svg>
-</a>
-</li>
-</ul>
-</nav>
-</div>
-</header><div aria-hidden="true" class="wave-divider"></div>
-<main class="wrap" id="top">
-<section class="hero">
-<p class="catch">伝えるすべてに、“楽しさ”と“心地よさ”を <span class="emoji">💪🔥</span></p>
-<div class="focus-card"><video autoplay="True" loop="True" muted="True" playsinline="True"><source src="images/compo1.webm" type="video/webm"/></video><div class="label" style="display:none;display:none">ランダム表示</div></div>
-<p class="lead no-wrap-pc">デザインは誰かに笑顔を届ける小さなきっかけだと考えています。携わるデザインで、誰かの心を少しでも明るくできたら嬉しいです。</p>
-</section>
-<section class="profile" id="profile">
-<div class="sec-title"><span class="bar"></span><h2 class="latin">Profile</h2></div>
-<div class="profile-card">
-<img alt="プロフィール写真" class="profile-img" src="images/プロフィールアイコン用.gif"/>
-<div class="profile-text">
-<p class="role">Designer</p>
-<h3 class="name">Yamada chinatsu</h3>
-<p class="desc">美大卒業後、ECサイトの運営に5年間携わり、デザインからマーケティングまで幅広く経験してきました。
-          広告運用で培った分析力を活かし、「見られる × 売れるデザイン」を意識した提案が得意です。
-          日々の課題に対して「もっと良くできる方法はないか」と考え、楽しみながら形にしています。
-          デザインを通して、モノやサービスの価値を丁寧に伝えることを大切にしています。</p>
-</div>
-</div>
-</section>
-<section class="skills" id="skills">
-<div class="sec-title"><span class="bar"></span><h2 class="latin">Skill</h2></div>
-<div class="skill-list">
-<div>
-<h3>できること</h3>
-<p>動画制作／SNS投稿／商品撮影・レタッチ／イラストレーション／キャラクターデザイン／パッケージデザイン／バナーデザイン／広告運用（Google・Meta・TikTok）／KARTE など</p>
-</div>
-<div>
-<h3>使用してるソフト・ツール</h3>
-<p>Adobe Photoshop／Illustrator／After Effects／Premiere Pro、Figma、CapCut ほか</p>
-</div>
-</div>
-</section>
-<section id="work">
-<div class="sec-title"><span class="bar"></span><h2 class="latin">Work</h2></div>
-<div class="viewall latin"></div>
-<div class="work-grid" id="workGrid"></div><div style="text-align:center; margin-top:30px; font-weight:600;"></div><div style="text-align:center; margin-top:30px; font-weight:600;"><a href="works/index.html">View all »»</a></div></section>
-<section id="contact">
-<div class="contact-panel">
-<div class="sec-title"><span class="bar" style="background:#83ddbf"></span><h2 class="latin">Contact</h2></div>
-<p>ご覧いただきありがとうございます。ご不明な点がありましたら、下記メールアドレスからお気軽にお問い合わせください。</p>
-<p class="mail">mail : <a href="mailto:yama42747@gmail.com">yama42747@gmail.com</a></p>
-</div>
-</section>
-</main>
-<!-- Back to top button -->
-<button aria-label="ページ上部へ" class="to-top" id="toTop">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</button>
-<script>
-    // Smooth scroll for internal links
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const id = a.getAttribute('href').slice(1);
-        const el = id ? document.getElementById(id) : null;
-        if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); }
-      });
-    });
-    // Back to top visibility
-    const toTop = document.getElementById('toTop');
-    const toggleTop = () => { toTop.hidden = window.scrollY <= 360; };
-    window.addEventListener('scroll', toggleTop, { passive: true });
-    toggleTop();
-    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-  </script>
-<script>
-/* ===== Workセクション：0X/ X ＋ .png/.jpg の順で自動探索 ===== */
-(() => {
-  const pad2 = n => String(n).padStart(2, '0');
-  const picks = [1, 2, 3, 4, 5, 6];
-  const grid  = document.querySelector('#work .work-grid');
-  if (!grid) return;
-
-  const makePaths = n => {
-    const p = pad2(n), s = String(n);
-    return [
-      `images/${p}.png`, `images/${p}.jpg`,
-      `images/${s}.png`, `images/${s}.jpg`,
-    ];
-  };
-
-  const useFirstAvailable = (img, paths) => {
-    let i = 0;
-    const tryNext = () => {
-      if (i >= paths.length) {
-        img.src =
-          "data:image/svg+xml;utf8," +
-          encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'><rect width='8' height='8' fill='#f7f7f7'/></svg>`);
-        return;
+  <meta charset="UTF-8" />
+  <title>Wireframe Top Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kosugi&family=Roboto:wght@400;500;700;900&display=swap&family=Roboto+Mono:wght@400;500;700" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+    font-family:"Roboto","Kosugi",system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+ height: 100%; 
+      background: #59ffa1;}
+    body {
+      margin: 0;
+      font-family:"Roboto","Kosugi",system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+      font-weight:500;
+      background: #59ffa1;
+      display: flex;
+    }
+    .wrapper {
+      width: 100%;          /* 大画面でも左右バランスを保つ */
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 8px;
+      flex: 1 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+}
+    .block {
+      background: #cccccc;
+      border-radius: 26px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 6px;
+      gap: 8px;
+      padding-right: 24px;
+    }
+    .logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+    }
+    .logo-link { display: block; }
+    .nav {
+      display: flex;
+      gap: 4px;
+    }
+    .nav-item {
+      width: 44px;
+      height: 22px;
+    }
+    main.grid-container {
+      display: grid;
+      grid-template-columns: 2fr 1.2fr;
+      grid-template-rows: 2fr 1.5fr 1.5fr;
+      gap: 4px;
+      flex: 1 0 auto;
+    }
+    .hero { grid-column: 1 / 3; }
+    .content-left { grid-row: 2 / 4; }
+    .content-right-top { grid-row: 2; }
+    .right-bottom {
+      grid-row: 3;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+    .right-bottom a {
+      text-decoration: none;
+      display: block;
+    }
+    .footer {
+      margin-top: 6px;
+      height: 22px;
+    }
+    @media (max-width: 768px) {
+      .wrapper { padding: 8px; }
+      .header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 6px;
       }
-      const src = paths[i++];
-      const probe = new Image();
-      probe.onload = () => (img.src = src);
-      probe.onerror = tryNext;
-      probe.src = src;
-    };
-    tryNext();
+      .nav { gap: 4px; }
+      main.grid-container {
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 2fr 2fr 1.5fr;
+        gap: 4px;
+        grid-template-areas:
+          "hero hero"
+          "left rightTop"
+          "left rightBottom";
+      }
+      .hero { grid-area: hero; }
+      .content-left { grid-area: left; }
+      .content-right-top { grid-area: rightTop; }
+      .right-bottom {
+        grid-area: rightBottom;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+      }
+    }
+    /* ===== heroロゴ配置（レイアウトを崩さない版） ===== */
+    .hero { position: relative; overflow: hidden; }
+    .hero-logo{
+      position: absolute;
+      inset: 0;
+      display: block;
+    }
+    .hero-logo img{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ===== ヘッダー左上ロゴ画像（logo-top.gif） ===== */
+    .logo-image{
+      background-image: url("picture/logo-top.gif");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      background-color: transparent !important; /* グレー背景を透明化 */
+    }
+
+    /* ===== FV（hero）背景は透明（維持） ===== */
+    .hero{
+      background: transparent !important;
+    }
+    /* ===== ヘッダー左上ロゴ 微調整（見やすさ優先） ===== */
+    .logo{
+      width: 72px;   /* 46px → 72px */
+      height: 72px;
+      border-radius: 16px;
+    }
+    .logo-image{
+      /* 拡大しすぎて潰れないように、contain + 余白で視認性UP */
+      background-size: contain;
+      background-origin: content-box;
+      background-clip: content-box;
+      padding: 6px; /* ロゴが角丸に詰まりすぎない */
+    }
+    /* ===== 左下でかいブロック：透過画像配置（PC/SP切替） ===== */
+    .content-left{
+      position: relative;
+      overflow: hidden;
+      background: transparent !important;
+      /* 透過PNGを活かす */
+    }
+    .content-left-visual{
+      position: absolute;
+      inset: 0;
+      display: block;
+    }
+    .content-left-visual img{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    
+    /* ===== PCフルスクリーン時：左＋右3ブロックをロゴ下でバランス良く中央寄せ ===== */
+    @media screen and (min-width: 1440px) {
+
+      /* 全体を中央に寄せて、左右の空き過ぎを抑える（SP/Tabletは影響なし） */
+      main.grid-container{
+        max-width: 1700px;
+        margin-left: auto;
+        margin-right: auto;
+        /* 左を伸ばしつつ、右カラムを上限付きにして間延びを防ぐ */
+        grid-template-columns: minmax(0, 2fr) minmax(520px, 1.2fr);
+      }
+
+      /* 右側の3ブロックは「右カラム内で」伸びすぎないようにする（非表示にはしない） */
+      .content-right-top,
+      .right-bottom{
+        max-width: 620px;
+        width: 100%;
+        justify-self: end;
+      }
+    }
+    /* ===== ブロック内 上部バー（Works / About / Contact） ===== */
+    .content-right-top,
+    .content-right-bottom-left,
+    .content-right-bottom-right{
+      position: relative;
+    }
+
+    .content-right-top::before,
+    .content-right-bottom-left::before,
+    .content-right-bottom-right::before{
+      content: "";
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      width: clamp(96px, 12vw, 180px);
+      height: clamp(28px, 3.6vw, 56px);
+      background-repeat: no-repeat;
+      background-position: left top;
+      background-size: contain;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* それぞれのバー画像 */
+    .content-right-top::before{
+      background-image: url("picture/works.gif");
+    }
+    .content-right-bottom-left::before{
+      background-image: url("picture/about.gif");
+    }
+    .content-right-bottom-right::before{
+      background-image: url("picture/contact.gif");
+    }
+    /* ===== バー画像 微調整 + 黒丸背景 ===== */
+    .content-right-top::before,
+    .content-right-bottom-left::before,
+    .content-right-bottom-right::before{
+      top: 18px;
+      left: 18px;
+      width: clamp(72px, 9vw, 120px);
+      height: clamp(24px, 3vw, 40px);
+      z-index: 3;
+    }
+
+    .content-right-top::after,
+    .content-right-bottom-left::after,
+    .content-right-bottom-right::after{
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      width: clamp(88px, 11vw, 140px);
+      height: clamp(36px, 4vw, 56px);
+      background: #2c2c2c;
+      border-radius: 999px;
+      z-index: 2;
+    }
+    /* ===== バーをブロック左上に密着させる ===== */
+    .content-right-top::before,
+    .content-right-bottom-left::before,
+    .content-right-bottom-right::before{
+      top: 0;
+      left: 0;
+      margin: 12px;
+    }
+
+    .content-right-top::after,
+    .content-right-bottom-left::after,
+    .content-right-bottom-right::after{
+      top: 0;
+      left: 0;
+      margin: 8px;
+    }
+    /* ===== 黒丸バーをブロック左上に完全密着（余白ゼロ） ===== */
+    .content-right-top::after,
+    .content-right-bottom-left::after,
+    .content-right-bottom-right::after{
+      top: 0;
+      left: 0;
+      margin: 0;
+    }
+
+    .content-right-top::before,
+    .content-right-bottom-left::before,
+    .content-right-bottom-right::before{
+      top: 0;
+      left: 0;
+      margin: 4px;
+    }
+    /* ===== SP時：黒丸バーを中央寄せ＋文字画像も中央配置 ===== */
+    @media screen and (max-width: 767px) {
+
+      .content-right-top::after,
+      .content-right-bottom-left::after,
+      .content-right-bottom-right::after{
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .content-right-top::before,
+      .content-right-bottom-left::before,
+      .content-right-bottom-right::before{
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+        background-position: center;
+      }
+    }
+    /* ===== 黒丸バーを必ずグレー枠内に収める ===== */
+    .content-right-top,
+    .content-right-bottom-left,
+    .content-right-bottom-right{
+      overflow: hidden;
+    }
+
+    /* PC / Tablet 共通 */
+    .content-right-top::after,
+    .content-right-bottom-left::after,
+    .content-right-bottom-right::after{
+      top: 8px;
+      left: 8px;
+    }
+
+    .content-right-top::before,
+    .content-right-bottom-left::before,
+    .content-right-bottom-right::before{
+      top: 8px;
+      left: 8px;
+      margin: 0;
+    }
+
+    /* SP時：中央寄せだが枠内 */
+    @media screen and (max-width: 767px) {
+      .content-right-top::after,
+      .content-right-bottom-left::after,
+      .content-right-bottom-right::after{
+        left: 50%;
+        transform: translateX(-50%);
+        top: 8px;
+      }
+
+      .content-right-top::before,
+      .content-right-bottom-left::before,
+      .content-right-bottom-right::before{
+        left: 50%;
+        transform: translateX(-50%);
+        top: 8px;
+        background-position: center;
+      }
+    }
+    /* ===== ラベル微修正（中央配置 / SP上段だけ左上 / サイズ縮小） ===== */
+
+    /* 1) 黒丸（カプセル）を少し小さく（PC/SP共通） */
+    .content-right-top::after,
+    .content-right-bottom-left::after,
+    .content-right-bottom-right::after{
+      width: clamp(76px, 9.5vw, 120px);
+      height: clamp(30px, 3.6vw, 46px);
+    }
+
+    /* 2) 文字画像を「黒丸枠内の中央」に（PC/SP共通） */
+    .content-right-top::before,
+    .content-right-bottom-left::before,
+    .content-right-bottom-right::before{
+      width: clamp(76px, 9.5vw, 120px);
+      height: clamp(30px, 3.6vw, 46px);
+      background-position: center;
+      background-size: 88% auto; /* 文字を黒丸内で気持ち余白 */
+    }
+
+    /* SP時：上段（Worksだけ）はPC同様「左上」／下2つは中央寄せのまま */
+    @media screen and (max-width: 767px) {
+
+      /* Works（上段）だけ左上 */
+      .content-right-top::after,
+      .content-right-top::before{
+        left: 8px;
+        transform: none;
+      }
+
+      /* About / Contact は中央寄せ */
+      .content-right-bottom-left::after,
+      .content-right-bottom-right::after,
+      .content-right-bottom-left::before,
+      .content-right-bottom-right::before{
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+    /* ===== ラベル微調整②（さらに縮小 + SP下段の見切れ防止） ===== */
+
+    /* 黒丸（カプセル）をさらに小さく（PC/SP共通） */
+    .content-right-top::after,
+    .content-right-bottom-left::after,
+    .content-right-bottom-right::after{
+      width: clamp(64px, 8.5vw, 108px);
+      height: clamp(26px, 3.2vw, 40px);
+      max-width: calc(100% - 16px); /* ブロック内に必ず収める */
+    }
+
+    /* 文字画像も小さく＆中央（PC/SP共通） */
+    .content-right-top::before,
+    .content-right-bottom-left::before,
+    .content-right-bottom-right::before{
+      width: clamp(64px, 8.5vw, 108px);
+      height: clamp(26px, 3.2vw, 40px);
+      max-width: calc(100% - 16px);
+      background-position: center;
+      background-size: 78% auto; /* 文字をさらに小さく */
+    }
+
+    /* SP：下段2ブロック（About/Contact）の見切れ防止 */
+    @media screen and (max-width: 767px) {
+
+      .content-right-bottom-left::after,
+      .content-right-bottom-right::after,
+      .content-right-bottom-left::before,
+      .content-right-bottom-right::before{
+        width: min(104px, calc(100% - 16px));
+        max-width: calc(100% - 16px);
+      }
+    }
+
+  
+    /* === header line + nav labels (added) === */
+    .header-line{
+      flex: 1;
+      height: 2px;
+      background: #2c2c2c;
+      border-radius: 2px;
+      margin: 0 14px;
+    }
+    .nav-item{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent !important; /* make the grey pill transparent */
+    }
+    .nav-item .nav-label{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* === nav spacing + size tweak (only) === */
+    .nav{
+      gap: 18px !important; /* add breathing room between Works/About/Contact */
+    }
+    .nav .nav-item{
+      width: 64px;
+      height: 28px;
+    }
+    .nav .nav-item .nav-label{
+      width: 100%;
+      height: 100%;
+    }
+    @media (max-width: 768px){
+      .nav{
+        gap: 14px !important;
+      }
+      .nav .nav-item{
+        width: 58px;
+        height: 26px;
+      }
+    }
+
+/* ===== Right blocks: slightly dim by default, brighten on hover (PC/SP/Tablet) ===== */
+.block.content-right-top,
+.block.content-right-bottom-left,
+.block.content-right-bottom-right{
+  /* keep existing background/colors; only adjust perceived brightness */
+  filter: brightness(0.90);
+  transition: filter 180ms ease;
+  will-change: filter;
+}
+
+
+/* --- Works block background image (PC default) --- */
+.block.content-right-top{
+  background-image: url("picture/works画像.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.block.content-right-top:hover,
+.block.content-right-bottom-left:hover,
+.block.content-right-bottom-right:hover{
+  filter: brightness(1.05);
+}
+
+
+/* --- About block background image (responsive) --- */
+.block.content-right-bottom-left{
+  background-color: #cccccc; /* fallback */
+  background-image: url("picture/about画像.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+  /* --- Contact block background image (responsive) --- */
+  .block.content-right-bottom-right{
+    background-color: #cccccc;
+    background-image: url("picture/contact画像.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px){
+  .block.content-right-top{
+    background-image: url("picture/works画像(tablet).png");
+  }
+  .block.content-right-bottom-left{
+    background-image: url("picture/about画像(tablet).png");
+  }
+  .block.content-right-bottom-right{
+    background-image: url("picture/contact画像(tablet).png");
+  }
+}
+
+/* SP */
+@media (max-width: 768px){
+  .block.content-right-top{
+    background-image: url("picture/works画像(sp).png");
+  }
+  .block.content-right-bottom-left{
+    background-image: url("picture/about画像(sp).png");
+  }
+  .block.content-right-bottom-right{
+    background-image: url("picture/contact画像(sp).png");
+  }
+}
+
+
+/* === PC screen click typing overlay === */
+.pc-screen-area{
+  position:absolute;
+  /* PC画面の位置に合わせて調整（既存の値を維持） */
+  left:6%;
+  top:18%;
+  width:88%;
+  height:60%;
+  cursor:pointer;
+  z-index:3;
+  /* クリックを確実に拾う */
+  pointer-events:auto;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow:hidden;
+}
+.pc-screen-area .typing-line{
+  width: 90%;
+  max-width: 520px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.pc-screen-area .typing-text{
+  display:inline-block;
+  white-space:pre-wrap;
+  line-height:1.2;
+  text-align:center;
+
+  overflow-wrap:anywhere;
+
+  word-break:break-word;
+
+  max-width:100%;
+}
+.pc-screen-area .typing-caret{
+  display:inline-block;
+  width:10px;
+  height:1.2em;
+  margin-left:6px;
+  background:#111;
+  animation:caretBlink 1s steps(1,end) infinite;
+  transform:translateY(2px);
+}
+@keyframes caretBlink{
+  0%,49%{opacity:1;}
+  50%,100%{opacity:0;}
+}
+
+/* SP / small: クリック領域をスマホ画面に合わせ、はみ出し防止（折り返し＋中央寄せ） */
+@media (max-width: 768px){
+  /* スマホ合成.png の画面位置に合わせる（SPのみ） */
+  .pc-screen-area{
+    left:18%;
+    top:24%;
+    width:64%;
+    height:62%;
+    overflow:hidden; /* カーソル風ブロック等が外に出ない */
+  
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+  .pc-screen-area .typing-line{
+    font-size:20px;
+    padding:0 10px;
+    justify-content:center;
+    text-align:center;
+  }
+  .pc-screen-area .typing-text{
+    white-space:normal;       /* 折り返し許可 */
+    max-width:100%;
+    line-height:1.35;
+    text-align:center;
+    word-break:break-word;
+  }
+  .pc-screen-area .typing-caret{
+    transform:translateY(1px);
+  }
+}
+</style>
+</head>
+<body>
+  <div class="wrapper">
+    <header class="header">
+      <!-- ロゴクリックで常にトップページへ -->
+      <a href="TOP.html" class="logo-link">
+        <div class="block logo logo-image"></div>
+      </a>
+      <div class="header-line" aria-hidden="true"></div>
+      <nav class="nav">
+        <a href="works.html" class="block nav-item"><img class="nav-label" src="picture/works-B.gif" alt="Works"></a>
+        <a href="about.html" class="block nav-item"><img class="nav-label" src="picture/about-B.gif" alt="About"></a>
+        <a href="contact.html" class="block nav-item"><img class="nav-label" src="picture/contact-B.gif" alt="Contact"></a>
+      </nav>
+    </header>
+
+    <main class="grid-container">
+      <section class="block hero"><picture class="hero-logo">
+    <!-- PC -->
+    <source media="(min-width: 1025px)" srcset="picture/logo-FV-PC.gif" />
+    <!-- タブレット（769px〜1024px） -->
+    <source media="(min-width: 769px)" srcset="picture/logo-FV-tablet.gif" />
+    <!-- SP（〜768px：フォールバック） -->
+    <img src="picture/logo-FV-SP.gif" alt="YC Portfolio" />
+  </picture>
+</section>
+      <section class="block content-left">
+        <picture class="content-left-visual">
+          <!-- PC/タブレット -->
+          <source media="(min-width: 769px)" srcset="picture/パソコン合成.png" />
+          <!-- SP（〜768px） -->
+          <img src="picture/スマホ合成.png" alt="Works visual" />
+        </picture>
+        <div class="pc-screen-area pc-screen" aria-hidden="true">
+          <div class="typing-line" aria-hidden="true"><span class="typing-text" id="typingText" aria-hidden="true"></span><span class="typing-caret" aria-hidden="true">▍</span></div>
+        </div>
+
+      </section>
+      <a href="works.html" class="block content-right-top"></a>
+      <section class="right-bottom">
+        <!-- ④: 左下ブロック（詳細ページへ） -->
+        <a href="about.html" class="block content-right-bottom-left"></a>
+        <!-- ⑤: 右下ブロック -->
+        <a href="contact.html" class="block content-right-bottom-right"></a>
+      </section>
+    </main>
+
+    <footer class="block footer" style="background:transparent !important;">
+  <div style="padding:4px;font-size:14px;font-weight:500;font-family:'Roboto','Kosugi',sans-serif;text-align:left;">
+    ＠YC Graphics
+  </div>
+</footer>
+  </div>
+
+<script>
+(() => {
+  const area = document.querySelector('.pc-screen-area');
+  const textEl = document.getElementById('typingText');
+  const caretEl = area ? area.querySelector('.typing-caret') : null;
+
+  if(!area || !textEl || !caretEl) return;
+
+  const lines = [
+    'Thank you for viewing!',
+    'This is my portfolio website.',
+    'Click “Works” to see my projects,',
+    '“About” to learn more about me,',
+    'or “Contact” to get in touch.'
+  ];
+
+  let displayed = '';
+  let charIndex = 0;  // 1行目の文字位置
+  let lineIndex = 1;  // 2行目以降の行位置
+  let started = false;
+
+  const setDisplayed = (v) => { displayed = v; textEl.textContent = displayed; };
+
+  const reset = () => {
+    started = false;
+    charIndex = 0;
+    lineIndex = 1;
+    setDisplayed('');
+    caretEl.style.display = 'none';
   };
 
-  const frag = document.createDocumentFragment();
-  picks.forEach(n => {
-    const a = document.createElement('a');
-    a.className = 'work-thumb';
-    a.href = `works/detail-${String(n).padStart(2, '0')}.html`;
+  const showCaret = () => { caretEl.style.display = 'inline-block'; };
 
-    const img = document.createElement('img');
-    img.alt = `作品 ${n}`;
-    img.loading = 'lazy';
-    img.decoding = 'async';
-    img.style.cssText = "width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;";
+  // 初期は非表示
+  reset();
 
-    useFirstAvailable(img, makePaths(n));
+  area.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
 
-    a.appendChild(img);
-    frag.appendChild(a);
-  });
+    if(!started){
+      started = true;
+      showCaret();
+    }
 
-  grid.innerHTML = '';
-  grid.appendChild(frag);
-})();
-</script><script>
-window.addEventListener('load', () => {
-  const hasVisited = sessionStorage.getItem('visited');
-  const intro = document.getElementById('intro-logo');
-  if (!hasVisited) {
-    sessionStorage.setItem('visited', 'true');
-    document.body.classList.add('loaded');
-    setTimeout(() => {
-      if (intro) intro.remove();
-    }, 4000); // ✅ 表示時間を4秒に変更
-  } else {
-    if (intro) intro.remove();
-  }
-});
-</script></body>
+    // 1行目：1クリック=1文字
+    if(charIndex < lines[0].length){
+      setDisplayed(displayed + lines[0].charAt(charIndex));
+      charIndex += 1;
+      return;
+    }
+
+    // 2行目以降：1クリック=1行
+    if(lineIndex < lines.length){
+      setDisplayed(displayed + '\n' + lines[lineIndex]);
+      lineIndex += 1;
+      return;
+    }
+
+    // 全表示後：次クリックでリセット
+    reset();
+  }, { passive:false });
+})();;
+</script>
+
+
+</body>
 </html>
