@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wireframe Top Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kosugi&family=Roboto:wght@400;500;700;900&display=swap&family=Roboto+Mono:wght@400;500;700" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+    font-family:"Roboto","Kosugi",system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+ height: 100%; 
+      background: #59ffa1;}
+    body {
+      margin: 0;
+      font-family:"Roboto","Kosugi",system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+      font-weight:500;
+      background: #59ffa1;
+      display: flex;
+    }
+    .wrapper {
+      width: 100%;          /* 大画面でも左右バランスを保つ */
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 8px;
+      flex: 1 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+}
+    .block {
+      background: #cccccc;
+      border-radius: 26px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 6px;
+      gap: 8px;
+      padding-right: 24px;
+    }
+    .logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+    }
+    .logo-link { display: block; }
+    .nav {
+      display: flex;
+      gap: 4px;
+    }
+    .nav-item {
+      width: 44px;
+      height: 22px;
+    }
+    main.grid-container {
+      display: grid;
+      grid-template-columns: 2fr 1.2fr;
+      grid-template-rows: 2fr 1.5fr 1.5fr;
+      gap: 4px;
+      flex: 1 0 auto;
+    }
+    .hero { grid-column: 1 / 3; }
+    .content-left { grid-row: 2 / 4; }
+    .content-right-top { grid-row: 2; }
+    .right-bottom {
+      grid-row: 3;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+    .right-bottom a {
+      text-decoration: none;
+      display: block;
+    }
+    .footer {
+      margin-top: 6px;
+      height: 22px;
+    }
+    @media (max-width: 768px) {
+      .wrapper { padding: 8px; }
+      .header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 6px;
+      }
+      .nav { gap: 4px; }
+      main.grid-container {
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 2fr 2fr 1.5fr;
+        gap: 4px;
+        grid-template-areas:
+          "hero hero"
+          "left rightTop"
+          "left rightBottom";
+      }
+      .hero { grid-area: hero; }
+      .content-left { grid-area: left; }
+      .content-right-top { grid-area: rightTop; }
+      .right-bottom {
+        grid-area: rightBottom;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+      }
+    }
+    /* ===== heroロゴ配置（レイアウトを崩さない版） ===== */
+    .hero { position: relative; overflow: hidden; }
+    .hero-logo{
+      position: absolute;
+      inset: 0;
+      display: block;
+    }
+    .hero-logo img{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ===== ヘッダー左上ロゴ画像（logo-top.webp） ===== */
+    .logo-image{
+      background-image: url("picture/logo-top.webp");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      background-color: transparent !important; /* グレー背景を透明化 */
+    }
+
+    /* ===== FV（hero）背景は透明（維持） ===== */
+    .hero{
+      background: transparent !important;
+    }
+    /* ===== ヘッダー左上ロゴ 微調整（見やすさ優先） ===== */
+    .logo{
+      width: 72px;   /* 46px → 72px */
+      height: 72px;
+      border-radius: 16px;
+    }
+    .logo-image{
+      /* 拡大しすぎて潰れないように、contain + 余白で視認性UP */
+      background-size: contain;
+      background-origin: content-box;
+      background-clip: content-box;
+      padding: 6px; /* ロゴが角丸に詰まりすぎない */
+    }
+    /* ===== 左下でかいブロック：透過画像配置（PC/SP切替） ===== */
+    .content-left{
+      position: relative;
+      overflow: hidden;
+      background: transparent !important;
+      /* 透過PNGを活かす */
+    }
+    .content-left-visual{
+      position: absolute;
+      inset: 0;
+      display: block;
+    }
+    .content-left-visual img{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    
+    /* ===== PCフルスクリーン時：左＋右3ブロックをロゴ下でバランス良く中央寄せ ===== */
+    @media screen and (min-width: 1440px) {
+
+      /* 全体を中央に寄せて、左右の空き過ぎを抑える（SP/Tabletは影響なし） */
+      main.grid-container{
+        max-width: 1700px;
+        margin-left: auto;
+        margin-right: auto;
+        /* 左を伸ばしつつ、右カラムを上限付きにして間延びを防ぐ */
+        grid-template-columns: minmax(0, 2fr) minmax(520px, 1.2fr);
+      }
+
+      /* 右側の3ブロックは「右カラム内で」伸びすぎないようにする（非表示にはしない） */
+      .content-right-top,
+      .right-bottom{
+        max-width: 620px;
+        width: 100%;
+        justify-self: end;
+      }
+    }
+    /* ===== ブロック内 上部バー（Works / About / Contact） ===== */
+    .content-right-top,
+    .content-right-bottom-left,
+    .content-right-bottom-right{
+      position: relative;
+    }
+
+    .content-right-top::before,
+    .content-right-bottom-left::before,
+    .content-right-bottom-right::before{
+      content: "";
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      width: clamp(96px, 12vw, 180px);
+      height: clamp(28px, 3.6vw, 56px);
+      background-repeat: no-repeat;
+      background-position: left top;
+      background-size: contain;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* それぞれのバー画像 */
+    .content-right-top::before{
+      background-image: url("picture/works.webp");
+    }
+    .content-right-bottom-left::before{
+      background-image: url("picture/about.webp");
+    }
+    .content-right-bottom-right::before{
+      background-image: url("picture/contact.webp");
+    }
+    /* ===== バー画像 微調整 + 黒丸背景 ===== */
+    .content-right-top::before,
+    .content-right-bottom-left::before,
+    .content-right-bottom-right::before{
+      top: 18px;
+      left: 18px;
+      width: clamp(72px, 9vw, 120px);
+      height: clamp(24px, 3vw, 40px);
+      z-index: 3;
+    }
+
+    .content-right-top::after,
+    .content-right-bottom-left::after,
+    .content-right-bottom-right::after{
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      width: clamp(88px, 11vw, 140px);
+      height: clamp(36px, 4vw, 56px);
+      background: #2c2c2c;
+      border-radius: 999px;
+      z-index: 2;
+    }
+    /* ===== バーをブロック左上に密着させる ===== */
+    .content-right-top::before,
+    .content-right-bottom-left::before,
+    .content-right-bottom-right::before{
+      top: 0;
+      left: 0;
+      margin: 12px;
+    }
+
+    .content-right-top::after,
+    .content-right-bottom-left::after,
+    .content-right-bottom-right::after{
+      top: 0;
+      left: 0;
+      margin: 8px;
+    }
+    /* ===== 黒丸バーをブロック左上に完全密着（余白ゼロ） ===== */
+    .content-right-top::after,
+    .content-right-bottom-left::after,
+    .content-right-bottom-right::after{
+      top: 0;
+      left: 0;
+      margin: 0;
+    }
+
+    .content-right-top::before,
+    .content-right-bottom-left::before,
+    .content-right-bottom-right::before{
+      top: 0;
+      left: 0;
+      margin: 4px;
+    }
+    /* ===== SP時：黒丸バーを中央寄せ＋文字画像も中央配置 ===== */
+    @media screen and (max-width: 767px) {
+
+      .content-right-top::after,
+      .content-right-bottom-left::after,
+      .content-right-bottom-right::after{
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .content-right-top::before,
+      .content-right-bottom-left::before,
+      .content-right-bottom-right::before{
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+        background-position: center;
+      }
+    }
+    /* ===== 黒丸バーを必ずグレー枠内に収める ===== */
+    .content-right-top,
+    .content-right-bottom-left,
+    .content-right-bottom-right{
+      overflow: hidden;
+    }
+
+    /* PC / Tablet 共通 */
+    .content-right-top::after,
+    .content-right-bottom-left::after,
+    .content-right-bottom-right::after{
+      top: 8px;
+      left: 8px;
+    }
+
+    .content-right-top::before,
+    .content-right-bottom-left::before,
+    .content-right-bottom-right::before{
+      top: 8px;
+      left: 8px;
+      margin: 0;
+    }
+
+    /* SP時：中央寄せだが枠内 */
+    @media screen and (max-width: 767px) {
+      .content-right-top::after,
+      .content-right-bottom-left::after,
+      .content-right-bottom-right::after{
+        left: 50%;
+        transform: translateX(-50%);
+        top: 8px;
+      }
+
+      .content-right-top::before,
+      .content-right-bottom-left::before,
+      .content-right-bottom-right::before{
+        left: 50%;
+        transform: translateX(-50%);
+        top: 8px;
+        background-position: center;
+      }
+    }
+    /* ===== ラベル微修正（中央配置 / SP上段だけ左上 / サイズ縮小） ===== */
+
+    /* 1) 黒丸（カプセル）を少し小さく（PC/SP共通） */
+    .content-right-top::after,
+    .content-right-bottom-left::after,
+    .content-right-bottom-right::after{
+      width: clamp(76px, 9.5vw, 120px);
+      height: clamp(30px, 3.6vw, 46px);
+    }
+
+    /* 2) 文字画像を「黒丸枠内の中央」に（PC/SP共通） */
+    .content-right-top::before,
+    .content-right-bottom-left::before,
+    .content-right-bottom-right::before{
+      width: clamp(76px, 9.5vw, 120px);
+      height: clamp(30px, 3.6vw, 46px);
+      background-position: center;
+      background-size: 88% auto; /* 文字を黒丸内で気持ち余白 */
+    }
+
+    /* SP時：上段（Worksだけ）はPC同様「左上」／下2つは中央寄せのまま */
+    @media screen and (max-width: 767px) {
+
+      /* Works（上段）だけ左上 */
+      .content-right-top::after,
+      .content-right-top::before{
+        left: 8px;
+        transform: none;
+      }
+
+      /* About / Contact は中央寄せ */
+      .content-right-bottom-left::after,
+      .content-right-bottom-right::after,
+      .content-right-bottom-left::before,
+      .content-right-bottom-right::before{
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+    /* ===== ラベル微調整②（さらに縮小 + SP下段の見切れ防止） ===== */
+
+    /* 黒丸（カプセル）をさらに小さく（PC/SP共通） */
+    .content-right-top::after,
+    .content-right-bottom-left::after,
+    .content-right-bottom-right::after{
+      width: clamp(64px, 8.5vw, 108px);
+      height: clamp(26px, 3.2vw, 40px);
+      max-width: calc(100% - 16px); /* ブロック内に必ず収める */
+    }
+
+    /* 文字画像も小さく＆中央（PC/SP共通） */
+    .content-right-top::before,
+    .content-right-bottom-left::before,
+    .content-right-bottom-right::before{
+      width: clamp(64px, 8.5vw, 108px);
+      height: clamp(26px, 3.2vw, 40px);
+      max-width: calc(100% - 16px);
+      background-position: center;
+      background-size: 78% auto; /* 文字をさらに小さく */
+    }
+
+    /* SP：下段2ブロック（About/Contact）の見切れ防止 */
+    @media screen and (max-width: 767px) {
+
+      .content-right-bottom-left::after,
+      .content-right-bottom-right::after,
+      .content-right-bottom-left::before,
+      .content-right-bottom-right::before{
+        width: min(104px, calc(100% - 16px));
+        max-width: calc(100% - 16px);
+      }
+    }
+
+  
+    /* === header line + nav labels (added) === */
+    .header-line{
+      flex: 1;
+      height: 2px;
+      background: #2c2c2c;
+      border-radius: 2px;
+      margin: 0 14px;
+    }
+    .nav-item{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent !important; /* make the grey pill transparent */
+    }
+    .nav-item .nav-label{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* === nav spacing + size tweak (only) === */
+    .nav{
+      gap: 18px !important; /* add breathing room between Works/About/Contact */
+    }
+    .nav .nav-item{
+      width: 64px;
+      height: 28px;
+    }
+    .nav .nav-item .nav-label{
+      width: 100%;
+      height: 100%;
+    }
+    @media (max-width: 768px){
+      .nav{
+        gap: 14px !important;
+      }
+      .nav .nav-item{
+        width: 58px;
+        height: 26px;
+      }
+    }
+
+/* ===== Right blocks: slightly dim by default, brighten on hover (PC/SP/Tablet) ===== */
+.block.content-right-top,
+.block.content-right-bottom-left,
+.block.content-right-bottom-right{
+  /* keep existing background/colors; only adjust perceived brightness */
+  filter: brightness(0.90);
+  transition: filter 180ms ease;
+  will-change: filter;
+}
+
+
+/* --- Works block background image (PC default) --- */
+.block.content-right-top{
+  background-image: url("picture/works画像.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.block.content-right-top:hover,
+.block.content-right-bottom-left:hover,
+.block.content-right-bottom-right:hover{
+  filter: brightness(1.05);
+}
+
+
+/* --- About block background image (responsive) --- */
+.block.content-right-bottom-left{
+  background-color: #cccccc; /* fallback */
+  background-image: url("picture/about画像.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+  /* --- Contact block background image (responsive) --- */
+  .block.content-right-bottom-right{
+    background-color: #cccccc;
+    background-image: url("picture/contact画像.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px){
+  .block.content-right-top{
+    background-image: url("picture/works画像(tablet).webp");
+  }
+  .block.content-right-bottom-left{
+    background-image: url("picture/about画像(tablet).webp");
+  }
+  .block.content-right-bottom-right{
+    background-image: url("picture/contact画像(tablet).webp");
+  }
+}
+
+/* SP */
+@media (max-width: 768px){
+  .block.content-right-top{
+    background-image: url("picture/works画像(sp).webp");
+  }
+  .block.content-right-bottom-left{
+    background-image: url("picture/about画像(sp).webp");
+  }
+  .block.content-right-bottom-right{
+    background-image: url("picture/contact画像(sp).webp");
+  }
+}
+
+
+/* === PC screen click typing overlay === */
+.pc-screen-area{
+  position:absolute;
+  /* PC画面の位置に合わせて調整（既存の値を維持） */
+  left:6%;
+  top:18%;
+  width:88%;
+  height:60%;
+  cursor:pointer;
+  z-index:3;
+  /* クリックを確実に拾う */
+  pointer-events:auto;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow:hidden;
+}
+.pc-screen-area .typing-line{
+  width: 90%;
+  max-width: 520px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.pc-screen-area .typing-text{
+  display:inline-block;
+  white-space:pre-wrap;
+  line-height:1.2;
+  text-align:center;
+
+  overflow-wrap:anywhere;
+
+  word-break:break-word;
+
+  max-width:100%;
+}
+.pc-screen-area .typing-caret{
+  display:inline-block;
+  width:10px;
+  height:1.2em;
+  margin-left:6px;
+  background:#111;
+  animation:caretBlink 1s steps(1,end) infinite;
+  transform:translateY(2px);
+}
+@keyframes caretBlink{
+  0%,49%{opacity:1;}
+  50%,100%{opacity:0;}
+}
+
+/* SP / small: クリック領域をスマホ画面に合わせ、はみ出し防止（折り返し＋中央寄せ） */
+@media (max-width: 768px){
+  /* スマホ合成.webp の画面位置に合わせる（SPのみ） */
+  .pc-screen-area{
+    left:18%;
+    top:24%;
+    width:64%;
+    height:62%;
+    overflow:hidden; /* カーソル風ブロック等が外に出ない */
+  
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+  .pc-screen-area .typing-line{
+    font-size:20px;
+    padding:0 10px;
+    justify-content:center;
+    text-align:center;
+  }
+  .pc-screen-area .typing-text{
+    white-space:normal;       /* 折り返し許可 */
+    max-width:100%;
+    line-height:1.35;
+    text-align:center;
+    word-break:break-word;
+  }
+  .pc-screen-area .typing-caret{
+    transform:translateY(1px);
+  }
+}
+</style>
+</head>
+<body>
+  <div class="wrapper">
+    <header class="header">
+      <!-- ロゴクリックで常にトップページへ -->
+      <a href="index.html" class="logo-link">
+        <div class="block logo logo-image"></div>
+      </a>
+      <div class="header-line" aria-hidden="true"></div>
+      <nav class="nav">
+        <a href="works.html" class="block nav-item"><img class="nav-label" src="picture/works-B.webp" alt="Works"></a>
+        <a href="about.html" class="block nav-item"><img class="nav-label" src="picture/about-B.webp" alt="About"></a>
+        <a href="contact.html" class="block nav-item"><img class="nav-label" src="picture/contact-B.webp" alt="Contact"></a>
+      </nav>
+    </header>
+
+    <main class="grid-container">
+      <section class="block hero"><picture class="hero-logo">
+    <!-- PC -->
+    <source media="(min-width: 1025px)" srcset="picture/logo-FV-PC.webp" />
+    <!-- タブレット（769px〜1024px） -->
+    <source media="(min-width: 769px)" srcset="picture/logo-FV-tablet.webp" />
+    <!-- SP（〜768px：フォールバック） -->
+    <img src="picture/logo-FV-SP.webp" alt="YC Portfolio" />
+  </picture>
+</section>
+      <section class="block content-left">
+        <picture class="content-left-visual">
+          <!-- PC/タブレット -->
+          <source media="(min-width: 769px)" srcset="picture/パソコン合成.webp" />
+          <!-- SP（〜768px） -->
+          <img src="picture/スマホ合成.webp" alt="Works visual" />
+        </picture>
+        <div class="pc-screen-area pc-screen" aria-hidden="true">
+          <div class="typing-line" aria-hidden="true"><span class="typing-text" id="typingText" aria-hidden="true"></span><span class="typing-caret" aria-hidden="true">▍</span></div>
+        </div>
+
+      </section>
+      <a href="works.html" class="block content-right-top"></a>
+      <section class="right-bottom">
+        <!-- ④: 左下ブロック（詳細ページへ） -->
+        <a href="about.html" class="block content-right-bottom-left"></a>
+        <!-- ⑤: 右下ブロック -->
+        <a href="contact.html" class="block content-right-bottom-right"></a>
+      </section>
+    </main>
+
+    <footer class="block footer" style="background:transparent !important;">
+  <div style="padding:4px;font-size:14px;font-weight:500;font-family:'Roboto','Kosugi',sans-serif;text-align:left;">
+    ＠YC Graphics
+  </div>
+</footer>
+  </div>
+
+<script>
+(() => {
+  const area = document.querySelector('.pc-screen-area');
+  const textEl = document.getElementById('typingText');
+  const caretEl = area ? area.querySelector('.typing-caret') : null;
+
+  if(!area || !textEl || !caretEl) return;
+
+  const lines = [
+    'Thank you for viewing!',
+    'This is my portfolio website.',
+    'Click “Works” to see my projects,',
+    '“About” to learn more about me,',
+    'or “Contact” to get in touch.'
+  ];
+
+  let displayed = '';
+  let charIndex = 0;  // 1行目の文字位置
+  let lineIndex = 1;  // 2行目以降の行位置
+  let started = false;
+
+  const setDisplayed = (v) => { displayed = v; textEl.textContent = displayed; };
+
+  const reset = () => {
+    started = false;
+    charIndex = 0;
+    lineIndex = 1;
+    setDisplayed('');
+    caretEl.style.display = 'none';
+  };
+
+  const showCaret = () => { caretEl.style.display = 'inline-block'; };
+
+  // 初期は非表示
+  reset();
+
+  area.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if(!started){
+      started = true;
+      showCaret();
+    }
+
+    // 1行目：1クリック=1文字
+    if(charIndex < lines[0].length){
+      setDisplayed(displayed + lines[0].charAt(charIndex));
+      charIndex += 1;
+      return;
+    }
+
+    // 2行目以降：1クリック=1行
+    if(lineIndex < lines.length){
+      setDisplayed(displayed + '\n' + lines[lineIndex]);
+      lineIndex += 1;
+      return;
+    }
+
+    // 全表示後：次クリックでリセット
+    reset();
+  }, { passive:false });
+})();;
+</script>
+
+
+</body>
+</html>
