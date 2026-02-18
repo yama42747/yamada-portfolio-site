@@ -1,0 +1,92 @@
+/* =========================================================
+  common.css（全ページ共通）
+  - 見た目は変えず、重複していた共通スタイルだけを集約
+  - 変更すると全ページへ影響します（特にヘッダー/ナビ/ノイズ）
+========================================================= */
+
+/* Reset */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+/* ノイズ重ね（各ページで --noise-opacity を上書きできます） */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:url("../picture/noise-texture.webp");
+  background-repeat:repeat;
+  background-size:auto;
+  opacity: var(--noise-opacity, 0.5);
+  pointer-events:none;
+  z-index:0;
+}
+
+/* 共通：最大幅 */
+.wrapper{
+  max-width:1500px;
+  margin:0 auto;
+  position:relative;
+  z-index:1;
+  width:100%;
+}
+
+/* 共通：ロゴ（64px固定） */
+.logo-link{
+  display:block;
+  width:64px;
+  height:64px;
+}
+.logo-link img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:contain;
+}
+
+/* 共通：ヘッダーの白線 */
+.header-line,
+.line{
+  flex:1;
+  height:1px;
+  background:#eaeeef;
+}
+
+/* 共通：ナビの“ピル”ボタン（about/contact/works/index 共通化） */
+.nav{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+.nav-item{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:140px;
+  height:32px;
+  padding:0 14px;
+  border:1px solid #eaeeef;
+  border-radius:999px;
+  overflow:hidden; /* 画像のはみ出し防止 */
+  box-sizing:border-box;
+}
+.nav-item img,
+.nav-icon{
+  height:20px;
+  width:auto;
+  max-width:100%;
+  display:block;
+  object-fit:contain;
+}
+
+/* SPだけ：3つが画面内に収まるよう縮小（並びは維持） */
+@media (max-width: 768px){
+  .nav{ gap:8px; }
+  .nav-item{
+    width:72px;
+    height:26px;
+    padding:0 8px;
+    border-width:2px;
+  }
+  .nav-item img,
+  .nav-icon{ height:16px; }
+}

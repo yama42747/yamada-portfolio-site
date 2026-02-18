@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<title>Wireframe Top Page</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Kosugi&amp;family=Roboto:wght@400;500;700;900&amp;display=swap&amp;family=Roboto+Mono:wght@400;500;700" rel="stylesheet"/>
+<style>
+/* ===== Reset ===== */
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;
+  font-family:"Roboto","Kosugi",system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  background:#1da356;
+  overflow-x:hidden;
+}
+
+/* Noise overlay */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:url("picture/noise-texture.webp");
+  background-repeat:repeat;
+  background-size:auto;
+  opacity:1;
+  pointer-events:none;
+  z-index:0;
+
+}
+
+/* ===== Wrapper Layout ===== */
+.wrapper{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:1500px;
+  margin:0 auto;
+  min-height:100vh;
+  padding:22px 26px 20px;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ===== Header ===== */
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:6px 0 14px;
+}
+.logo-link{ display:inline-block; }
+.logo-image{
+  width:64px;
+  height:auto;
+  display:block;
+}
+
+/* Top line */
+.line{
+  flex:1;
+  height:1px;
+  background:#eaeeef;
+  margin:0 18px;
+  border-radius:2px;
+}
+
+/* Nav (text labels) */
+.nav{
+  display:flex;
+  gap:18px;
+}
+.nav-item{
+  display:flex;
+  align-items:center;
+  text-decoration:none;
+}
+.nav-label{
+  color:#2c2c2c;
+  font-weight:800;
+  font-size:22px;
+  line-height:1;
+}
+
+
+.nav-icon {
+  height: 22px;
+  width: auto;
+  display: block;
+}
+/* ===== Main Grid ===== */
+main.grid-container{
+  flex:1 1 auto;
+  min-height:0;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  /* hero / content-top / content-bottom / credit */
+  grid-template-rows: 1fr 1fr;
+  gap:18px;
+  padding:0;
+  align-items:stretch;
+}
+
+/* ===== Hero ===== */
+.hero-logo{
+  grid-column:1 / -1;
+  grid-row:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  border-radius:18px;
+  position:relative;
+
+  width:100%;
+  height:100%;
+}
+.hero{
+  grid-column:1 / -1;
+  grid-row:1;
+}
+
+.hero-logo img{
+  width:100%;
+  height:100%;
+  max-width:88%;
+  max-height:82%;
+  object-fit:contain;
+  object-position:center;
+}
+@media (max-width: 768px){
+  .hero-logo img{
+    max-width:90%;
+    max-height:78%;
+  }
+}
+
+/* ===== Blocks ===== */
+.block{
+  display:block;
+  position:relative;
+  border-radius:18px;
+  overflow: hidden;
+  box-shadow:0 10px 18px rgba(0,0,0,.18);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.block.hero{background:transparent;box-shadow:none;}
+.block.hero:hover{transform:none;box-shadow:none;}
+
+.block:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 24px rgba(0,0,0,.22);
+}
+
+/* Works / About / Contact label pill */
+.label{
+  position:absolute;
+  top:10px;
+  left:10px;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 12px;
+  background:#2c2c2c;
+  color:#59ffa1;
+  border-radius:999px;
+  font-weight:800;
+  font-size:22px;
+  line-height:1;
+  z-index:2;
+}
+.label.about::after{
+  content:"★";
+  color:#ffd54a;
+  font-size:18px;
+  margin-left:2px;
+}
+
+/* Place blocks in the grid */
+.works-main{
+  grid-column:1;
+  grid-row:2 / 4;
+  min-height:0;
+
+  position:relative;
+  }
+.right-stack{
+  grid-column:2;
+  grid-row:2 / 4;
+  min-height:0;
+  display:grid;
+  grid-template-rows: 1fr 1fr;
+  gap:18px;
+}
+.content-right-bottom-left{ grid-row:1; }
+.content-right-bottom-right{ grid-row:2; }
+
+/* Credit under Works: left corner just below Works block */
+.yc-credit{margin-top:6px; color:#eaeeef;
+  z-index:5;
+}
+
+/* ===== Background images (from your latest assets) ===== */
+.block.content-right-top{
+  background-image: url("picture/works画像.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.block.content-right-bottom-left{
+    background-image: url("picture/about画像(sp).webp");
+  }
+.block.content-right-bottom-right{
+    background-image: url("picture/contact画像(sp).webp");
+  }
+
+
+.block.content-right-bottom-right:hover{
+  filter: brightness(1.05);
+}
+
+/* ===== Responsive (keep 2 columns even on SP) ===== */
+@media (max-width: 768px){
+  .wrapper{padding:18px 16px 16px;}
+  .nav{gap:14px;}
+  .nav-label{font-size:18px;}
+  main.grid-container{gap:14px;}
+  .right-stack{gap:14px;}
+  .label{font-size:18px; padding:5px 10px;}
+}
+
+@media (max-width: 480px){
+  .wrapper{padding:14px 12px 14px;}
+  .line{margin:0 10px;}
+  .nav{gap:12px;}
+  .nav-label{font-size:16px;}
+  main.grid-container{gap:12px;}
+  .right-stack{gap:12px;}
+  .block,.hero-logo{border-radius:14px;}
+  .label{font-size:16px;}
+}
+/* Hover overlay (darken + center label) */
+.block::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.60);
+  opacity:0;
+  transition: opacity 0.25s ease;
+  border-radius: inherit;
+  z-index:1;
+}
+.block:hover::before{ opacity:1; }
+
+.hover-center-label{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  transition: opacity 0.25s ease;
+  z-index:2;
+  pointer-events:none;
+}
+.block:hover .hover-center-label{ opacity:1; }
+
+.hover-center-label::before{
+  content:"";
+  width: clamp(120px, 25%, 200px);
+  height: clamp(28px, 6%, 48px);
+  background: center / contain no-repeat var(--hover-img);
+  filter: drop-shadow(0 2px 0 rgba(0,0,0,0.35));
+}
+.hover-center-label[data-img="works-B.webp"]{ --hover-img: url("picture/works-B.webp"); }
+.hover-center-label[data-img="about-B.webp"]{ --hover-img: url("picture/about-B.webp"); }
+.hover-center-label[data-img="contact-B.webp"]{ --hover-img: url("picture/contact-B.webp"); }
+
+/* ===== FIX: disable hover overlay on HERO (top logo block) ===== */
+.block.hero::before{
+  opacity:0 !important;
+  display:none !important;
+}
+.block.hero:hover::before{ opacity:0 !important; }
+.block.hero .hover-center-label{ display:none !important; }
+
+/* === Header nav pill (match about.html) === */
+.nav{
+  display:flex;
+  gap:20px;
+}
+.nav-item{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:140px;
+  height:32px;
+  padding:0 14px;
+  border:1px solid #eaeeef;
+  border-radius:999px;
+  overflow:hidden;
+}
+.nav-icon{
+  height:20px;
+  width:auto;
+  object-fit:contain;
+}
+@media (max-width:768px){
+  .nav{gap:8px;}
+  .nav-item{
+    width:72px;
+    height:26px;
+    padding:0 8px;
+  }
+  .nav-icon{height:16px;}
+}
+
+
+/* ============================= */
+/* PC / SP 切り替え用 追加設定  */
+/* ============================= */
+
+/* PCのみ Works画像差し替え */
+@media (min-width: 769px){
+  .block.content-right-top{
+    background-image: url("picture/works(pc).webp");
+  }
+}
+
+/* SPのみ About画像差し替え */
+@media (max-width: 768px){
+  .block.content-right-bottom-left{
+    background-image: url("picture/about(sp).webp");
+  }
+}
+
+/* SPのみ Contact画像差し替え */
+@media (max-width: 768px){
+  .block.content-right-bottom-right{
+    background-image: url("picture/contact(sp).webp");
+  }
+}
+
+
+/* SPのみ Works画像差し替え */
+@media (max-width: 768px){
+  .block.content-right-top{
+    background-image: url("picture/works(sp).webp");
+  }
+}
+
+
+/* =========================
+   SPのみ：ヘッダー全体を下に +4px（レイアウト非干渉）
+   ========================= */
+@media (max-width: 768px){
+  .header{
+    transform: translateY(4px);
+  }
+}
+
+
+/* PCのみ：ヘッダー白横線を +2px 下げる */
+@media (min-width: 769px){
+  .line{
+    transform: translateY(2px);
+  }
+}
+
+</style>
+
+<style>
+@media (min-width: 769px){
+  .header{
+    margin-top: 5px;
+  }
+}
+</style>
+
+</head>
+<body>
+<div class="wrapper">
+<header class="header">
+<!-- ロゴクリックで常にトップページへ -->
+<a class="logo-link" href="index.html">
+<img alt="YC logo" class="logo-image" src="picture/logo-top.webp"/>
+</a>
+<div aria-hidden="true" class="line"></div>
+<nav class="nav">
+<a class="nav-item" href="works.html"><img alt="Works" class="nav-icon" src="picture/works-B.webp"/></a>
+<a class="nav-item" href="about.html"><img alt="About" class="nav-icon" src="picture/about-B.webp"/></a>
+<a class="nav-item" href="contact.html"><img alt="Contact" class="nav-icon" src="picture/contact-B.webp"/></a>
+</nav>
+</header>
+<main class="grid-container">
+<section class="block hero"><picture class="hero-logo"><source media="(min-width: 769px)" srcset="picture/logo-FV-PC.webp"/>
+<!-- PC -->
+<!-- タブレット（769px〜1024px） -->
+<!-- SP（〜768px：フォールバック） -->
+<img alt="YC Portfolio" src="picture/logo-FV-SP.webp">
+</img></picture>
+</section><a class="block content-right-top works-main" href="works.html"><span class="hover-center-label" data-img="works-B.webp"></span></a>
+<div class="yc-credit">＠YC Graphics</div><section class="right-stack"><a class="block content-right-bottom-left" href="about.html"><span class="hover-center-label" data-img="about-B.webp"></span></a><a class="block content-right-bottom-right" href="contact.html"><span class="hover-center-label" data-img="contact-B.webp"></span></a></section></main>
+<footer class="block footer site-footer" style="background:transparent !important;"></footer>
+</div>
+</body>
+</html>
+<style>.block.hero{background:transparent;box-shadow:none;border:none;}
+/* === Header nav pill (match about.html) === */
+.nav{
+  display:flex;
+  gap:20px;
+}
+.nav-item{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:140px;
+  height:32px;
+  padding:0 14px;
+  border:1px solid #eaeeef;
+  border-radius:999px;
+  overflow:hidden;
+}
+.nav-icon{
+  height:20px;
+  width:auto;
+  object-fit:contain;
+}
+@media (max-width:768px){
+  .nav{gap:8px;}
+  .nav-item{
+    width:72px;
+    height:26px;
+    padding:0 8px;
+  }
+  .nav-icon{height:16px;}
+}
+
+</style>

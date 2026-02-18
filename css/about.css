@@ -1,0 +1,354 @@
+/* =========================================================
+  about.css（Aboutページ固有）
+  - about.html 内の style を移動・整理
+  - “効果がない重複”だけ削除し、最終的に効いている値は維持
+========================================================= */
+
+/* このページだけ Noto Sans JP を使用（本文/見出し） */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500;700&display=swap');
+
+:root{ --noise-opacity: 0.5; }
+
+html, body{
+  height: 100%;
+  background: #ea8532;
+}
+body{
+  margin: 0;
+  font-family:"Roboto","Kosugi",system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  background: #ea8532;
+  /* body を flex にすると最大幅時に崩れやすいので block（元データ通り） */
+  display: block;
+}
+
+/* common.css の wrapper に加えて、about は min-height/flex を付与 */
+.wrapper{
+  max-width: 1500px;
+  margin: 0 auto;
+  padding:22px 26px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== HEADER ===== */
+.header{
+  padding: 1px 0 0;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.logo-link{ position:relative; top:-3px; } /* 元データ通りの高さ合わせ */
+.page-title img{height:24px}
+.header-line{ margin:0 16px; }
+
+/* ===== Layout ===== */
+.block{ background: #cccccc; border-radius: 26px; }
+
+main.detail-layout{
+  display: grid;
+  grid-template-columns: 1.6fr 1.4fr;
+  grid-template-rows: auto auto auto auto;
+  grid-template-areas:
+    "main text2"
+    "main text3"
+    "main title"
+    "main thumbs";
+  gap: 4px;
+  flex:1 0 auto;
+}
+
+.main-visual{
+  grid-area: main;
+  overflow: hidden;
+  background: transparent;
+  position: relative;
+}
+.main-visual .about-main-pic,
+.main-visual .about-main-pic img{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* SP/Tablet/PC 画像は picture の source で切替え（HTML側） */
+.main-visual .about-main-pic img{ object-fit: cover; transform-origin: 50% 60%; }
+
+/* ===== 右側ブロック ===== */
+.text-secondary { grid-area:text2; min-height:18px; }
+.text-tertiary { grid-area:text3; }
+.title-block { grid-area:title; min-height:18px; }
+.thumb-grid { grid-area:thumbs; display:grid; grid-template-columns:repeat(4,1fr); gap:4px; }
+
+/* tool grid */
+.thumb-grid.tool-grid{ gap:12px; }
+.tool-pill{
+  display:flex; align-items:center; justify-content:center;
+  height: 44px;
+  border-radius: 14px;
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  position: relative;
+  overflow: hidden;
+}
+.tool-pill.ps{ background:#212647; color:#54b0ff; }
+.tool-pill.ai{ background:#35160b; color:#ff8123; }
+.tool-pill.ae{ background:#2a2044; color:#b377f4; }
+.tool-pill.pr{ background:#2a2044; color:#b377f4; }
+.tool-pill.sns{ background:#212647; color:#4ea0ff; }
+.tool-pill.ga4{ background:#511010; color:#ff3636; }
+.tool-pill.meta{ background:#203544; color:#7dceff; }
+.tool-pill.tt{ background:#560f33; color:#ff3390; }
+
+/* label <-> description hover swap */
+.tool-pill .tool-label,
+.tool-pill .tool-desc{
+  position: absolute;
+  inset: 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 0 10px;
+  text-align:center;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  will-change: opacity, transform;
+}
+.tool-pill .tool-label{ opacity: 1; transform: translateY(0); }
+.tool-pill .tool-desc{
+  opacity: 0;
+  transform: translateY(8px);
+  white-space: nowrap;
+}
+.tool-pill:hover .tool-label,
+.tool-pill:focus-visible .tool-label{ opacity: 0; transform: translateY(-8px); }
+.tool-pill:hover .tool-desc,
+.tool-pill:focus-visible .tool-desc{ opacity: 1; transform: translateY(0); }
+
+/* ===== 画像の入場アニメ（<=3s） ===== */
+.about-main-pic img{
+  animation: scaleTiltIn 2.4s cubic-bezier(.2,.9,.2,1) both;
+  will-change: transform;
+}
+@keyframes scaleTiltIn{
+  0%   { transform: scale(0.85) rotate(0deg); }
+  30%  { transform: scale(0.92) rotate(-6deg); }
+  55%  { transform: scale(1.00) rotate(6deg); }
+  75%  { transform: scale(1.00) rotate(-3deg); }
+  100% { transform: scale(1.00) rotate(0deg); }
+}
+/* アニメ終了後 hover で震える（JSで .anim-done 付与） */
+@keyframes hoverWiggle{
+  0%   { transform: scale(1.02) rotate(0deg); }
+  15%  { transform: scale(1.02) rotate(2deg); }
+  30%  { transform: scale(1.02) rotate(-2deg); }
+  45%  { transform: scale(1.02) rotate(1.5deg); }
+  60%  { transform: scale(1.02) rotate(-1.5deg); }
+  75%  { transform: scale(1.02) rotate(1deg); }
+  100% { transform: scale(1.02) rotate(0deg); }
+}
+.about-main-pic img.anim-done:hover{ animation: hoverWiggle 0.45s ease-in-out 1; }
+
+@media (prefers-reduced-motion: reduce){
+  .about-main-pic img{ animation: none; }
+  .about-main-pic img.anim-done:hover{ animation: none; }
+}
+
+/* ===== About page right blocks（スクショ合わせの調整） ===== */
+.block.text-secondary,
+.block.text-tertiary,
+.block.title-block,
+.thumb-grid{ background: transparent; }
+
+.about-heading{
+  display:flex;
+  flex-direction: column;
+  align-items:flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.about-heading-img{
+  display:block;
+  width: 100%;
+  height: auto;
+  max-width: 560px;
+}
+.about-heading-img--tools{
+  display:block;
+  width:100%;
+  max-width: 720px;
+  height:auto;
+}
+.tools-subtitle{
+  display:block;
+  width: min(418px,100%);
+  height:auto;
+  margin-top: 6px;
+}
+.name-sign{
+  display:block;
+  width: min(418px,100%);
+  height:auto;
+  margin-top: 10px;
+}
+
+/* “謎の余白”対策（元データ通り） */
+.block.text-secondary, .block.title-block { padding: 0; }
+.block.text-tertiary { overflow: auto; min-height: 0; border-radius:0; }
+.block.text-tertiary p { margin: 0; }
+main.detail-layout { min-height: 0; }
+
+.about-scroll{
+  height: 100%;
+  max-height: 100%;
+  overflow: auto;
+  padding-right: 6px;
+}
+.about-scroll p{
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 0;
+  color:#eaeeef;
+}
+
+/* custom scrollbar (webkit only) */
+.about-scroll::-webkit-scrollbar { width: 8px; }
+.about-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.25); border-radius: 999px; }
+.about-scroll::-webkit-scrollbar-track { background: rgba(0,0,0,0.08); border-radius: 999px; }
+
+/* ===== Responsive ===== */
+@media (max-width:768px){
+  .wrapper{padding:8px;}
+  .thumb-grid{ grid-template-columns:repeat(2,1fr); }
+}
+
+/* SP版のみ：左右ブロック配置を入れ替え（元データ通り） */
+@media (max-width:600px){
+  main.detail-layout{
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:auto auto auto;
+    grid-template-areas:
+      "main main"
+      "title text2"
+      "thumbs text3";
+    gap: 8px;
+    column-gap: 14px;
+  }
+  .thumb-grid{ grid-template-columns: repeat(2,1fr); }
+}
+
+/* spacing tweak */
+@media (min-width: 769px){ .text-tertiary{ margin-top: 20px; } }
+@media (max-width: 600px){ .text-tertiary{ margin-top: 12px; } }
+
+/* 以降：既存の “詰め調整” をそのまま維持（!important は元データ互換のため残す） */
+@media (min-width: 769px){
+  .text-secondary { margin-bottom: 10px !important; }
+  .text-tertiary { margin-top: 10px !important; margin-bottom: 10px !important; }
+  .title-block   { margin-top: 10px !important; margin-bottom: 10px !important; }
+  .thumb-grid    { margin-top: 10px !important; }
+}
+.tool-pill.top{ min-height: 47px !important; padding: 12px 8px !important; }
+.tool-pill.mid{ min-height: 41px !important; padding: 11px 8px !important; }
+
+@media (min-width: 1025px){
+  .right-block-1 { margin-bottom: 0px !important; }
+  .right-block-2 { margin-top: 10px !important; margin-bottom: 0px !important; }
+  .right-block-3 { margin-top: 20px !important; margin-bottom: 0px !important; }
+  .right-tools   { margin-top: 12px !important; }
+
+  .text-secondary{ margin-bottom: 0 !important; }
+  .text-tertiary{ margin-top: 0 !important; }
+
+  .tools-subtitle{
+    width: min(418px, 100%) !important;
+    max-width: 418px !important;
+  }
+  .about-scroll{ max-height: 260px !important; }
+}
+.right-block-2 { margin-top: 10px !important; margin-bottom: 10px !important; }
+.right-block-3 { margin-top: 10px !important; margin-bottom: 10px !important; }
+.right-tools   { margin-top: 10px !important; }
+
+@media (min-width: 769px) and (max-width: 1024px){
+  .text-secondary{ margin-bottom: 10px !important; }
+  .text-tertiary{ margin-top: 0 !important; }
+  .about-scroll{ max-height: 220px !important; }
+  .about-scroll p{ font-size: 13px !important; line-height: 1.9 !important; color:#eaeeef; }
+
+  .thumb-grid.tool-grid{ row-gap: 10px !important; column-gap: 10px !important; }
+  .tool-pill{ height: 40px !important; font-size: 12px !important; padding: 10px 14px !important; }
+
+  .footer{ margin-top: 6px !important; font-size: 12px !important; }
+  .tools-subtitle{ width: min(334px, 100%) !important; max-width: 334px !important; }
+}
+
+@media (max-width: 600px){
+  .thumb-grid.tool-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+  .tool-pill{
+    height: 40px !important;
+    font-size: 11px !important;
+    border-radius: 16px !important;
+    padding: 10px 8px !important;
+  }
+  .main-visual{ min-height: 32vh !important; }
+  .about-heading-img,
+  .about-heading-img--tools{ max-width: 200px !important; }
+
+  .name-sign{
+    width: 100% !important;
+    max-width: 200px !important;
+    margin-top: 6px !important;
+  }
+  .tools-subtitle{
+    width: 100% !important;
+    max-width: 200px !important;
+    margin-top: 4px !important;
+  }
+  .about-scroll{ max-height: 180px !important; }
+
+  /* フッター固定（SPのみ） */
+  .wrapper{ padding-bottom: 40px !important; }
+  .footer{
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    margin: 0 !important;
+    height: auto !important;
+    z-index: 999 !important;
+    background: transparent !important;
+    pointer-events: none;
+  }
+  .footer > div{
+    font-size: 12px !important;
+    padding: 6px 12px !important;
+  }
+}
+
+/* SP用：編集ソフト＆できること 画像差し替え */
+.about-heading-img--tools-sp{
+  display:none;
+  width:100%;
+  max-width: 720px;
+  height:auto;
+}
+@media (max-width: 600px){
+  .about-heading-img--tools{ display:none; }
+  .about-heading-img--tools-sp{ display:block; }
+}
+
+/* 最終微調整 */
+@media (max-width: 600px){
+  .name-sign{ margin-top: 12px !important; }
+}
+
+/* Header nav spacing (about は“詰め感”優先) */
+.nav{ gap: 20px !important; }

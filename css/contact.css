@@ -1,0 +1,80 @@
+/* =========================================================
+  contact.css（Contactページ固有）
+  - contact.html 内の style を移動・整理
+========================================================= */
+
+:root{ --noise-opacity: 0.5; }
+
+body{
+  margin:0;
+  font-family:sans-serif; /* contact は元々 sans-serif */
+  background:#4d91ce;
+  color:#eaeeef;
+  position:relative;
+}
+
+.wrapper{
+  padding:22px 26px 20px;
+}
+
+/* ===== HEADER ===== */
+.header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding: 8px 0 0;
+  transform: translateY(-3px);
+}
+
+/* タイトル */
+.page-title img{height:22px}
+
+/* 白線（common.css の .header-line を使用） */
+.header-line{ margin:0 18px; }
+
+/* ナビ：右寄せ */
+.nav{ justify-content:flex-end; }
+
+/* about ボタンだけ、元データ通りに位置の微調整
+   ※この数値を変えると “about” ピルだけズレます */
+.nav-item.about{ position:relative; left:2px; margin-right:-8px; }
+
+/* ===== FORM ===== */
+p{font-size:14px}
+label{
+  font-size:14px;
+  color:#eaeeef;
+  font-weight:900;
+  font-family: "Arial Black", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+input,textarea{
+  width:100%;
+  padding:14px;
+  border-radius:12px;
+  border:none;
+  font-size:15px;
+  margin-bottom:12px;
+  background:#fff;
+  color:#111;
+}
+textarea{height:120px}
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:22px;
+  background:#ccc;
+  font-size:15px;
+}
+button[disabled]{cursor:not-allowed}
+button:not([disabled]){cursor:pointer;background:#ffffff}
+
+/* ===== Intro text =====
+   ※元データで同じプロパティが重複していたため、効果がある最終値に整理 */
+.contact-intro{
+  color:#eaeeef;
+  text-shadow:none;
+  font-weight:900;
+  font-family: "Arial Black", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size:15px;
+}

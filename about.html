@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>Detail 04 Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kosugi&family=Roboto:wght@400;500;700;900&display=swap" />
+  <style>
+*{box-sizing:border-box}
+html,body{height:100%;background:#4a91cf;color:#fff}
+body{
+  margin:0;
+  font-family:"Roboto","Kosugi",system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  background:#4a91cf;
+  display:block;
+}
+
+/* Noise overlay (match index.html) */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:url("picture/noise-texture.webp");
+  background-repeat:repeat;
+  background-size:auto;
+  opacity:0.8;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ===== Layout wrapper ===== */
+.wrapper{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:1500px;
+  margin:0 auto;
+  padding:22px 26px 20px;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ===== Header ===== */
+.header{
+  padding:1px 0 0;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.logo-link{
+  display:block;
+  position:relative;
+  top:-3px;
+  width:64px;
+  height:64px;
+}
+.logo-link img{width:100%;height:100%;display:block;object-fit:contain}
+.page-title img{height:24px}
+.header-line{
+  flex:1;
+  height:1px;
+  background:#eaeeef;
+  margin:0 16px;
+}
+.nav{display:flex;gap:20px;position:relative;top:-1px}
+.nav-item{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:140px;
+  height:32px;
+  padding:0 14px;
+  border:1px solid #eaeeef;
+  border-radius:999px;
+  overflow:hidden;
+}
+.nav-item img{height:20px;width:auto;max-width:100%;display:block;object-fit:contain}
+.nav-item.top{width:140px;height:32px}
+
+/* ===== Main ===== */
+.about-text-layout{
+  flex:1 0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:auto auto;
+  grid-template-areas:
+    "ch0 ch2"
+    "ch1 ch3";
+  gap:32px;
+  padding:26px 26px 0;
+}
+
+/* ===== Chapter base ===== */
+.chapter{
+  position:relative;
+  overflow:hidden;
+  padding:34px 38px;
+  color:#fff;
+  background:#1da356;
+  border-radius:56px;
+  box-shadow:0 0 0 1px rgba(0,0,0,0.10) inset;
+}
+.chapter::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:url("picture/noise-texture.webp");
+  background-repeat:repeat;
+  opacity:0.30;
+  pointer-events:none;
+  z-index:0;
+  border-radius:inherit;
+}
+.chapter > *{position:relative;z-index:1}
+
+.chapter--0{grid-area:ch0}
+.chapter--1{grid-area:ch1}
+.chapter--2{grid-area:ch2}
+.chapter--3{grid-area:ch3}
+
+/* Headings / text */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500;700&display=swap');
+.chapter__title{
+  margin:0 0 10px;
+  font-family:"Noto Sans JP","Roboto",sans-serif;
+  font-weight:700;
+  font-size:42px;
+  line-height:1.1;
+  letter-spacing:0.02em;
+}
+.chapter__lead{
+  margin:0 0 14px;
+  font-family:"Noto Sans JP","Roboto",sans-serif;
+  font-weight:500;
+  font-size:14px;
+  opacity:0.95;
+}
+.chapter__text{
+  margin:0 0 14px;
+  font-family:"Noto Sans JP","Roboto",sans-serif;
+  font-weight:300;
+  font-size:14px;
+  line-height:1.68;
+}
+.chapter__list{
+  margin:12px 0 0;
+  padding-left:18px;
+  font-family:"Noto Sans JP","Roboto",sans-serif;
+  font-weight:300;
+  font-size:13px;
+  line-height:1.68;
+}
+.chapter__list li{margin:6px 0}
+
+/* PC-only line breaks (hidden on SP) */
+br.pc-only{display:inline;}
+
+
+.chapter--1 .chapter__lead,
+.chapter--1 .chapter__text{
+  color:#2c2c2c !important;
+}
+
+.chapter--1 .chapter__title{
+  color:#2c2c2c !important;
+}
+
+
+
+/* ===== Tool grid ===== */
+.tool-grid{
+  margin-top:18px;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+}
+.tool-pill{
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:44px;
+  border-radius:14px;
+  font-weight:900;
+  font-size:12px;
+  letter-spacing:0.02em;
+}
+.tool-pill .tool-label,
+.tool-pill .tool-desc{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 10px;
+  text-align:center;
+  transition:opacity .22s ease, transform .22s ease;
+}
+.tool-pill .tool-label{opacity:1;transform:translateY(0)}
+.tool-pill .tool-desc{opacity:0;transform:translateY(8px);white-space:nowrap}
+.tool-pill:hover .tool-label,
+.tool-pill:focus-visible .tool-label{opacity:0;transform:translateY(-8px)}
+.tool-pill:hover .tool-desc,
+.tool-pill:focus-visible .tool-desc{opacity:1;transform:translateY(0)}
+
+.tool-pill.ps{background:#212647;color:#54b0ff}
+.tool-pill.ai{background:#35160b;color:#ff8123}
+.tool-pill.ae{background:#2a2044;color:#b377f4}
+.tool-pill.pr{background:#2a2044;color:#b377f4}
+.tool-pill.sns{background:#212647;color:#4ea0ff}
+.tool-pill.ga4{background:#511010;color:#ff3636}
+.tool-pill.meta{background:#203544;color:#7dceff}
+.tool-pill.tt{background:#560f33;color:#ff3390}
+
+/* ===== PC: keep everything in first view ===== */
+@media (min-width:1025px){
+  .about-text-layout{
+    gap:30px;
+    padding:20px 12px 0;
+    margin-bottom:28px;
+  }
+  .chapter{
+    padding:22px 26px;
+    border-radius:56px;
+  }
+  .chapter__title{font-size:34px}
+  .chapter__text{line-height:1.5}
+  .tool-grid{margin-top:12px;gap:8px}
+  .tool-pill{height:40px}
+  .footer{margin-top:12px}
+}
+
+/* ===== PC/Tablet: slight “overspill” size to match other pages ===== */
+@media (min-width:769px){
+  .chapter:not(.chapter--0):not(.chapter--1):not(.chapter--2){
+    background:transparent;
+    overflow:visible;
+  }
+  .chapter:not(.chapter--0):not(.chapter--1):not(.chapter--2)::before{
+    content:"";
+    position:absolute;
+    inset:-12px;
+    background:#1da356;
+    border-radius:72px;
+    z-index:0;
+    pointer-events:none;
+  }
+  .chapter:not(.chapter--0):not(.chapter--1):not(.chapter--2)::after{
+    inset:-12px;
+    border-radius:72px;
+  }
+}
+
+/* ===== Image-shaped blocks (only 0/1/2) ===== */
+.chapter--0,
+.chapter--1,
+.chapter--2{
+  background:transparent !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  overflow:visible !important;
+}
+.chapter--0::after,
+.chapter--1::after,
+.chapter--2::after{
+  display:block !important;
+  inset:-12px;
+  background-image:url("picture/noise-texture.webp");
+  background-repeat:repeat;
+  opacity:0.18;
+  border-radius:72px;
+}
+
+.chapter--0::before{
+  content:"";
+  position:absolute;
+  inset:-12px;
+  background-image:url("picture/block-orange.webp");
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:100% 100%;
+  z-index:0;
+  pointer-events:none;
+}
+.chapter--1::before{
+  content:"";
+  position:absolute;
+  inset:-12px;
+  background-image:url("picture/block-yellow.webp");
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:100% 100%;
+  z-index:0;
+  pointer-events:none;
+}
+.chapter--2::before{
+  content:"";
+  position:absolute;
+  inset:-12px;
+  background-image:url("picture/block-blue.webp");
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:100% 100%;
+  z-index:0;
+  pointer-events:none;
+}
+
+/* ===== Tablet ===== */
+@media (max-width:1024px){
+  .chapter__title{font-size:36px}
+}
+@media (max-width:900px){
+  .about-text-layout{gap:18px}
+  .tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* ===== SP ===== */
+@media (max-width:600px){
+  .about-text-layout{
+    grid-template-columns:1fr;
+    grid-template-areas:
+      "ch0"
+      "ch1"
+      "ch2"
+      "ch3";
+    gap:12px;
+    padding:14px 0 0; /* 横幅のみ拡張・ヘッダー位置維持 */
+  }
+  .chapter{
+    padding:22px 20px;
+    border-radius:34px;
+    overflow:hidden;
+    background:#1da356;
+  }
+  .chapter::after{inset:0;border-radius:inherit}
+  .chapter__title{font-size:30px}
+  .chapter__text{font-size:13px}
+  /* SP only: +1 line above the chapter--1 title */
+  .chapter--1 .chapter__title::before{content:"";display:block;height:1.68em;}
+  /* SP only: +1 line below the last sentence in chapter--1 */
+  .chapter--1 .chapter__text::after{content:"";display:block;height:1.68em;}
+
+br.pc-only{display:none}
+  /* SP: keep text inside image blocks */
+  .chapter--0,.chapter--1,.chapter--2{padding-left:26px;padding-right:26px}
+
+  .tool-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
+  .tool-pill{height:40px;font-size:11px;border-radius:16px}
+  /* image-shaped blocks stay within frame on SP */
+  .chapter--0,.chapter--1,.chapter--2{overflow:hidden !important}
+  .chapter--0::before,.chapter--1::before,.chapter--2::before{inset:0}
+}
+
+/* ===== SP header (match contact/index feeling) ===== */
+@media (max-width:768px){
+  .wrapper{padding:8px}
+  .header{
+    padding:6px 18px 14px !important;
+    transform:translateY(13px) !important;
+  }
+  .header-line{display:none !important}
+  .logo-link{
+    top:0 !important;
+    left:0 !important;
+    width:64px !important;
+    height:auto !important;
+    flex:0 0 auto !important;
+  }
+  .page-title img{height:22px !important}
+  .nav{gap:8px !important;top:0 !important;margin-left:auto !important}
+  .nav-item,.nav-item.top{
+    width:72px !important;
+    height:26px !important;
+    padding:0 8px !important;
+    border-width:1px !important;
+  }
+  .nav-item img{height:16px !important}
+}
+
+/* ===== Footer ===== */
+.footer{margin-top:6px}
+.footer span{color:#ffffff}
+@media (max-width:600px){
+  .footer{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    margin:0;
+    z-index:999;
+    background:transparent;
+    pointer-events:none;
+  }
+  .footer > div{font-size:12px;padding:6px 12px}
+  .wrapper{padding-bottom:40px}
+}
+</style>
+
+</head>
+<body>
+<div class="wrapper">
+  <header class="header">
+  <a href="index.html" class="logo-link">
+    <img src="picture/logo-top.webp" alt="logo">
+  </a>
+  <div class="page-title">
+    <img src="picture/about-B.webp" alt="about">
+  </div>
+  <div class="header-line"></div>
+  <nav class="nav">
+    <a class="nav-item" href="works.html">
+      <img src="picture/works-B.webp" alt="works">
+    </a>
+    <a class="nav-item" href="contact.html">
+      <img src="picture/contact-B.webp" alt="contact">
+    </a>
+    <a class="nav-item top" href="index.html">
+      <img src="picture/top-B.webp" alt="top">
+    </a>
+  </nav>
+</header>
+
+  
+  
+  <main class="about-text-layout" aria-label="About 本文（3章構成）">
+    <section class="chapter chapter--1" aria-labelledby="ch1">
+      <h2 id="ch1" class="chapter__title">これまでのこと📝</h2>
+      <p class="chapter__lead">美術大学でビジュアルデザインを学び、つくることが好きでデザインの仕事を選びました。</p>
+      <p class="chapter__text">
+        就職後は、ECサイトの販促運営に約5年携わり、<br class="pc-only">
+        サイトやSNS、パッケージなど、現場で様々なデザインと向き合ってきました。<br><br>
+        実務では作って終わりではなく、数値や反応を分析しながらサービスを育てていく環境に恵まれた為、
+        制作だけでなく運用まで見据えて考える機会をいただきました。<br><br>
+        つくることが好きで始めたこの仕事ですが、<br class="pc-only">
+        今は「その先どう届くか」、「制作目的を達成できているのか」まで考えることを大切にしています👍
+      </p>
+</section>
+
+<section class="chapter chapter--0" aria-labelledby="ch0">
+      <h2 id="ch0" class="chapter__title">初めまして😄</h2>
+      <p class="chapter__text">
+        はじめまして。<br>
+        ご覧いただきありがとうございます。<br><br>
+        こちらのページでは、これまでの仕事や、取り組んできた制作・運用のこと、<br class="pc-only">
+        そして今できることをまとめています。<br><br>
+        人となりや、デザインへの向き合い方も<br>
+        このページを通してお伝えできれば幸いです☺️
+      </p>
+    </section>
+
+    <section class="chapter chapter--2" aria-labelledby="ch2">
+      <h2 id="ch2" class="chapter__title">こんなタイプです🧠</h2>
+      <p class="chapter__text">
+コツコツ型ですが、実際の現場はいつもスピード感のある環境でした🔥<br>
+そのおかげで、迷いすぎずにまず形にする力が磨かれました。<br><br>
+
+まず出してみる→反応を見る→整えて、また前に進める。<br>
+完璧を待つよりも、動かしながら形にしていくほうが前に進めると感じています💪<br><br>
+
+スピードを止めずに、でも雑にはならないように。<br>
+そのバランスを探し続けながら、チームが安心して前に進める状態をつくることを大切にしているタイプです🤝
+</p>
+    </section>
+
+    <section class="chapter chapter--3" aria-labelledby="ch3">
+      <h2 id="ch3" class="chapter__title">できること💪</h2>
+      <p class="chapter__text">
+        ECサイトやSNS、広告まわりの制作を中心に担当してきました。<br>
+        バナー / LP / SNS投稿 / 動画 / パッケージなど、目的に合わせて伝え方を設計します。<br><br>
+        伝える順番や温度感も含めて、今のサービスに合った形を探しながら、整えていくことを心がけています。
+      </p>
+<!-- ツール（スキルバー）：文章の下に配置（ホバーで説明に切替） -->
+      <div class="tool-grid" aria-label="使用ツール">
+        <div class="tool-pill ps" tabindex="0"><span class="tool-label">Photoshop</span><span class="tool-desc">レタッチ/イラスト</span></div>
+        <div class="tool-pill ai" tabindex="0"><span class="tool-label">Illustrator</span><span class="tool-desc">DTP/WEB</span></div>
+        <div class="tool-pill ae" tabindex="0"><span class="tool-label">After Effects</span><span class="tool-desc">動画編集</span></div>
+        <div class="tool-pill pr" tabindex="0"><span class="tool-label">Premiere Pro</span><span class="tool-desc">動画編集</span></div>
+        <div class="tool-pill sns" tabindex="0"><span class="tool-label">SNS</span><span class="tool-desc">運用</span></div>
+        <div class="tool-pill ga4" tabindex="0"><span class="tool-label">GA4</span><span class="tool-desc">分析</span></div>
+        <div class="tool-pill meta" tabindex="0"><span class="tool-label">Meta</span><span class="tool-desc">広告運用</span></div>
+        <div class="tool-pill tt" tabindex="0"><span class="tool-label">TikTok</span><span class="tool-desc">運用</span></div>
+      </div>
+    </section>
+  </main>
+
+<footer class="block footer" style="background:transparent !important;">
+  <div style="padding:4px;font-size:14px;font-weight:500;font-family:'Roboto','Kosugi',sans-serif;text-align:left;">
+    <span style="color:#eaeeef">＠YC Graphics</span>
+  </div>
+</footer>
+</div>
+
+</body>
+</html>

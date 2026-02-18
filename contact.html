@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<title>Contact</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:sans-serif;
+  background:#4d91ce;
+  color:#eaeeef;
+  position:relative;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url("picture/noise-texture.webp") repeat;
+  opacity:0.8;
+  pointer-events:none;
+  z-index:0;
+}
+.wrapper{
+  max-width:1500px;
+  margin:0 auto;
+  padding:27px 26px 20px;
+  position:relative;
+  z-index:1;
+}
+
+/* ===== HEADER ===== */
+.header{
+  /* ヘッダー全体：index.html の余白バランスを基準（SP/PCどちらも同じ見え方） */
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  /* 影響：ヘッダー上下の余白（ロゴ/タイトル/白線/ナビが縦にズレる要因） */
+  padding:6px 0 14px;
+
+  /* 影響：PC版でロゴ位置が大きくズレて見える原因になりやすいので無効化
+     ※SP版は下の「SPヘッダー統一パッチ」で別途制御しているため、SPの見え方は維持されます */
+  transform:none;
+}
+
+/* ロゴ */
+.logo-link{
+  /* ロゴのリンク領域 */
+  display:block;
+  position:relative;
+  left:0;
+  top:0; /* ★PC版：以前の位置に戻す（SPは下のSPパッチで上書き） */
+  width:64px;
+  height:auto;
+  flex:0 0 auto;
+}
+/* ロゴ画像の表示（PC/SP共通）
+   影響：ロゴ画像の見え方のみ。位置は .logo-link で制御します。 */
+.logo-link img{
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:contain;
+}
+
+/* ロゴ画像自体の表示（index.html基準） */
+
+
+
+/* タイトル */
+.page-title img{height:22px}
+
+/* 白線 */
+.header-line{
+  flex:1;
+  height:1px;
+  background:#eaeeef;
+  margin:0 18px;
+}
+
+/* ナビ */
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:20px;              /* about.html の間隔感 */
+  position:relative;
+  top:0;
+}
+
+/* ピル(丸枠) */
+.nav-item{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:140px;           /* 3つとも同サイズ */
+  height:32px;
+  padding:0 14px;
+  border:1px solid #eaeeef;  /* 細い枠 */
+  border-radius:999px;
+  box-sizing:border-box;
+  overflow:hidden;       /* 中の画像はみ出し防止 */
+}
+
+/* 以前の微調整を無効化（aboutと同じ見え方に寄せる） */
+.nav-item.about{
+  left:0 !important;
+  margin-right:0 !important;
+}
+
+/* ボタン画像（枠内に収める） */
+.nav-item img{
+  height:20px;
+  width:auto;
+  max-width:100%;
+  object-fit:contain;
+  display:block;
+}
+
+/* SPだけ：3つが画面内に収まるよう縮小（並びは維持） */
+@media (max-width: 768px){
+  .nav{
+    gap:8px;
+  }
+  .nav-item{
+    width:72px;
+    height:26px;
+    padding:0 8px;
+    border-width:2px;
+  }
+  .nav-item img{
+    height:16px;
+  }
+}
+/* ===== FORM ===== */
+p{font-size:14px}
+label{
+  font-size:14px;
+  color:#eaeeef;
+  font-weight:900;
+  font-family: "Arial Black", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+input,textarea{
+  width:100%;
+  padding:14px;
+  border-radius:12px;
+  border:none;
+  font-size:15px;
+  margin-bottom:12px;
+  background:#fff;
+  color:#111;
+}
+textarea{height:120px}
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:22px;
+  background:#ccc;
+  font-size:15px;
+}
+button[disabled]{cursor:not-allowed}
+button:not([disabled]){cursor:pointer;background:#ffffff}
+
+/* ===== Intro text (修正箇所) ===== */
+.contact-intro{
+  color:#eaeeef;
+  text-shadow:none;
+
+  color:#eaeeef;
+  font-weight:900; /* 800以上を指定 */
+  font-family: "Arial Black", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size:15px;
+  /* 0.6px 相当の外側縁取り */
+}
+/* PC/Tabletのみ微調整（SPのヘッダー統一には影響させない） */
+@media (min-width: 769px){
+  .nav-item.about{position:relative; left:2px; margin-right:-8px;}
+}
+
+
+/* =========================================================
+   SPヘッダー統一パッチ（index.html のSP見え方を基準に揃える）
+   影響：768px以下のヘッダー（ロゴ/白線/ナビピル）だけに作用します。
+   目的：ページごとに異なっていた「枠線の太さ・位置・余白」を index.html と同一にする。
+   注意：PC/Tablet（769px以上）の見え方は、既存の調整を優先するため基本的に触りません。
+   ========================================================= */
+@media (max-width: 768px){
+  /* ヘッダー全体の上下余白（index.html基準） */
+  .header{
+    padding: 6px 0 14px !important;
+    position: relative !important;
+    top: -5px !important; /* SPのみ +5px 上へ */
+    transform: none !important; /* contact.html にあったSP時のズラしを無効化 */
+  }
+
+  /* ロゴ位置（SPはズラさず揃える） */
+  .logo-link{
+top: 0 !important;
+left: 0 !important;
+width: 64px !important;
+height: auto !important; /* index.html同様：高さ固定をやめ、ロゴが小さくならないようにする */
+flex: 0 0 auto !important;
+}
+
+  /* タイトル画像は高さだけ統一（各ページの画像自体はそのまま） */
+  .page-title img{
+    height: 22px !important;
+  }
+
+  /* 白線の位置/余白（index.html基準） */
+  .header-line{
+    margin: 0 18px !important;
+    height: 1px !important;
+  }
+
+  /* ナビ（ピル） */
+  .nav{
+    gap: 8px !important;
+    top: 0 !important;
+    margin-left: auto !important;
+  }
+
+  /* ピルのサイズ（index.html基準） + 枠線の太さを統一（太くしない） */
+  .nav-item,
+  .nav-item.top{
+    width: 72px !important;
+    height: 26px !important;
+    padding: 0 8px !important;
+    border-width: 1px !important;
+  }
+
+  /* ピル内の画像サイズ（index.html基準） */
+  .nav-item img{
+    height: 16px !important;
+  }
+}
+
+
+/* PCのみ Contactタイトルを3px下げる */
+@media (min-width: 769px){
+  .page-title img{
+    position: relative;
+    top: 3px;
+  }
+}
+
+
+/* 白横棒線を下に+2px（PC/SP共通） */
+.header-line{
+  position: relative;
+  top: 2px;
+}
+
+
+/* PCのみ 白横棒線を合計+4px下げる */
+@media (min-width: 769px){
+  .header-line{
+    top: 4px !important;
+  }
+}
+
+</style>
+<style>
+body, 
+label, 
+p, 
+h1, h2, h3, h4, h5, h6, 
+span, 
+a {
+    color: #ffffff !important;
+}
+
+/* ================================
+   PCのみ：右側カテゴリボタンを+1px下げる
+   ================================ */
+@media (min-width: 769px){
+  .nav{
+    position: relative;
+    top: 1px;
+  }
+}
+
+</style></head>
+<body>
+<div class="wrapper">
+<header class="header">
+<a class="logo-link" href="index.html">
+<img alt="logo" src="picture/logo-top.webp"/>
+</a>
+<div class="page-title">
+<img alt="contact" src="picture/contact-B.webp"/>
+</div>
+<div class="header-line"></div>
+<nav class="nav">
+<a class="nav-item" href="works.html"><img alt="works" src="picture/works-B.webp"/></a>
+<a class="nav-item about" href="about.html"><img alt="about" src="picture/about-B.webp"/></a>
+<a class="nav-item top" href="index.html"><img alt="top" src="picture/top-B.webp"/></a>
+</nav>
+</header>
+<p class="contact-intro">ご相談・お見積もり等々、下記フォームからお気軽にお問い合わせください！土・日・祝を除く、3日以内にお返事いたします。</p>
+<form id="contactForm" novalidate="">
+<label>お名前</label>
+<input id="name" name="name" required="" type="text"/>
+<label>メールアドレス</label>
+<input id="email" name="email" required="" type="email"/>
+<label>お問い合わせ内容</label>
+<textarea id="message" name="message" required=""></textarea>
+<button disabled="" id="submitBtn" type="submit">送信</button>
+</form>
+</div>
+<script>
+(function(){
+  const form = document.getElementById('contactForm');
+  const btn = document.getElementById('submitBtn');
+  const requiredIds = ['name','email','message'];
+
+  function isValid(){
+    for(const id of requiredIds){
+      const el = document.getElementById(id);
+      if(!el || !el.value.trim() || !el.checkValidity()) return false;
+    }
+    return true;
+  }
+  function updateButton(){ btn.disabled = !isValid(); }
+
+  requiredIds.forEach(id=>{
+    const el = document.getElementById(id);
+    if(el){ el.addEventListener('input', updateButton); el.addEventListener('change', updateButton); }
+  });
+  updateButton();
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!isValid()) return;
+
+    const subject = 'お問い合わせ（ポートフォリオサイト）';
+    const body = [
+      'お名前：' + name.value,
+      'メールアドレス：' + email.value,
+      '',
+      'お問い合わせ内容：',
+      message.value
+    ].join('\n');
+
+    window.location.href =
+      'mailto:yama42747@gmail.com?subject=' +
+      encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  });
+})();
+</script>
+</body>
+</html>

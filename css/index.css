@@ -1,0 +1,216 @@
+/* =========================================================
+  index.css（TOPページ固有）
+  - 見た目は変えず、index.html 内の style を移動・整理
+========================================================= */
+
+:root{ --noise-opacity: 1; } /* index はノイズ濃いめ */
+
+/* ===== Base ===== */
+body{
+  margin:0;
+  font-family:"Roboto","Kosugi",system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  background:#1da356;
+  overflow-x:hidden;
+}
+
+/* ===== Wrapper Layout ===== */
+.wrapper{
+  /* common.css に max-width/margin/z-index はあります */
+  min-height:100vh;
+  padding:22px 26px 20px;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ===== Header ===== */
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:6px 0 14px;
+}
+.logo-link{ display:inline-block; width:auto; height:auto; } /* indexはロゴ画像が height:auto のため上書き */
+.logo-image{
+  width:64px;
+  height:auto;
+  display:block;
+}
+
+/* Top line（index は .line を使用） */
+.line{
+  margin:0 18px;
+  border-radius:2px;
+}
+
+/* ===== Main Grid ===== */
+main.grid-container{
+  flex:1 1 auto;
+  min-height:0;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr auto;
+  gap:18px;
+  padding:0;
+  align-items:stretch;
+}
+
+/* ===== Hero ===== */
+.hero-logo{
+  grid-column:1 / -1;
+  grid-row:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  border-radius:18px;
+  position:relative;
+  width:100%;
+  height:100%;
+}
+.hero{
+  grid-column:1 / -1;
+  grid-row:1;
+}
+.hero-logo img{
+  width:100%;
+  height:100%;
+  max-width:88%;
+  max-height:82%;
+  object-fit:contain;
+  object-position:center;
+}
+@media (max-width: 768px){
+  .hero-logo img{
+    max-width:90%;
+    max-height:78%;
+  }
+}
+
+/* ===== Blocks ===== */
+.block{
+  /* TOPページの各ブロック共通（背景色が無いと画像未読込時に緑が透けて見えるので、元のグレー背景を指定）
+     ここを変えると Works/About/Contact のブロック背景色が変わります */
+  background:#cccccc;
+  display:block;
+  position:relative;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 10px 18px rgba(0,0,0,.18);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.block.hero{background:transparent;box-shadow:none;border:none;}
+.block.hero:hover{transform:none;box-shadow:none;}
+
+.block:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 24px rgba(0,0,0,.22);
+}
+
+/* Place blocks in the grid */
+.works-main{
+  grid-column:1;
+  grid-row:2;
+  min-height:0;
+  position:relative;
+}
+.right-stack{
+  grid-column:2;
+  grid-row:2;
+  min-height:0;
+  display:grid;
+  grid-template-rows: 1fr 1fr auto;
+  gap:18px;
+}
+.content-right-bottom-left{ grid-row:1; }
+.content-right-bottom-right{ grid-row:2; }
+
+/* Credit under Works */
+.yc-credit{
+  /* Worksブロック直下に出すクレジット（TOPのみ）
+     ここを変えると「＠YC Graphics」の位置が変わります */
+  grid-column:1;
+  grid-row:3;
+  align-self:start;
+  margin-top:6px;
+  color:#eaeeef;
+  z-index:5;
+}
+
+/* ===== Background images ===== */
+.block.content-right-top{
+  background-image: url("../picture/works画像1.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.block.content-right-bottom-left{
+  background-image: url("../picture/about画像(sp).webp");
+}
+.block.content-right-bottom-right{
+  background-image: url("../picture/contact画像(sp).webp");
+}
+.block.content-right-bottom-right:hover{ filter: brightness(1.05); }
+
+/* ===== Responsive (keep 2 columns even on SP) ===== */
+@media (max-width: 768px){
+  .wrapper{padding:18px 16px 16px;}
+  main.grid-container{gap:14px;}
+  .right-stack{gap:14px;}
+}
+@media (max-width: 480px){
+  .wrapper{padding:14px 12px 14px;}
+  .line{margin:0 10px;}
+  main.grid-container{gap:12px;}
+  .right-stack{gap:12px;}
+  .block,.hero-logo{border-radius:14px;}
+}
+
+/* Hover overlay (darken + center label) */
+.block::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.60);
+  opacity:0;
+  transition: opacity 0.25s ease;
+  border-radius: inherit;
+  z-index:1;
+}
+.block:hover::before{ opacity:1; }
+
+.hover-center-label{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  transition: opacity 0.25s ease;
+  z-index:2;
+  pointer-events:none;
+}
+.block:hover .hover-center-label{ opacity:1; }
+
+.hover-center-label::before{
+  content:"";
+  width: clamp(120px, 25%, 200px);
+  height: clamp(28px, 6%, 48px);
+  background: center / contain no-repeat var(--hover-img);
+  filter: drop-shadow(0 2px 0 rgba(0,0,0,0.35));
+}
+.hover-center-label[data-img="works-B.webp"]{ --hover-img: url("../picture/works-B.webp"); }
+.hover-center-label[data-img="about-B.webp"]{ --hover-img: url("../picture/about-B.webp"); }
+.hover-center-label[data-img="contact-B.webp"]{ --hover-img: url("../picture/contact-B.webp"); }
+
+/* HERO は hover overlay を無効化 */
+.block.hero::before{ display:none !important; }
+.block.hero .hover-center-label{ display:none !important; }
+
+
+/* ===== Works thumbnail: SP image swap ===== */
+@media (max-width: 768px){
+  .block.content-right-top{
+    background-image: url("../picture/works画像(sp).webp");
+  }
+}

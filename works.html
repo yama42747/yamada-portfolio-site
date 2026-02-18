@@ -1,0 +1,2316 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>Detail 03 Grid Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kosugi&family=Roboto:wght@400;500;700;900&display=swap" />
+  <style>
+* { box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    
+      background-color: #34a358;}
+    body {
+      font-family:"Roboto","Kosugi",system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+      background-color: #34a358;
+    }
+
+    .wrapper {
+      max-width:1500px;
+      margin:0 auto;
+      position:relative;
+      z-index:1;
+      width: 100%;
+      min-height: 100vh;
+      padding: 22px 26px 22px;
+      display: flex;
+      flex-direction: column;
+    }
+
+.header{
+  display:flex;
+  align-items:center;
+  padding:6px 0 14px;
+  gap:16px;
+}
+
+.header-inner{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  width:100%;
+}
+.logo-link{
+  display:block;
+  position:relative;
+  left:0px; /* align with paragraph/text column */
+  top:-2px; /* keep current height alignment */
+  width:64px;
+  height:64px;
+}
+.logo-link img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:contain;
+}
+.page-title img{height:22px}
+.header-line{
+  flex:1;
+  height:1px;
+  background-color: #eaeeef;
+  margin:0 18px;
+}
+/* グローバルメニュー */
+.nav{
+  display:flex;
+  gap:20px;
+  align-items:center;
+  margin-left:auto;
+}
+
+/* ピルボタン（contact と同じ見た目） */
+.nav-item{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:140px;
+  height:32px;
+  padding:0 14px;
+  border:1px solid #eaeeef;
+  border-radius:999px;
+  box-sizing:border-box;
+  overflow:hidden; /* 中のロゴがはみ出ないように */
+}
+
+.nav-item img{
+  max-width:100%;
+  max-height:100%;
+  width:auto;
+  height:18px;
+  object-fit:contain;
+  display:block;
+}
+
+/* SP時は画面内に収まるように少し縮小 */
+
+.card-lg{
+  height: var(--card-lg);
+}
+
+.card-sm{
+  height: calc((var(--card-lg) - var(--gap)) / 2);
+}
+
+.stack{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.stack .card{
+  width: 100%;
+  border-radius: 20px;
+}
+
+@media (max-width: 560px){
+  .nav{gap:10px;}
+  .nav-item{
+    width:112px;
+    height: auto;
+    padding:0 10px;
+  }
+  .nav-item img{height:16px;}
+}
+.block {
+      background-color: #34a358;
+      border-radius: 26px;
+    }
+
+    .logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+    }
+
+    /* --- メインレイアウト --- */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--gap);
+      flex: 1 0 auto;
+      align-items: flex-start;
+    }
+
+    /* サイドバー */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      padding: 4px 0;
+    }
+
+    .sidebar-top {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sidebar-pill {
+      width: 64px;
+      height: 18px;
+      border-radius: 999px;
+    }
+
+    .sidebar-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 16px;
+    }
+
+    .sidebar-square-large {
+      width: 80px;
+      height: 52px;
+    }
+
+    .sidebar-square-small {
+      width: 40px;
+      height: 40px;
+    }
+
+    /* グリッド本体 */
+    .grid-wrapper {
+      padding: 4px 0;
+    }
+
+    .card-grid {
+      --gap: 4px;
+      --card-lg: 300px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--gap);
+    }
+
+    .stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+    }
+
+    .card-lg {
+      height: var(--card-lg);
+    }
+
+    .card-sm {
+      height: calc((var(--card-lg) - var(--gap)) / 2);
+    }
+
+.card {
+            border-radius: 26px;
+      background-color: #34a358;
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    .card.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .footer {
+      margin-top: 8px;
+      height: 22px;
+    }
+
+    /* --- SPレイアウト --- */
+    
+/* =========================================================
+   PC版：ヘッダー要素を上に7px移動（SPは未変更）
+   目的：ヘッダーが下がって見える問題を調整（白線は表示維持）
+   ========================================================= */
+@media (min-width: 769px){
+  .header{
+    transform: translateY(-7px);
+  }
+  /* 念のため白線が消えないように明示 */
+  .header-line{
+    display:block;
+  }
+}
+
+@media (max-width: 768px) {
+      .wrapper {
+      max-width:1500px;
+      margin:0 auto;
+        padding: 18px 16px 16px;
+      }
+
+      .main-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+      }
+
+      .sidebar {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+
+      .sidebar-top {
+        flex-direction: column;
+        gap: var(--gap);
+      }
+
+      .sidebar-bottom {
+        flex-direction: row;
+        align-items: center;
+        margin-top: 0;
+        gap: 6px;
+      }
+
+      .sidebar-square-large {
+        width: 72px;
+        height: 48px;
+      }
+
+      .sidebar-square-small {
+        width: 32px;
+        height: 32px;
+      }
+
+      .grid-wrapper {
+        margin-top: 8px;
+      }
+
+      .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* SP版は2列 */
+      }
+
+      .card{height:200px;}
+    }
+
+    /* モーダル用スタイル */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+
+    .modal-overlay.is-open {
+      display: flex;
+    }
+
+    .modal-content {
+      position: relative;
+      background-color: #eaeeef;
+      border-radius: 24px;
+      padding: 16px;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.18);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .modal-image {
+      width: 100%;
+      border-radius: 20px;
+      background: transparent;
+      aspect-ratio: 16 / 9;
+      max-height: 70vh;
+    }
+
+    .modal-caption {
+      height: 36px;
+      border-radius: 18px;
+      background-color: #eaeeef;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      font-size: 14px;
+    }
+
+    .modal-content.no-caption .modal-caption{display:none !important;}
+
+    /* modal body (default) */
+    .modal-body{
+      width: 100%;
+      font-size: 14px;
+      line-height: 1.9;
+      color: #111;
+    }
+
+    
+    /* === Block2 popup mode === */
+    .modal-content.works2-mode{
+      max-width: 940px;
+      width: min(940px, 92vw);
+      padding: 16px;
+      gap: 10px;
+    }
+    .modal-content.works2-mode .modal-image{
+      display: none !important;
+    }
+    .modal-content.works2-mode .modal-body{
+      display: block !important;
+      background-color: #eaeeef;
+      border-radius: 20px;
+      padding: 26px 26px 20px;
+      max-height: 70vh;
+      overflow: auto;
+    }
+    .modal-content.works2-mode .modal-caption{
+      background-color: #eaeeef;
+    }
+    .modal-content.works2-mode .block2-article h2{
+      margin: 0 0 14px;
+      font-size: 26px;
+      font-weight: 800;
+      border-bottom: none;
+      display: inline-block;
+      padding-bottom: 0;
+      }
+    .modal-content.works2-mode .block2-article p{
+      margin: 10px 0;
+      line-height: 1.9;
+      font-size: 14px;
+      color: #111;
+    }
+    .modal-content.works2-mode .block2-article .note{
+      font-size: 12px;
+      margin-top: 6px;
+      opacity: .85;
+    }
+    .modal-content.works2-mode .block2-article img{
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 18px auto;
+      border-radius: 6px;
+    }
+
+/* === Block6 popup mode === */
+    .modal-content.works6-mode{
+      max-width: 940px;
+      width: min(940px, 92vw);
+      padding: 16px;
+      gap: 10px;
+    }
+    .modal-content.works6-mode .modal-image{
+      display: none !important;
+    }
+    .modal-content.works6-mode .modal-body{
+      display: block !important;
+      background-color: #eaeeef;
+      border-radius: 20px;
+      padding: 22px 22px 18px;
+      max-height: 70vh;
+      overflow: auto;
+    }
+    .modal-content.works6-mode .modal-caption{
+      background-color: #eaeeef;
+    }
+.modal-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: none;
+      background-color: #fdd457;
+      cursor: pointer;
+    }
+
+
+
+    /* --- caption bar & close button color update --- */
+    .modal-caption {
+      background-color: #eaeeef;
+    }
+    .modal-close {
+      background-color: #fdd457;
+    }
+
+
+    /* --- close button X mark --- */
+    .modal-close {
+      position: absolute;
+    }
+    .modal-close::before,
+    .modal-close::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 14px;
+      height: 2px;
+      background-color: #2c2c2c;
+      border-radius: 2px;
+      transform-origin: center;
+    }
+    .modal-close::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+    .modal-close::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+
+    /* --- hover action: thumbnail gently moves (powa) --- */
+    .card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: inherit;
+      background-size: inherit;
+      background-position: inherit;
+      background-repeat: inherit;
+      transform: scale(1);
+      transition: transform 0.35s ease, filter 0.35s ease;
+      pointer-events: none;
+      border-radius: inherit;
+    }
+    .card:hover::before {
+      transform: scale(1.06);
+      filter: brightness(1.03);
+    }
+
+
+
+
+/* --- category tag (visible before hover/click) --- */
+.card { position: relative; } /* ensure absolute positioning works */
+.card-tag{
+  position:absolute;
+  top:14px;
+  left:14px;
+  z-index:3;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:0.02em;
+  color:#fff;
+  background:rgba(0,0,0,0.45);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  pointer-events:none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+}
+@media (max-width: 768px){
+  .card-tag{
+    top:10px;
+    left:10px;
+    padding:5px 9px;
+    font-size:12px;
+  }
+}
+
+/* caption02 popup tab: multiline layout */
+.modal-caption.multiline{
+  height:auto;
+  min-height:36px;
+  display:block;
+  line-height:1.5;
+  padding:10px 16px;
+  max-height:140px;
+  overflow-y:auto;
+}
+.modal-caption.multiline .mc-title{
+  font-weight:700;
+  margin:0 0 6px 0;
+}
+.modal-caption.multiline .mc-link{
+  margin:0 0 6px 0;
+}
+.modal-caption.multiline .mc-link a{
+  color:#0b36c6;
+  text-decoration:underline;
+}
+.modal-caption.multiline .mc-desc{
+  margin:0;
+}
+
+/* Noise overlay (match index.html) */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:url("picture/noise-texture.webp");
+  background-repeat:repeat;
+  background-size:auto;
+  opacity:0.8;
+  pointer-events:none;
+  z-index:0;
+}
+
+
+/* =========================================================
+   SPヘッダー統一パッチ（index.html のSP見え方を基準に揃える）
+   影響：768px以下のヘッダー（ロゴ/白線/ナビピル）だけに作用します。
+   目的：ページごとに異なっていた「枠線の太さ・位置・余白」を index.html と同一にする。
+   注意：PC/Tablet（769px以上）の見え方は、既存の調整を優先するため基本的に触りません。
+   ========================================================= */
+@media (max-width: 768px){
+  /* ヘッダー全体の上下余白（index.html基準） */
+  .header{
+    padding: 6px 0 14px !important;
+    transform: none !important; /* contact.html にあったSP時のズラしを無効化 */
+  }
+
+  /* ロゴ位置（SPはズラさず揃える） */
+  .logo-link{
+    top: 0 !important;
+    left: 0 !important;
+    width: 64px !important;
+    height: 64px !important;
+  }
+
+  /* タイトル画像は高さだけ統一（各ページの画像自体はそのまま） */
+  .page-title img{
+    height: 22px !important;
+  }
+
+  /* 白線の位置/余白（index.html基準） */
+  .header-line{
+    margin: 0 18px !important;
+    height: 1px !important;
+  }
+
+  /* ナビ（ピル） */
+  .nav{
+    gap: 8px !important;
+    top: 0 !important;
+    margin-left: auto !important;
+  }
+
+  /* ピルのサイズ（index.html基準） + 枠線の太さを統一（太くしない） */
+  .nav-item,
+  .nav-item.top{
+    width: 72px !important;
+    height: 26px !important;
+    padding: 0 8px !important;
+    border-width: 1px !important;
+  }
+
+  /* ピル内の画像サイズ（index.html基準） */
+  .nav-item img{
+    height: 16px !important;
+  }
+}
+
+
+/* =========================================================
+   SP版：Worksヘッダー位置を About / Contact に合わせる調整
+   影響：works.html の 768px以下ヘッダーのみ（本文グリッド・モーダル等は触りません）
+   目的：ロゴ/タイトル/ナビの上下・左右余白、丸枠ピルの配置ズレを統一
+   ========================================================= */
+@media (max-width: 768px){
+  /* 左右余白：About / Contact と同じ“見た目”基準に合わせる */
+  .wrapper{
+    padding: 8px !important;
+  }
+
+  /* ヘッダー全体：余白とパーツ間隔を統一 */
+  .header{
+    padding: 6px 0 14px !important;
+    gap: 12px !important;
+    transform: none !important;
+  }
+  .header-inner{
+    gap: 12px !important;
+  }
+
+  /* ロゴ：SPはズラしをなくして揃える（contact基準） */
+  .logo-link{
+    top: 0 !important;
+    left: 0 !important;
+    height: auto !important; /* 小さく見える/ズレる原因になりやすい固定高を外す */
+  }
+  .logo-link img{
+    height: auto !important;
+  }
+
+  /* ナビ：3つが同じ詰め感で揃うように */
+  .nav{
+    gap: 8px !important;
+    margin-left: auto !important;
+  }
+}
+
+
+/* =========================================================
+   SP版：Worksヘッダーの“左右余白/上余白”を About・Contact と同じ見た目に寄せる最終調整
+   背景：前回の統一パッチで .wrapper の左右paddingが 8px になり、詰まって見えていました。
+   対応：works.html の SP（768px以下）だけ、wrapper を「18px 16px 16px」に戻し、ヘッダー上余白を増やします。
+   影響：ヘッダー周辺のみ（本文グリッド/モーダル等は触りません）
+   ========================================================= */
+@media (max-width: 768px){
+  /* contact.html / about.html のSPの“呼吸”に合わせる */
+  .wrapper{
+    padding: 18px 16px 16px !important; /* 上/左右/下 */
+  }
+
+  /* ヘッダー上の余白を少し増やして、他ページと揃える */
+  .header{
+    padding: 10px 0 14px !important; /* 上だけ増やす */
+  }
+}
+
+
+/* =========================================================
+   SP版：ヘッダー横棒（白線）を非表示
+   影響：works.html の SP（768px以下）のみ
+   理由：About / Contact とトーンを揃えるため
+   ========================================================= */
+@media (max-width: 768px){
+  .header-line{
+    display: none !important;
+  }
+}
+
+
+    /* --- Block4 (Package) popup layout --- */
+    .modal-content.pack-mode{
+      padding: 0;
+      max-width: 860px;
+      width: min(860px, 92vw);
+      max-height: 86vh;
+      overflow: hidden;
+    }
+    .modal-content.pack-mode .modal-image,
+    .modal-content.pack-mode .modal-caption{ display:none; }
+    .modal-content.pack-mode #modalBody{ display:block; }
+
+    #modalBody{
+      display:none;
+      background-color: #eaeeef;
+      border-radius: 24px;
+      overflow-y:auto;
+      max-height: 86vh;
+      padding: 32px 28px 36px;
+      box-sizing:border-box;
+    }
+    .pack-wrap{
+      max-width: 760px;
+      margin: 0 auto;
+      color:#111;
+      font-family: inherit;
+    }
+    .pack-title{
+      font-size: 28px;
+      line-height: 1.35;
+      font-weight: 800;
+      margin: 6px 0 14px;
+    }
+    .pack-hr{
+      height: 2px;
+      width: 56px;
+      background-color: #34a358;
+      border-radius: 999px;
+      margin: 0 0 18px;
+    }
+    .pack-text{
+      font-size: 14px;
+      line-height: 1.9;
+      margin: 0 0 14px;
+      color:#222;
+      white-space: pre-line;
+    }
+    .pack-img{display:block;max-width:100%;height:auto;border:none;background:transparent}
+    .pack-img img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+    .pack-note{
+      font-size: 12px;
+      line-height: 1.8;
+      margin: 0 0 18px;
+      color:#222;
+    }
+    /* --- Block4 Package (SP typography overrides) --- */
+    @media (max-width: 768px){
+      /* SPではPC用の強制改行（white-space: pre-line）を解除して自然改行に */
+      .pack-lead,
+      .pack-text,
+      .pack-note{
+        white-space: normal;
+      }
+
+      /* タイトルが3行になりやすいのでSPは少しだけ小さくして2行に寄せる */
+      .pack-title{
+        font-size: 26px;
+        line-height: 1.25;
+        letter-spacing: 0.03em;
+      }
+      .pack-quote{
+        margin-left: -0.08em;
+      }
+
+      /* 余白を少し詰めて視認性UP */
+      .pack-article{
+        padding: 18px 18px 22px;
+      }
+      .pack-lead{
+        font-size: 14px;
+        line-height: 1.9;
+        letter-spacing: 0.06em;
+      }
+      .pack-text{
+        font-size: 14px;
+        line-height: 2.0;
+        letter-spacing: 0.06em;
+      }
+    }
+
+    /* close button position in pack mode */
+    .modal-content.pack-mode .modal-close{
+      top: 14px;
+      right: 14px;
+    }
+
+
+
+/* --- Block4 Package popup (pack-mode) --- */
+.pack-article{max-width:760px;margin:0 auto;padding:28px 24px 40px;color:#111;letter-spacing:0.03em;}
+.pack-article h2{font-size:28px;line-height:1.35;margin:0 0 14px;font-weight:800;letter-spacing:0.04em;}
+.pack-article .pack-quote{display:inline-block;margin-left:-0.18em;}
+.pack-article .pack-lead{font-size:14px;line-height:1.9;margin:0 0 18px;color:#222;letter-spacing:0.06em;}
+.pack-article .pack-hr{display:none;}
+.pack-article figure{margin:0;}
+.pack-article img{width:100%;height:auto;display:block;border:none;background:transparent;}
+.pack-article figcaption{font-size:14px;line-height:1.9;color:#222;padding:10px 6px 0;letter-spacing:0.06em;}
+.pack-article .pack-section{background-color: #eaeeef;border:none;padding:14px 14px 18px;margin:0 0 18px;}
+
+
+/* Block4 popup: add one-line spacing between the FV image and the first paragraph (PC & SP) */
+.pack-article > figure + .pack-section .pack-text{
+  margin-top: 0.8em; 
+}
+
+
+
+/* ===== Block3 (Promo Banners) custom popup layout ===== */
+.modal-content.promo-mode{
+  padding: 0;
+  max-width: 860px;
+  width: min(860px, 92vw);
+  max-height: 86vh;
+  overflow: hidden;
+}
+.modal-content.promo-mode .modal-image,
+.modal-content.promo-mode .modal-caption{ display:none; }
+.modal-content.promo-mode #modalBody{ display:block; }
+
+/* Reuse #modalBody base styles from Block4 */
+.promo-wrap{
+  max-width: 760px;
+  margin: 0 auto;
+  color:#111;
+  font-family: inherit;
+}
+.promo-title{
+  font-size: 26px;
+  line-height: 1.35;
+  font-weight: 800;
+  margin: 6px 0 12px;
+}
+.promo-hr{display:none;}
+.promo-lead{
+  font-size: 14px;
+  line-height: 1.9;
+  margin: 0 0 14px;
+  color:#222;
+  white-space: pre-line;
+}
+.promo-figure{margin: 16px 0; background: transparent; border-radius: 0; overflow: visible; box-shadow: none;}
+.promo-figure img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 18px;
+}
+.promo-cap{padding: 14px 0 0; font-size: 0.95rem; line-height: 1.8; color: #111; background: transparent; border-radius: 0;}
+@media (max-width: 680px){
+  #modalBody{ padding: 22px 16px 26px; border-radius: 20px; }
+  .promo-title{ font-size: 22px; }
+  .promo-figure{margin: 16px 0; background: transparent; border-radius: 0; overflow: visible; box-shadow: none;}
+  .promo-cap{padding: 14px 0 0; font-size: 0.95rem; line-height: 1.8; color: #111; background: transparent; border-radius: 0;}
+}
+
+/* ===== Block6 Popup (scoped) ===== */
+.works6-modal{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  display: none;
+  z-index: 9999;
+}
+.works6-modal[aria-hidden="false"]{ display: block; }
+.works6-modal-inner{
+  max-width: 960px;
+  margin: 6vh auto;
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  max-height: 88vh;
+  overflow: auto;
+}
+.works6-close{
+  position: sticky;
+  top: 0;
+  float: right;
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+}
+.works6-popup{
+  max-width: 920px;
+  margin: 0 auto;
+}
+.works6-title{
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  margin: 6px 0 12px;
+}
+.works6-lead{
+  margin: 0 0 10px;
+  line-height: 1.9;
+  font-size: 13px;
+}
+.works6-figure{
+  margin: 16px 0 10px;
+}
+.works6-figure img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+}
+.works6-text p{
+  margin: 0 0 10px;
+  line-height: 1.9;
+  font-size: 12.5px;
+}
+
+.modal-content.works6-mode .modal-caption{display:none !important;}
+
+/* ===== Block7 Popup (scoped) ===== */
+.modal-content.works7-mode .modal-caption{display:none !important;}
+.modal-content.works7-mode .modal-body{
+  display:block !important; /* Fix: #modalBody was display:none in some modes -> blank modal */
+  background-color: #eaeeef;
+  border-radius:20px;
+  padding:22px 22px 0px;
+  max-height:70vh;
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+.modal-content.works7-mode .modal-image{display:none !important;}
+.modal-content.works7-mode .works7-figure-last{margin-bottom:0 !important;}
+
+.works7-popup{
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.works7-title{
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  margin: 6px 0 12px;
+}
+
+.works7-lead{
+  margin: 0 0 14px;
+  line-height: 1.8;
+  font-size: 13px;
+}
+
+.works7-figure{
+  margin: 18px 0 12px;
+}
+
+.works7-figure img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+}
+
+
+.works7-figure-fullbleed{
+  margin-left: -22px;
+  margin-right: -22px;
+}
+.works7-figure-fullbleed img{
+  width: calc(100% + 44px);
+  max-width: none;
+  border-radius: 0;
+}
+@media (max-width: 520px){
+  .works7-figure-fullbleed{
+    margin-left: -18px;
+    margin-right: -18px;
+  }
+  .works7-figure-fullbleed img{
+    width: calc(100% + 36px);
+  }
+}
+
+.works7-text{
+  margin: 8px 0 0;
+}
+
+.works7-text p{
+  margin: 0 0 12px;
+  line-height: 1.85;
+  font-size: 12.8px;
+}
+
+.works7-closing{
+  margin: 14px 0 6px;
+  line-height: 1.85;
+  font-size: 12.8px;
+}
+
+
+/* --- Fix: Block7 modal width & bottom spacing --- */
+.modal-content.works7-mode{
+  max-width: 980px;
+  width: min(980px, calc(100vw - 60px));
+}
+
+@media (max-width: 768px){
+  .modal-content.works7-mode{
+    width: calc(100vw - 26px);
+  }
+}
+
+/* stop horizontal scroll / swipe inside modal */
+.modal-content.works7-mode .modal-body{
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+  touch-action: pan-y;
+  padding-bottom: 0;
+}
+
+/* remove unexpected space under the last image (works7-pic4.webp) */
+.modal-content.works7-mode .works7-popup{
+  padding-bottom: 0;
+}
+.modal-content.works7-mode .works7-figure.works7-figure-last,
+.modal-content.works7-mode .works7-figure-fullbleed.works7-figure-last{
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+.modal-content.works7-mode .works7-figure.works7-figure-last img,
+.modal-content.works7-mode .works7-figure-fullbleed.works7-figure-last img{
+  display: block;
+  margin-bottom: 0 !important;
+}
+
+/* ===== Block1 (UI・UX) custom popup layout ===== */
+.modal-content.works1-mode{
+  max-width: 980px;
+  width: min(980px, 92vw);
+  padding: 16px;
+  gap: 10px;
+}
+.modal-content.works1-mode .modal-image{ display:none !important; }
+.modal-content.works1-mode .modal-caption{ display:none !important; }
+.modal-content.works1-mode .modal-body{
+  display:block !important;
+  background-color: #eaeeef;
+  border-radius: 20px;
+  padding: 26px 24px 30px;
+  max-height: 76vh;
+  overflow: auto;
+}
+
+.ux-wrap{
+  max-width: 860px;
+  margin: 0 auto;
+  color:#111;
+}
+.ux-title{
+  font-size: 26px;
+  line-height: 1.35;
+  font-weight: 800;
+  margin: 4px 0 10px;
+  letter-spacing: .02em;
+}
+.ux-lead{
+  font-size: 13.5px;
+  line-height: 1.95;
+  color:#222;
+  margin: 0 0 14px;
+}
+.ux-figure{
+  margin: 18px 0;
+}
+.ux-figure img{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius: 18px;
+}
+.ux-section{
+  margin: 18px 0 6px;
+}
+.ux-subtitle{
+  font-size: 15px;
+  font-weight: 800;
+  margin: 0 0 10px;
+}
+.ux-note{
+  font-size: 12.8px;
+  line-height: 1.9;
+  color:#222;
+  margin: 0 0 10px;
+}
+@media (max-width: 768px){
+  .modal-content.works1-mode{ padding: 12px; }
+  .modal-content.works1-mode .modal-body{
+    padding: 18px 16px 22px;
+    max-height: 78vh;
+  }
+  .ux-title{ font-size: 22px; }
+  .ux-figure img{ border-radius: 14px; }
+}
+
+
+
+/* ===== Block5 (Web - this site) popup LP layout ===== */
+/* Block5 clean safeguards */
+.modal-content.works5-mode .modal-body{box-shadow:none;}
+.works5-figure img{max-width:100%;outline:none;border:none;}
+
+.modal-content.works5-mode{
+  padding: 0;
+  max-width: 980px;
+  width: min(980px, 92vw);
+  max-height: 86vh;
+  overflow: hidden;
+}
+.modal-content.works5-mode .modal-image,
+.modal-content.works5-mode .modal-caption{ display:none !important; }
+.modal-content.works5-mode .modal-body{
+  display:block !important;
+  background-color: #eaeeef;
+  border-radius: 24px;
+  overflow-y: auto;
+  max-height: 86vh;
+  padding: 28px 22px 30px;
+  box-sizing: border-box;
+}
+
+.works5-lp{
+  background:#eaeeef;
+}
+.works5-sheet{
+  background:#eaeeef;
+  border:none; /* remove inner frame line */
+  padding: 0;  /* use modal-body padding only */
+  max-width: 860px; /* match other popup image scale */
+  margin: 0 auto;
+}
+.works5-title{
+  font-size: 26px;
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: .06em;
+  margin: 0 0 14px;
+  color:#111;
+}
+.works5-lead{
+  font-size: 13px;
+  line-height: 1.95;
+  margin: 0 0 18px;
+  color:#111;
+  letter-spacing: .02em;
+}
+.works5-figure{ margin: 18px 0; }
+.works5-figure img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+.works5-hero img{
+  border-radius: 10px;
+}
+.works5-subtext{
+  font-size: 13px;
+  line-height: 1.95;
+  color:#111;
+  margin: 14px 0 0;
+}
+.works5-gridcap{
+  font-size: 12px;
+  line-height: 1.85;
+  color:#111;
+  margin: 0;
+}
+@media (max-width: 680px){
+  .modal-content.works5-mode .modal-body{ padding: 18px 14px 20px; border-radius: 20px; }
+  .works5-sheet{ padding: 18px 16px 20px; }
+  .works5-title{ font-size: 22px; letter-spacing: .04em; }
+  .works5-lead, .works5-subtext{ font-size: 12.5px; }
+}
+
+
+/* ===== Block6 Thumbnail Image Switching ===== */
+/* PC */
+@media (min-width: 769px){
+  .card[data-caption="作品キャプション 6"]{
+    background-image:url('picture/works6-pic3(PC).webp') !important;
+  }
+}
+/* SP */
+@media (max-width: 768px){
+  .card[data-caption="作品キャプション 6"]{
+    background-image:url('picture/works6-pic3(pic).webp') !important;
+  }
+}
+
+
+/* ===== Block2 thumbnail: CENTER background ===== */
+.card[data-caption="作品キャプション 2"]{
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+
+/* block5(SP版) 背景画像をSPのみ差し替え */
+@media (max-width: 768px) {
+  .card[data-caption="作品キャプション 5"]{
+    background-image: url('picture/block6-SP.webp') !important;
+    background-position: center center !important;
+    background-size: cover !important;
+  }
+}
+</style>
+
+<style>
+@media (max-width: 768px){
+  /* Block3 SP: remove forced line breaks in lead text only */
+  .promo-lead br{ display:none; }
+}
+
+/* ===== Block2 thumbnail: CENTER background ===== */
+.card[data-caption="作品キャプション 2"]{
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+</style>
+
+
+<style>
+@media (max-width: 768px){
+  .card[data-caption="作品キャプション 3"]{
+    background-position: center center !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+/* ===== Block2 thumbnail: CENTER background ===== */
+.card[data-caption="作品キャプション 2"]{
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+</style>
+
+<style>
+@media (min-width: 769px){
+  /* Block3 PC thumbnail: move DOWN by 50px (PC only) */
+  .card[data-caption="作品キャプション 3"]{
+    background-position: center calc(50% + 50px) !important;
+  }
+}
+}
+
+/* ===== Block2 thumbnail: CENTER background ===== */
+.card[data-caption="作品キャプション 2"]{
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+</style>
+
+
+
+
+
+<style>
+@media (max-width: 768px){
+  /* Block6 SP thumbnail: center the background image */
+  .card[data-caption="作品キャプション 6"]{
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+}
+
+/* ===== Block2 thumbnail: CENTER background ===== */
+.card[data-caption="作品キャプション 2"]{
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+</style>
+
+
+<style>
+@media (min-width: 769px){
+  /* Block6 PC thumbnail: center the background image */
+  .card[data-caption="作品キャプション 6"]{
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+}
+
+/* ===== Block2 thumbnail: CENTER background ===== */
+.card[data-caption="作品キャプション 2"]{
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+</style>
+
+
+<style>
+/* ===== Block7 thumbnail: CENTER background ONLY ===== */
+/* 他ブロック・モーダル挙動には影響なし */
+.card[data-caption="作品キャプション 7"]{
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+/* ===== Block2 thumbnail: CENTER background ===== */
+.card[data-caption="作品キャプション 2"]{
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+</style>
+
+
+<style>
+@media (min-width: 769px){
+  .header-line{
+    transform: translateY(1px);
+  }
+}
+</style>
+
+
+<style>
+/* ===== Block8 thumbnail image switching ===== */
+/* PC */
+@media (min-width: 769px){
+  .card[data-caption="作品キャプション 8"]{
+    background-image:url('picture/block8-pic(PC).webp') !important;
+    background-position:center center !important;
+    background-size:cover !important;
+    background-repeat:no-repeat !important;
+  }
+}
+/* SP */
+@media (max-width: 768px){
+  .card[data-caption="作品キャプション 8"]{
+    background-image:url('picture/block8-pic1(sp).webp') !important;
+    background-position:center center !important;
+    background-size:cover !important;
+    background-repeat:no-repeat !important;
+  }
+}
+
+/* ===== Block8 popup (自主制作・個人依頼) ===== */
+.modal-content.works8-mode{
+  padding: 0;
+  max-width: 860px;
+  width: min(860px, 92vw);
+  max-height: 86vh;
+  overflow: hidden;
+}
+.modal-content.works8-mode .modal-image,
+.modal-content.works8-mode .modal-caption{ display:none !important; }
+.modal-content.works8-mode #modalBody{ display:block; }
+
+.works8-wrap{
+  max-width: 760px;
+  margin: 0 auto;
+  color:#111;
+  font-family: inherit;
+}
+.works8-title{
+  font-size: 26px;
+  line-height: 1.35;
+  font-weight: 800;
+  margin: 6px 0 12px;
+}
+.works8-lead{
+  font-size: 14px;
+  line-height: 1.9;
+  margin: 0 0 14px;
+  color:#222;
+}
+.works8-figure{
+  margin: 16px 0;
+  background: transparent;
+}
+.works8-figure img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 18px;
+}
+.works8-cap{
+  padding: 14px 0 0;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color:#111;
+  margin: 0;
+}
+@media (max-width: 680px){
+  #modalBody{ padding: 22px 16px 26px; border-radius: 20px; }
+  .works8-title{ font-size: 22px; }
+  .works8-figure img{ border-radius: 16px; }
+  .works8-cap{ font-size: 0.95rem; }
+}
+</style>
+
+</head>
+<body>
+  <div class="wrapper">
+    <header class="header">
+  <div class="header-inner">
+    <a class="logo-link" href="index.html">
+      <img src="picture/logo-top.webp" alt="YC">
+    </a>
+
+    <div class="page-title">
+      <img src="picture/works-B.webp" alt="Works">
+    </div>
+
+    <div class="header-line"></div>
+
+    <nav class="nav" aria-label="Global">
+      <a class="nav-item" href="about.html"><img src="picture/about-B.webp" alt="About"></a>
+      <a class="nav-item" href="contact.html"><img src="picture/contact-B.webp" alt="Contact"></a>
+      <a class="nav-item top" href="index.html"><img src="picture/top-B.webp" alt="Top"></a>
+    </nav>
+  </div>
+</header>
+
+    <main class="main-layout">
+      <!-- 右側：3列グリッド（SPは2列） -->
+      <section class="grid-wrapper">
+        <div class="card-grid">
+          <!-- Row 1 (Large) -->
+          <div class="card card-lg" data-caption="作品キャプション 1" style="background-image:url('picture/works1-pic1(neil).webp');">
+  <div class="card-tag">UI・UX</div>
+</div>
+          <div class="card card-lg" data-caption="作品キャプション 2" style="background-image:url('picture/block2-(PC).webp');">
+  <div class="card-tag">SNS運用</div>
+</div>
+          <div class="card card-lg" data-caption="作品キャプション 3" style="background-image:url('picture/block3-p1(pic).webp');">
+  <div class="card-tag">バナー（販促）</div>
+</div>
+
+          <!-- Row 2 (Left: Large / Middle+Right: Stacked Small) -->
+          <div class="card card-lg" data-caption="作品キャプション 4" style="background-image:url('picture/worlks4-FV(pic).webp');">
+  <div class="card-tag">パッケージ</div>
+</div>
+
+          <div class="stack" aria-label="Works stack middle">
+            <div class="card card-sm" data-caption="作品キャプション 5" style="background-image:url('picture/block6-PC.webp');background-position:center center;background-size:cover;background-repeat:no-repeat;">
+  <div class="card-tag">Web（当サイト）</div>
+</div>
+            <div class="card card-sm" data-caption="作品キャプション 6" style="background-image:url('picture/works6-pic3(PC).webp');">
+  <div class="card-tag">バナー（その他）</div>
+</div>
+          </div>
+
+          <div class="stack" aria-label="Works stack right">
+            <div class="card card-sm" data-caption="作品キャプション 7" style="background-image:url('picture/works7.webp');">
+  <div class="card-tag">キャラクター</div>
+</div>
+            <div class="card card-sm" data-caption="作品キャプション 8" style="background-image:url('picture/block8-pic(PC).webp');background-position:center center;background-size:cover;background-repeat:no-repeat;">
+  <div class="card-tag">個人制作</div>
+</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    
+    <div style="text-align:center; font-family:'Roboto','Kosugi',sans-serif; font-size:18px; font-weight:500; margin:24px 0; color:#eaeeef;">
+      More to come...
+    </div>
+
+<footer class="block footer" style="background:transparent !important;">
+  <div style="padding:4px;font-size:14px;font-weight:500;font-family:'Roboto','Kosugi',sans-serif;text-align:left;">
+    <span style="color:#eaeeef">＠YC Graphics</span>
+  </div>
+</footer>
+  </div>
+
+
+  <div class="modal-overlay" id="cardModal">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose"></button>
+      <div class="modal-image"></div>
+        <div class="modal-body" id="modalBody"></div>
+      <div class="modal-caption" id="modalCaption"></div>
+    </div>
+  </div>
+
+  
+<script>
+// Popup (Modal) logic
+// - Works grid structure is NOT touched.
+// - Only the popup content is controlled here.
+
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('cardModal');
+  const modalContent = modal ? modal.querySelector('.modal-content') : null;
+  const modalBody = modal ? modal.querySelector('.modal-body') : null;
+  const modalCaption = document.getElementById('modalCaption');
+  const modalClose = document.getElementById('modalClose');
+
+  if (!modal || !modalContent || !modalBody || !modalCaption || !modalClose) {
+    // If modal DOM is missing, do nothing (prevents JS errors that break click handlers)
+    return;
+  }
+
+  const setModalHTML = (html) => {
+    modalBody.innerHTML = html;
+  };
+
+  // Reset popup scroll so each open starts at top
+  const resetModalScroll = () => {
+    // modalBody is the scroll container
+    if (modalBody) {
+      modalBody.scrollTop = 0;
+      if (typeof modalBody.scrollTo === 'function') modalBody.scrollTo(0, 0);
+    }
+  };
+
+  const clearModes = () => {
+    modalContent.classList.remove('works1-mode');
+    modalContent.classList.remove('works5-mode');
+    modalContent.classList.remove('pack-mode');
+    modalContent.classList.remove('promo-mode');
+    modalContent.classList.remove('works6-mode');
+    modalContent.classList.remove('works7-mode');
+    modalContent.classList.remove('works8-mode');
+    modalContent.classList.remove('no-caption');
+    // Restore caption bar default (works6 will hide it)
+    modalCaption.style.display = '';
+  };
+
+  const openModal = (caption) => {
+    clearModes();
+    modalCaption.textContent = caption || '';
+
+    // Block1: UI・UX popup (custom scroll article)
+    if (caption === '作品キャプション 1') {
+      modalContent.classList.add('works1-mode');
+      modalCaption.textContent = '';
+
+      const htmlWorks1 = `
+        <div class="ux-wrap">
+          <h2 class="ux-title">考えながら、整えてきた UI・UX</h2>
+          <p class="ux-lead">
+            UI・UXデザインでは、見た目を整える前に、<br>
+            「何を解決したいのか」を整理するところから始めてきました。<br><br>
+            このページでは、ECサイトのUI・UXデザインに携わる中で、<br>
+            実際にどのように考え、手を動かしてきたのかをまとめています。
+          </p>
+
+          <figure class="ux-figure">
+            <img src="picture/works1-pic1.webp" alt="UI・UX 画面イメージ">
+          </figure>
+
+          <div class="ux-section">
+            <p class="ux-note">
+              アプリやWebのUI・UXデザインでは、課題の整理→リサーチ→設計→検証と<br>
+              段階的なプロセスで進められることが多いと思いますが、<br><br>
+              実務の中では、「まずここから」という決まった型よりも、<br>
+              その時の課題や状況に合わせて、行き来しながら進めることがほとんどでした。
+            </p>
+            <figure class="ux-figure">
+              <img src="picture/works1-pic2.webp" alt="改善の流れ">
+            </figure>
+          </div>
+
+          <div class="ux-section">
+            <p class="ux-note">
+              既存サイトの改善では、ユーザーの動きを想像し、<br>
+              ・どこで離脱していそうか<br>
+              ・なぜこの導線が使われていないのか<br>
+              ・情報が多すぎないか<br>
+              そうした点を画面単位で洗い出していました。<br><br>
+              在籍時は主に、<br>
+              ・会員画面・会員登録フローでの離脱<br>
+              ・商品プレビュー画面での滞在時間の短さ<br>
+              ・情報量が多いページでの視線の分散<br>
+              といった課題に着目し、画面構成や情報の出し順を段階的に調整しました。
+            </p>
+            <figure class="ux-figure">
+              <img src="picture/works1-pic3.webp" alt="担当したUIデザインの一部">
+            </figure>
+          </div>
+
+          <div class="ux-section">
+            <figure class="ux-figure">
+              <img src="picture/works1-pic4.webp" alt="会員ページ メニューの改善例">
+            </figure>
+          </div>
+
+          <div class="ux-section">
+            <p class="ux-note">
+              その結果、WEBサイトデザイン改善後の計測データ（改善後の3ヶ月間）では、<br>
+              ・会員登録完了率：約5〜8％向上<br>
+              ・回遊率（2ページ以上閲覧したユーザー割合）：約1〜5％向上<br>
+              ・商品詳細ページの平均プレビュー数：約5〜10％増加<br>
+              といった改善傾向が見られました。
+            </p>
+            <figure class="ux-figure">
+              <img src="picture/works1-pic5.webp" alt="UI設計を担当したページ">
+            </figure>
+
+            <p class="ux-note">
+              変更 → 確認 → 微調整を繰り返す中で、<br>
+              常に「いまのサービスにとって最適な形は何か」を問い続けてきました。<br><br>
+              何を伝えるべきか。どこで迷わせていないか。<br>
+              その積み重ねが、数値にも表れたと考えています。<br><br>
+              この考え方は、サービスの内容が変わっても活かせる視点だと感じています。<br>
+              実際に制作を担当したページはこちらからご覧いただけます。URL ▶︎ https://www.ttrinity.jp/sell/
+            </p>
+          </div>
+        </div>
+      `;
+
+      setModalHTML(htmlWorks1);
+      resetModalScroll();
+      modal.classList.add('is-open');
+      document.body.classList.add('modal-open');
+      requestAnimationFrame(() => resetModalScroll());
+      setTimeout(() => resetModalScroll(), 0);
+      return;
+    }
+
+
+
+    // Block3: Promo banner popup
+    if (caption === '作品キャプション 3') {
+      modalContent.classList.add('promo-mode');
+
+      const htmlPromo = `
+        <div class="promo-wrap">
+          <h2 class="promo-title">一瞬で判断される、販促バナー</h2>
+          
+          <p class="promo-lead">運営ECサイトの販促バナー制作を担当しました。<br>販促バナーは、一瞬で判断され、行動につながることが求められます。<br><br>季節施策やキャンペーン、価格訴求など、目的に応じて情報の強さを調整しながら、<br>短い接触時間の中で伝わる設計にすることを大切にしてきました。<br><br>ここでは、制作したバナーの一部をまとめています。</p>
+
+          <figure class="promo-figure">
+            <img src="./picture/block3-p1.webp" alt="販促バナー 1">
+            <figcaption class="promo-cap">大きな数字やキーワードを主役にして、ひと目で内容が伝わる設計にしました。<br>強さのある配色でも可読性が落ちないよう、文字サイズとコントラストを調整しました。</figcaption>
+          </figure>
+
+          <figure class="promo-figure">
+            <img src="./picture/block3-p2.webp" alt="販促バナー 2">
+            <figcaption class="promo-cap">価格訴求と商品理解を同時に成立させるため、写真とコピーの役割を明確に分けた構成にしています。<br>一瞬で内容が判断できるよう、情報の配置と距離感を整理しました。</figcaption>
+          </figure>
+
+          <figure class="promo-figure">
+            <img src="./picture/block3-p3.webp" alt="販促バナー 3">
+            <figcaption class="promo-cap">バレンタイン施策として世界観を持たせつつ、価格や条件が埋もれないよう、情報の強弱を整理しました。<br>装飾要素を加えつつも、視認性が崩れない構成を意識しています。</figcaption>
+          </figure>
+
+          <figure class="promo-figure">
+            <img src="./picture/block3-p4.webp" alt="販促バナー 4">
+            <figcaption class="promo-cap">ハロウィン施策として高揚感のある世界観を持たせつつ、条件が重なるセールでも判断を迷わせない<br>情報設計にしています。<br>金額・期限・割引内容の優先順位を整理し、一瞬で全体像が把握できる構成としました。</figcaption>
+          </figure>
+
+          <figure class="promo-figure">
+            <img src="./picture/block3-p5.webp" alt="販促バナー 5">
+            <figcaption class="promo-cap">タイムセール施策として強い訴求が必要な中でも、割引額・対象・期限が判断できる構成にしています。<br>情報の役割を分け、視線が迷わないレイアウトとしました。</figcaption>
+          </figure>
+
+          <figure class="promo-figure">
+            <img src="./picture/block3-p6.webp" alt="販促バナー 6">
+            <figcaption class="promo-cap">対象が広い新生活応援施策のため、割引額・対象・期限が一度で判断できる構成にしています。<br>買う理由が迷わず伝わるよう、情報の並びと訴求ワードを整理しました。</figcaption>
+          </figure>
+
+          <figure class="promo-figure">
+            <img src="./picture/block3-p7.webp" alt="販促バナー 7">
+            <figcaption class="promo-cap">数字を主役にしつつ、夜空をイメージした背景で季節感と非日常感をプラス。<br>開催期間や条件も、迷わず視線に入る配置を意識しています。</figcaption>
+          </figure>
+
+          <figure class="promo-figure">
+            <img src="./picture/block3-p8.webp" alt="販促バナー 8">
+            <figcaption class="promo-cap">ファイナルセールの告知として、割引額と期限を起点に、購入判断を後押しする構成にしています。</figcaption>
+          </figure>
+        </div>
+      `;
+
+      modalBody.innerHTML = htmlPromo;
+      modalBody.style.display = 'block';
+      resetModalScroll();
+      resetModalScroll();
+      modal.classList.add('is-open');
+      document.body.classList.add('modal-open');
+      requestAnimationFrame(() => resetModalScroll());
+      setTimeout(() => resetModalScroll(), 0);
+      // Ensure scroll doesn't carry over after render
+      requestAnimationFrame(() => resetModalScroll());
+      setTimeout(() => resetModalScroll(), 0);
+      return;
+    }
+
+    // Block4: Package popup (reference: 2026-portfolio-part2.png)
+    if (caption === '作品キャプション 4') {
+
+      modalContent.classList.add('pack-mode');
+
+      // NOTE: image assets are assumed to exist in ./picture/
+      const htmlPack = `
+        <article class="pack-article">
+          <h2><span class="pack-quote">「</span>包む」だけで終わらせない、<br>パッケージ設計</h2>
+          <p class="pack-lead">自社プロダクトの梱包パッケージを担当しました。</p>
+          <p class="pack-lead">パッケージは、商品を保護するためのものであると同時に、<br>届いた瞬間の印象をつくる、大切な接点でもあります。</p>
+          <p class="pack-lead">開ける前、手に取ったとき、そして商品を使い始めるまで。<br>その一連の体験を意識しながら、ビジュアルや素材感を組み立てていきました。<br>
+制作背景やデザインの意図については、こちらで詳しく紹介しています。<br>
+URL ▶︎ <a href="https://note.com/ttrinity/n/nd8ce590eaef2" target="_blank" rel="noopener noreferrer">https://note.com/ttrinity/n/nd8ce590eaef2</a></p>
+
+          <div class="pack-hr"></div>
+
+          <figure>
+            <img src="picture/worlks4-FV.webp" alt="Package Design FV" loading="lazy">
+          </figure>
+
+          <div class="pack-section">
+            <p class="pack-text">ブランドが一目で伝わるよう、ロゴやモチーフを使った総柄に仕上げており、<br>ECでの発送時にも印象に残るよう、開けた瞬間の楽しさを意識したデザインにしています。</p>
+            <figure>
+              <img src="picture/worlks4-box.webp" alt="Package Box" loading="lazy">
+            </figure>
+            <figure>
+              <img src="picture/worlks4-sp.webp" alt="Package SP" loading="lazy">
+            </figure>
+          </div>
+
+          <div class="pack-section">
+            <figure>
+              <img src="picture/worlks4-pack1.webp" alt="Package Paper" loading="lazy">
+              <figcaption>梱包箱のサイズを問わず、どこを切り取ってもブランドらしさと楽しさが視覚的に伝わる設計を意識しました。</figcaption>
+            </figure>
+          </div>
+
+          <div class="pack-section">
+            <figure>
+              <img src="picture/worlks4-pack2.webp" alt="Package OPP" loading="lazy">
+              <figcaption>袋素材でも重たい印象にならないよう、配色と総柄の密度で軽やかさを調整したデザインです。<br>箱と同一の総柄を用いることで、梱包全体に一貫したブランド体験を持たせています。</figcaption>
+            </figure>
+          </div>
+
+          <div class="pack-section">
+            <figure>
+              <img src="picture/worlks4-pack3.webp" alt="Package Drawstring" loading="lazy">
+              <figcaption>贈り物として選ばれる場面を想定し、ロゴは控えめに配置した包装デザインとしています。</figcaption>
+            </figure>
+          </div>
+        </article>
+      `;
+
+      setModalHTML(htmlPack);
+      resetModalScroll();
+      modal.classList.add('is-open');
+      document.body.classList.add('modal-open');
+      requestAnimationFrame(() => resetModalScroll());
+      setTimeout(() => resetModalScroll(), 0);
+      return;
+    }
+
+    // Block5: Web（当サイト） popup LP
+    if (caption === '作品キャプション 5') {
+      modalContent.classList.add('works5-mode');
+      modalCaption.textContent = '';
+
+      const htmlWorks5 = `
+        <article class="works5-lp">
+          <section class="works5-sheet">
+            <h2 class="works5-title">考え、こねて、形にする<br>ポートフォリオサイト</h2>
+
+            <p class="works5-lead">
+              本ポートフォリオサイトでは、<br>
+              デザインのモチーフとして<strong>「粘土」</strong>の要素を取り入れています。<br><br>
+
+              粘土は、一度で完成形を決めるものではなく、<br>
+              手を動かしながら少しずつ形を整えていく素材です。<br><br>
+
+              その性質が、試しながら調整を重ねていく<br>
+              自分のデザインの進め方と重なると感じ、全体のコンセプトにしました。
+            </p>
+
+            <figure class="works5-figure works5-hero">
+              <img src="picture/block5-pic1.webp" alt="ポートフォリオ サイト メインビジュアル">
+            </figure>
+
+            <p class="works5-subtext">
+              背景の粒感や、角の丸いフレーム、<br>
+              どこかやわらかい色づかい。<br><br>
+
+              画面全体に「こねながら整えていく」<br>
+              というイメージを重ねています。<br><br>
+
+              ただ目を引くための装飾ではなく、長く見てもらえるトーンになるよう、<br>
+              余白や情報量のバランスも意識しました。
+            </p>
+
+            <figure class="works5-figure">
+              <img src="picture/block5-pic2.webp" alt="粘土をこねる手のモチーフ">
+            </figure>
+
+            <figure class="works5-figure">
+              <img src="picture/block5-pic3.webp" alt="Worksページ キャプチャ">
+            </figure>
+
+            <figure class="works5-figure">
+              <img src="picture/block5-pic4.webp" alt="Aboutページ キャプチャ">
+            </figure>
+            <figure class="works5-figure">
+              <img src="picture/block5-pic5.webp" alt="Worksページ グリッド キャプチャ">
+            </figure>
+
+            <p class="works5-subtext">
+              また、情報設計においては「どこから読んでも違和感がない構成」を意識しました。<br><br>
+
+              上から順番に読む前提ではなく、<br>
+              気になったブロックから自由に見ても内容がきちんと伝わるように。<br><br>
+
+              それぞれのセクションがひとつの小さな完結したまとまりになるよう、<br>
+              構成を整えています。
+            </p>
+
+
+
+            <figure class="works5-figure">
+              <img src="picture/block5-pic6.webp" alt="SP表示イメージ">
+            </figure>
+
+            <p class="works5-final-text">粘土のように、全体を通して柔軟に考え、整えていく姿勢がさりげなく伝わるデザインを目指しました。</p>
+          </section>
+        </article>
+`;
+
+      setModalHTML(htmlWorks5);
+      resetModalScroll();
+      modal.classList.add('is-open');
+      document.body.classList.add('modal-open');
+      requestAnimationFrame(() => resetModalScroll());
+      setTimeout(() => resetModalScroll(), 0);
+      return;
+    }
+
+if (caption === '作品キャプション 6') {
+      modalContent.classList.remove('promo-mode', 'pack-mode', 'works2-mode');
+      modalContent.classList.add('works6-mode');
+
+      const htmlWorks6 = `
+<div class="works6-popup">
+  <h2 class="works6-title">新商品・特集ページへの導線バナー</h2>
+
+  <p class="works6-lead">
+    セールや価格訴求を目的としたバナー以外でも、<br>
+    新商品のリリースや、サイト内特集ページへの誘導を目的とした告知バナーも制作してきました。
+  </p>
+
+  <p class="works6-lead">
+    これらのバナーでは、即時の購入を促すのではなく、<br>
+    まず興味を持ってもらい、ページを開いてもらうことを役割としています。
+  </p>
+
+  <figure class="works6-figure">
+    <img src="picture/works6-pic1.webp" alt="お酒Tシャツ特集 バナー">
+  </figure>
+
+  <div class="works6-text">
+    <p>
+      情報を詰め込みすぎず、<br>
+      テーマや世界観が直感的に伝わるよう、<br>
+      モチーフや色、形で内容を想起できる構成を意識しました。
+    </p>
+
+    <p>
+      「何が売れているか」よりも、<br>
+      「どんな特集なのか」「自分に関係がありそうか」が一目で伝わることを重視しています。
+    </p>
+  </div>
+
+  <figure class="works6-figure">
+    <img src="picture/works6-pic2.webp" alt="スイーツTシャツ特集 バナー">
+  </figure>
+
+  <div class="works6-text">
+    <p>
+      ファッション、季節感、趣味性など、<br>
+      テーマごとにトーンを切り替えながら、<br>
+      サイト全体の雰囲気から浮かないよう調整しました。
+    </p>
+
+    <p>
+      バナー単体で完結させるのではなく、<br>
+      遷移先ページとのつながりを意識したビジュアル設計を行っています。
+    </p>
+  </div>
+
+  <figure class="works6-figure">
+    <img src="picture/works6-pic3.webp" alt="コットンジャケット バナー">
+  </figure>
+
+  <div class="works6-text">
+    <p>
+      強い訴求が必要な販促バナーとは異なり、<br>
+      これらの告知バナーでは、余白と柔らかさを残し、<br>
+      押しつけにならない導線づくりを意識しました。
+    </p>
+  </div>
+
+  <figure class="works6-figure works6-figure-last">
+    <img src="picture/works6-pic4.webp" alt="summer T-shirts バナー">
+  </figure>
+</div>
+      `;
+
+      setModalHTML(htmlWorks6);
+      resetModalScroll();
+      resetModalScroll();
+      modal.classList.add('is-open');
+      document.body.classList.add('modal-open');
+      requestAnimationFrame(() => resetModalScroll());
+      setTimeout(() => resetModalScroll(), 0);
+      // Ensure scroll doesn't carry over after render
+      requestAnimationFrame(() => resetModalScroll());
+      setTimeout(() => resetModalScroll(), 0);
+      return;
+    }
+
+    /* =============================
+       Block7 popup (作品キャプション 7)
+       ============================= */
+    if (caption === '作品キャプション 7') {
+      modalContent.classList.add('works7-mode');
+      modalCaption.textContent = '';
+
+      const htmlWorks7 = `
+        <div class="works7-popup">
+          <h2 class="works7-title">ブランド公式キャラクターの設計</h2>
+
+          <p class="works7-lead">
+            公式キャラクターのデザインでは、単に「かわいい存在」を作るのではなく、<br>
+            ブランドの空気感や温度を、直感的に伝えるための存在として設計しました。
+          </p>
+
+          <figure class="works7-figure">
+            <img src="picture/works7-pic1.webp" alt="ブランド公式キャラクター（クッション）">
+          </figure>
+
+          <div class="works7-text">
+            <p>
+              ECサービスでは、情報量が多くなりやすく、<br>
+              テキストやUIだけでは少し硬い印象になってしまう場面があります。
+            </p>
+            <p>
+              そこで、ページやコンテンツの中に<br>
+              感情のクッションとして機能する要素が必要だと考え、<br>
+              キャラクターの導入を検討しました。
+            </p>
+          </div>
+
+          <figure class="works7-figure">
+            <img src="picture/works7-pic2.webp" alt="キャラクターデザイン詳細">
+          </figure>
+
+          <div class="works7-text">
+            <p>
+              形状は、角を持たない有機的なシルエットとし、<br>
+              見た瞬間に柔らかさを感じられるように設計しています。
+            </p>
+            <p>
+              インクをモチーフにした少し不揃いな形や質感は、<br>
+              ブランド全体のデザイントーンともなじむように設計しています。
+            </p>
+          </div>
+
+          <figure class="works7-figure works7-figure-fullbleed">
+            <img src="picture/works7-pic3.webp" alt="キャラクター活用例">
+          </figure>
+
+          <div class="works7-text">
+            <p>
+              また、キャラクターを1体に固定するのではなく、<br>
+              性格の異なる2体として設計しました。
+            </p>
+            <p>
+              コンテンツの内容や文脈に応じて使い分けることで、<br>
+              表現の幅を広げることを意識しています。
+            </p>
+          </div>
+
+          <p class="works7-note">
+            また、キャラクターを1体に固定するのではなく、性格の異なる2体として設計しました。<br><br>
+            コンテンツの内容や文脈に応じて使い分けることで、表現の幅を広げることを意識しています。<br><br>
+            ブランドの世界観を壊さず、それでいてユーザーとの距離を縮める。<br>
+            そんな役割を担う存在として、キャラクターを設計しました。
+          </p>
+
+          <figure class="works7-figure works7-figure-fullbleed works7-figure-last">
+            <img src="picture/works7-pic4.webp" alt="キャラクター活用例 2">
+          </figure>
+        </div>
+`;
+
+      setModalHTML(htmlWorks7);
+      resetModalScroll();
+      resetModalScroll();
+      modal.classList.add('is-open');
+      document.body.classList.add('modal-open');
+      requestAnimationFrame(() => resetModalScroll());
+      setTimeout(() => resetModalScroll(), 0);
+      requestAnimationFrame(() => resetModalScroll());
+      setTimeout(() => resetModalScroll(), 0);
+      return;
+    }
+
+
+
+    // Block8: 自主制作・個人依頼 popup（画像＋文章）
+    if (caption === '作品キャプション 8') {
+      modalContent.classList.add('works8-mode');
+      modalCaption.textContent = '';
+
+      const htmlWorks8 = `
+        <div class="works8-wrap">
+          <h2 class="works8-title">自主制作・個人依頼</h2>
+
+          <p class="works8-lead">
+            個人依頼・自主制作で制作したバナー作品です。<br>
+            想定案件やコンセプト設計から取り組んだビジュアルを中心に、<br>
+            目的に合わせた表現設計を行っています。
+          </p>
+
+          <p class="works8-lead">
+            
+            
+            
+          </p>
+
+          <figure class="works8-figure">
+            <img src="picture/block8-pic1.webp" alt="Milky Strawberry バナー">
+            <p class="works8-cap">
+              フレッシュさと季節感を強く打ち出した、想定バナーです。<br>
+              商品写真が主役になるよう補色と光感を調整し、<br>
+              「おいしそう」が一瞬で伝わるビジュアルを意識しました。<br><br>
+              背景や装飾は甘さを引き立てつつ、価格・期間などの情報が埋もれないバランスで設計しています。
+            </p>
+          </figure>
+
+          <figure class="works8-figure">
+            <img src="picture/block8-pic2.webp" alt="積極採用中 バナー">
+            <p class="works8-cap">
+              実在企業を想定した採用バナーの自主制作です。<br>
+              「経験を、次のステージへ！」という前向きな訴求がまっすぐ届くよう、<br>
+              主コピーの迫力と、補足情報（研修・サポート）の安心感を両立させました。<br><br>
+              人物写真の信頼感を活かしつつ、視線が「キャッチ → 募集状況 → 待遇/安心材料」へ流れるように<br>              文字サイズと配置バランスを調整しています。
+            </p>
+          </figure>
+
+          <figure class="works8-figure">
+            <img src="picture/block8-pic3.webp" alt="FluffyParty コスメ広告バナー">
+            <p class="works8-cap">
+              ブランドコンセプトから設計したコスメ広告バナーです。<br>
+              夜のケア時間をテーマに、やわらかい光と色でとろける質感をビジュアルで表現しました。<br><br>
+              キャッチコピー・ロゴ・世界観を一貫させ、感情に寄り添うトーンでまとめています。
+            </p>
+          </figure>
+
+          <figure class="works8-figure">
+            <img src="picture/block8-pic4.webp" alt="げきからパーリナイト バナー">
+            <p class="works8-cap">
+              個人依頼で制作したキャンペーンバナーです。<br>
+              にぎやかさと食欲を刺激する色使いを意識し、料理写真のボリューム感を活かしながら構成しました。<br><br>              タイトルは大きく配置し、視認性を優先。<br>
+              情報が多くなりすぎないよう、装飾の密度も調整しています。
+            </p>
+          </figure>
+        </div>
+      `;
+
+      setModalHTML(htmlWorks8);
+      resetModalScroll();
+      modal.classList.add('is-open');
+      document.body.classList.add('modal-open');
+      requestAnimationFrame(() => resetModalScroll());
+      setTimeout(() => resetModalScroll(), 0);
+      return;
+    }
+
+    // Block2: SNS・動画コンテンツ（本文＋画像）
+    if (caption === '作品キャプション 2') {
+      modalContent.classList.add('works2-mode');
+      // Block2はキャプションタブを表示しない
+      modalContent.classList.add('no-caption');
+      modalCaption.textContent = '';
+      modalCaption.style.display = 'none';
+
+      setModalHTML(`
+        <div class="block2-article">
+          <h2>SNS・動画コンテンツの制作と運用</h2>
+          <p>
+            SNS運用では、投稿単体の見た目よりも、<br>
+            「なぜ今この内容を出すのか」「どう積み上げるか」を重視して取り組んできました。
+          </p>
+          <p>
+            YouTube / X（旧Twitter）/ Instagram / TikTok など複数のSNSと広告施策を横断し、<br>
+            各媒体の特性に合わせてコンテンツ設計と運用方針の設計・改善を行っていました。
+          </p>
+
+          <img src="picture/block2-p1.webp" alt="SNS・動画コンテンツの制作と運用（1）">
+          <p class="note">※実際の広告数値ではありません</p>
+          <p>
+            媒体ごとに反応の傾向を見ながら、投稿内容や見せ方を調整していました。<br>
+            どの投稿が伸びているのかを定期的に振り返り、<br>
+            良かった要素を次のコンテンツに活かす形で改善を重ねていました。
+          </p>
+
+          <img src="picture/block2-p2.webp" alt="SNS・動画コンテンツの制作と運用（2）">
+          <p>
+            動画系プラットフォームでは、媒体ごとの視聴体験を意識し、<br>
+            縦画面での視認性や情報配置を設計しながらコンテンツを展開していました。<br><br>
+            その結果、バズや広告に依存せずとも、<br>
+            継続的に反応が積み上がる状態を作ることができました。
+          </p>
+
+          <img src="picture/block2-p3.webp" alt="SNS・動画コンテンツの制作と運用（3）">
+          <p>
+            Youtubeでは、自社ブログへと促す記事・動画を資産化する運用を意識し、<br>
+            約79,000人の訪問者／22万PVを獲得。<br><br>
+            TikTokでは、直近1年で約94万回再生／36万人以上の視聴者を獲得。<br>
+            10万再生超の動画を複数生み出し、認知拡大に貢献しました。<br><br>
+            Instagramでは、商品を軸にしたコンテンツ発信を継続し、<br>
+            約2年間でフォロワー数が9,600人から12,000人以上へと増加しました。<br><br>
+            保存数やプロフィール遷移といった<br>
+            「次の行動」に関わる指標も安定して伸びており、<br>
+            一過性ではない運用成果を達成することができました。
+          </p>
+
+          <img src="picture/block2-p4.webp" alt="SNS・動画コンテンツの制作と運用（4）">
+        </div>
+      `);
+
+      resetModalScroll();
+      modal.classList.add('is-open');
+      document.body.classList.add('modal-open');
+      requestAnimationFrame(() => resetModalScroll());
+      setTimeout(() => resetModalScroll(), 0);
+      return;
+    }
+
+// Default: show a simple image if data-image exists, otherwise blank body.
+    // (Keeps other blocks functional without breaking.)
+    setModalHTML('');
+    resetModalScroll();
+      modal.classList.add('is-open');
+      document.body.classList.add('modal-open');
+      requestAnimationFrame(() => resetModalScroll());
+      setTimeout(() => resetModalScroll(), 0);
+  };
+
+  const closeModal = () => {
+    modal.classList.remove('is-open');
+    document.body.classList.remove('modal-open');
+    // Reset any mode styles and contents so the next open is always fresh
+    clearModes();
+    setModalHTML('');
+    modalCaption.textContent = '';
+    modalCaption.style.display = '';
+    resetModalScroll();
+  };
+
+  // Click handler (event delegation)
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('.card');
+    if (!card) return;
+
+    const caption = card.getAttribute('data-caption') || '';
+    openModal(caption);
+  });
+
+  // Close actions
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+});
+</script>
+
+
+<style>
+@media (max-width: 768px){
+  .pack-article h2 br{
+    display: none;
+  }
+}
+
+/* ===== Block2 thumbnail: CENTER background ===== */
+.card[data-caption="作品キャプション 2"]{
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+</style>
+
+
+<style>
+@media (max-width: 768px){
+  .card[data-caption="作品キャプション 4"]{
+    background-position: center center !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+/* ===== Block2 thumbnail: CENTER background ===== */
+.card[data-caption="作品キャプション 2"]{
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+</style>
+
+
+<!-- ======================= -->
+<!-- Block6 Popup (CONTENT ONLY ADDITION) -->
+<!-- ======================= -->
+<div id="works6-popup-modal" class="works6-modal" aria-hidden="true">
+  <div class="works6-modal-inner">
+    <button class="works6-close" aria-label="close">×</button>
+
+    <div class="works6-popup">
+      <h2 class="works6-title">新商品・特集ページへの導線バナー</h2>
+
+      <p class="works6-lead">
+        セールや価格訴求を目的としたバナー以外でも、<br>
+        新商品のリリースや、サイト内特集ページへの誘導を目的とした告知バナーも制作してきました。
+      </p>
+
+      <p class="works6-lead">
+        これらのバナーでは、即時の購入を促すのではなく、<br>
+        まず興味を持ってもらい、ページを開いてもらうことを役割としています。
+      </p>
+
+      <figure class="works6-figure">
+        <img src="picture/works6-pic1.webp" alt="お酒Tシャツ特集 バナー">
+      </figure>
+
+      <div class="works6-text">
+        <p>
+          情報を詰め込みすぎず、<br>
+          テーマや世界観が直感的に伝わるよう、<br>
+          モチーフや色、形で内容を想起できる構成を意識しました。
+        </p>
+
+        <p>
+          「何が売れているか」よりも、<br>
+          「どんな特集なのか」「自分に関係がありそうか」が一目で伝わることを重視しています。
+        </p>
+      </div>
+
+      <figure class="works6-figure">
+        <img src="picture/works6-pic2.webp" alt="スイーツTシャツ特集 バナー">
+      </figure>
+
+      <div class="works6-text">
+        <p>
+          ファッション、季節感、趣味性など、<br>
+          テーマごとにトーンを切り替えながら、<br>
+          サイト全体の雰囲気から浮かないよう調整しました。
+        </p>
+
+        <p>
+          バナー単体で完結させるのではなく、<br>
+          遷移先ページとのつながりを意識したビジュアル設計を行っています。
+        </p>
+      </div>
+
+      <figure class="works6-figure">
+        <img src="picture/works6-pic3.webp" alt="コットンジャケット バナー">
+      </figure>
+
+      <div class="works6-text">
+        <p>
+          強い訴求が必要な販促バナーとは異なり、<br>
+          これらの告知バナーでは、余白と柔らかさを残し、<br>
+          押しつけにならない導線づくりを意識しました。
+        </p>
+      </div>
+
+      <figure class="works6-figure works6-figure-last">
+        <img src="picture/works6-pic4.webp" alt="summer T-shirts バナー">
+      </figure>
+    </div>
+  </div>
+</div>
+
+
+<style>
+@media (max-width: 768px){
+  /* Block5 SP：文章内の強制改行（<br>）を無効化 */
+  .works5-lead br,
+  .works5-subtext br{
+    display: none;
+  }
+}
+</style>
+
+</body>
+</html>
