@@ -1512,6 +1512,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalCaption = document.getElementById('modalCaption');
   const modalClose = document.getElementById('modalClose');
 
+    /* ===== Image Zoom Function ===== */
+  const zoomOverlay = document.getElementById('imageZoomOverlay');
+  const zoomImg = document.getElementById('imageZoomTarget');
+
+  document.addEventListener('click', (e) => {
+
+    // モーダル内の画像だけ対象
+    const img = e.target.closest('.modal-body img');
+    if (img) {
+      zoomImg.src = img.src;
+      zoomOverlay.classList.add('is-open');
+      return;
+    }
+
+    // クリックで閉じる
+    if (e.target === zoomOverlay) {
+      zoomOverlay.classList.remove('is-open');
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      zoomOverlay.classList.remove('is-open');
+    }
+  });
+
+
   if (!modal || !modalContent || !modalBody || !modalCaption || !modalClose) {
     // If modal DOM is missing, do nothing (prevents JS errors that break click handlers)
     return;
@@ -2193,6 +2220,7 @@ if (caption === '作品キャプション 6') {
     if (e.key === 'Escape') closeModal();
   });
 });
+
 </script>
 
 
@@ -2314,7 +2342,37 @@ if (caption === '作品キャプション 6') {
     display: none;
   }
 }
+
+/* ===== Image Zoom ===== */
+.image-zoom-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  cursor: zoom-out;
+}
+
+.image-zoom-overlay.is-open{
+  display: flex;
+}
+
+.image-zoom-overlay img{
+  max-width: 92vw;
+  max-height: 90vh;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+
 </style>
+
+<!-- ===== Image Zoom Overlay ===== -->
+<div id="imageZoomOverlay" class="image-zoom-overlay">
+  <img id="imageZoomTarget" src="" alt="">
+</div>
 
 </body>
 </html>
