@@ -170,7 +170,9 @@ label{
   font-weight:900;
   font-family: "Arial Black", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-input,textarea{
+/* contactフォームの中だけに効かせる（Passwordモーダルに干渉させない） */
+#contactForm input,
+#contactForm textarea{
   width:100%;
   padding:14px;
   border-radius:12px;
@@ -180,8 +182,9 @@ input,textarea{
   background:#fff;
   color:#111;
 }
-textarea{height:120px}
-button{
+#contactForm textarea{height:120px}
+
+#contactForm button{
   width:100%;
   padding:14px;
   border:none;
@@ -189,6 +192,9 @@ button{
   background:#ccc;
   font-size:15px;
 }
+#contactForm button[disabled]{cursor:not-allowed}
+#contactForm button:not([disabled]){cursor:pointer;background:#ffffff}
+
 button[disabled]{cursor:not-allowed}
 button:not([disabled]){cursor:pointer;background:#ffffff}
 
@@ -311,7 +317,16 @@ a {
   }
 }
 
-</style></head>
+</style>
+
+<!-- =========================
+  Password Gate（3日で再ログイン）
+  ※ js/auth.js を読み込む
+========================= -->
+<script src="js/auth.js?v=2" defer></script>
+
+
+</head>
 <body>
 <div class="wrapper">
 <header class="header">
