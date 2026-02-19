@@ -6,6 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kosugi&family=Roboto:wght@400;500;700;900&display=swap" />
   <style>
+
+   @media (max-width:768px){
+  .wrapper{ overflow-x:hidden; }
+
+  .header{ overflow:visible; } /* header自体より内側にスクロールを持たせる */
+  .header-inner{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    white-space:nowrap;
+  }
+  .header-inner::-webkit-scrollbar{ display:none; }
+
+  .header-inner > *{ flex:0 0 auto; }
+  .nav{ margin-left:0 !important; flex-wrap:nowrap; }
+}
+
+
 * { box-sizing: border-box; }
     html, body {
       height: 100%;
