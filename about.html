@@ -380,6 +380,34 @@ br.pc-only{display:none}
     border-width:1px !important;
   }
   .nav-item img{height:16px !important}
+
+  
+  /* --- SP: header overflow fix (iPhone mini etc) --- */
+@media (max-width:768px){
+  /* ページ全体は横スクロールさせない */
+  .wrapper{ overflow-x:hidden; }
+
+  /* ヘッダーだけ横スクロールOKにする */
+  .header{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    white-space:nowrap;
+  }
+  .header::-webkit-scrollbar{ display:none; }
+
+  /* ヘッダー内の各要素を縮ませず、横並び固定 */
+  .logo-link,
+  .page-title,
+  .nav,
+  .nav-item{
+    flex:0 0 auto !important;
+  }
+
+  /* 右寄せ(auto)で崩れることがあるので、SPでは解除 */
+  .nav{ margin-left:0 !important; flex-wrap:nowrap; }
+}
+
+
 }
 
 /* ===== Footer ===== */
